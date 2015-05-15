@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="statusMargin">0dp</dimen>
+    <dimen name="userSpace">164dp</dimen>
+    <dimen name="photoMarginTop">16dp</dimen>
+
+
+    <dimen name="sectionSize">17sp</dimen>
+    <dimen name="sectionNotificationSize">16sp</dimen>
+    <dimen name="labelSize">15sp</dimen>
+
+    <!-- match_parent = -1dp / wrap_content = -2dp -->
+    <dimen name="drawerWidth">-1dp</dimen>
+
+</resources>
