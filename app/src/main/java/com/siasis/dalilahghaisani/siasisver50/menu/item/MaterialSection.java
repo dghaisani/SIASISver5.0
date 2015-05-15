@@ -99,6 +99,23 @@ public class MaterialSection<Fragment, customTextView extends TextView> implemen
         this.bottom = bottom;
         this.hasIcon = hasIcon;
 
+
+        if (!hasIcon) {
+            if (currentApiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                view = LayoutInflater.from(ctx).inflate(getItemLayout(values, R.layout.layout_material_section), null);
+            } else {
+                view = LayoutInflater.from(ctx).inflate(getItemLayout(values, R.layout.layout_material_section_nine_old), null);
+            }
+        } else {
+            if (currentApiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                view = LayoutInflater.from(ctx).inflate(getItemLayout(values, R.layout.layout_material_section_icon), null);
+            } else {
+                view = LayoutInflater.from(ctx).inflate(getItemLayout(values, R.layout.layout_material_section_icon_nine_old), null);
+            }
+            icon = (ImageView) view.findViewById(R.id.section_icon);
+        }
+
+
         notifications = (customTextView) view.findViewById(R.id.section_notification);
         text = (customTextView) view.findViewById(R.id.section_text);
 

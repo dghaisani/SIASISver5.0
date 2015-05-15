@@ -221,10 +221,10 @@ public class MaterialHeadItem {
         this.menu = menu;
     }
 
-    /*  public void setStartIndex(int startIndex) {
-          this.startIndex = startIndex;
-      }
-  */
+  /*  public void setStartIndex(int startIndex) {
+        this.startIndex = startIndex;
+    }
+*/
     public void setLoadFragmentOnChanged(boolean loadFragmentOnChanged) {
         this.loadFragmentOnChanged = loadFragmentOnChanged;
     }
@@ -274,10 +274,10 @@ public class MaterialHeadItem {
         return closeDrawerBackgroundOnClick;
     }
 
-    /*   public int getStartIndex() {
-           return startIndex;
-       }
-   */
+ /*   public int getStartIndex() {
+        return startIndex;
+    }
+*/
     public boolean isLoadFragmentOnChanged() {
         return loadFragmentOnChanged;
     }

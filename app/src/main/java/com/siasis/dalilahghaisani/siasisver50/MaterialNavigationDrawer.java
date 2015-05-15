@@ -56,6 +56,8 @@ import com.siasis.dalilahghaisani.siasisver50.menu.item.MaterialSection;
 import com.siasis.dalilahghaisani.siasisver50.listener.MaterialSectionOnClickListener;
 import com.siasis.dalilahghaisani.siasisver50.tools.Utils;
 
+
+
 @SuppressLint("InflateParams")
 public abstract class MaterialNavigationDrawer<Fragment, customTextView extends TextView> extends ActionBarActivity implements MaterialSectionOnClickListener, MaterialSectionChangeListener, MaterialHeadItem.OnHeadItemDataLoaded {
 
@@ -348,6 +350,16 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         }
     }
 
+    /*private View.OnClickListener toolbarToggleListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(isCurrentFragmentChild) {
+                onHomeAsUpSelected();
+                onBackPressed();
+            }
+        }
+    };*/
+
     private void initDrawer() {
 
         DrawerLayout.LayoutParams drawerParams = (android.support.v4.widget.DrawerLayout.LayoutParams) drawerViewGroup.getLayoutParams();
@@ -502,6 +514,15 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
         // loadMenuAndFragment
         loadMenuAndFragment(loadFragmentOnStart);
 
+//        changeToolbarColor(currentSection);
+
+        /*} else {
+
+            // load here the saved data
+            ArrayList<Integer> headItemsNumbers = savedInstanceState.getIntegerArrayList(STATE_HEAD_ITEM);
+            ....
+            changeToolbarColor(section);*/
+        //}
     }
 
 
@@ -619,8 +640,20 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                             throw new RuntimeException("StartIndex should selected a section with a fragment");
                         }
 
-                    }
-                    else if (fromStart || headItemManager == null || headItemManager.get(0) == null/* || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged())*/) {
+                    }/* else if(!fromStart && drawerHeaderType != DRAWERHEADER_HEADITEMS) {
+
+                        MaterialSection newSection = (MaterialSection) sectionList.get(startIndex);
+
+                        if ((newSection.getTarget() == MaterialSection.TARGET_FRAGMENT)) {
+                            currentSection = newSection;
+                            currentSection.select();
+                            setFragment((Fragment) currentSection.getTargetFragment(), currentSection.getTitle(), null, false);
+                            changeToolbarColor(currentSection);
+                        } else {
+                            throw new RuntimeException("StartIndex should selected a section with a fragment");
+                        }
+
+                    }*/ else if (fromStart || headItemManager == null || headItemManager.get(0) == null/* || (headItemManager.get(0) != null && headItemManager.get(0).isLoadFragmentOnChanged())*/) {
                         // load first found fragment
                         for (int i = 0; i < itemList.size(); i++) {
                             if (itemList.get(i) instanceof MaterialSection) {
@@ -1712,7 +1745,13 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                     return true;
                 }
         } else {
-
+            // for later use
+            /*switch (item.getItemId()) {
+                // Respond to the action bar's Up/Home button
+                case android.R.id.home:
+                    toolbarToggleListener.onClick(null);
+                    return true;
+            }*/
         }
         return super.onOptionsItemSelected(item);
     }
@@ -1836,6 +1875,11 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
                 } else if (section.getTarget() == MaterialSection.TARGET_ACTIVITY) {
                     section.unSelect();
 
+                    //finish();
+               /* if (finishActivityOnNewIntent) {
+                    this.startActivity(section.getTargetIntent());
+                    finish();
+                } else {*/
 
                     // smooth close drawerViewGroup before activity start
                     new Handler().postDelayed(new Runnable() {
@@ -2013,7 +2057,7 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
         ImageView image = new ImageView(this);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        image.setScaleType(ImageView.ScaleType.FIT_XY);
         image.setImageDrawable(background);
 
         customDrawerHeader.addView(image, params);

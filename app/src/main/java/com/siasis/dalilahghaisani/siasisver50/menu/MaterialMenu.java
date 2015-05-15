@@ -68,6 +68,9 @@ public class MaterialMenu {
                 pos++;
             }
         }
+       /* } else {
+            throw new RuntimeException("Object is not a MaterialSection");
+        }*/
         return -1;
     }
 
@@ -84,6 +87,16 @@ public class MaterialMenu {
         return null;
     }
 
+    public int getSectionSize() {
+        int size = 0;
+        for (int i = 0; i < getItems().size(); i++) {
+            if (getItems().get(i) instanceof MaterialSection) {
+                size++;
+            }
+        }
+        return size;
+    }
+
     public int getStartIndex() {
         return startIndex;
     }
@@ -92,4 +105,11 @@ public class MaterialMenu {
         this.startIndex = startIndex;
     }
 
+    public MaterialSection getSectionFromRealPosition(int position) {
+        if (getItems().get(position) instanceof MaterialSection) {
+            return (MaterialSection) getItems().get(position);
+        } else {
+            return null;
+        }
+    }
 }

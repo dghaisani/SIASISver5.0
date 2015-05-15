@@ -31,6 +31,17 @@ public class Utils {
         }
     }
 
+   /* public static int getDrawerWidth(Resources res) {
+        if(res.getConfiguration().smallestScreenWidthDp >= 600 || res.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // device is a tablet
+            return (int) (320 * res.getDisplayMetrics().density);
+        }
+        else {
+            return (int) (res.getDisplayMetrics().widthPixels - (56 * res.getDisplayMetrics().density));
+        }
+
+    }*/
+
     public static Point getUserPhotoSize(Resources res) {
         int size = (int) (64 * res.getDisplayMetrics().density);
 

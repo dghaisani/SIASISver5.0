@@ -5,9 +5,9 @@
     <dimen name="userSpace">164dp</dimen>
     <dimen name="photoMarginTop">16dp</dimen>
 
-    <dimen name="sectionIconHeight">20dp</dimen>
-    <dimen name="sectionIconWidth">20dp</dimen>
-    <dimen name="sectionSize">16sp</dimen>
+    <dimen name="sectionIconHeight">25dp</dimen>
+    <dimen name="sectionIconWidth">25dp</dimen>
+    <dimen name="sectionSize">17sp</dimen>
     <dimen name="sectionNotificationSize">16sp</dimen>
     <dimen name="labelSize">15sp</dimen>
 
