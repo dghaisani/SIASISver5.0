@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Tanggal Request"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/textViewTanggal"
+        android:layout_below="@+id/textViewJudulReq"
+        android:layout_toRightOf="@+id/customer_mobile"
+        android:layout_toEndOf="@+id/customer_mobile" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Judul Request"
+        android:id="@+id/textViewJudulReq"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/customer_mobile"
+        android:layout_toRightOf="@+id/customer_mobile"
+        android:layout_toEndOf="@+id/customer_mobile" />
+
+    <ImageView
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/customer_mobile"
+        android:src="@drawable/avahome" />
+
+</RelativeLayout>

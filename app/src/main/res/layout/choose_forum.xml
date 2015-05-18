@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/twitter_blue"
+        android:id="@+id/header_detail">
+
+        <TextView
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="Daftar Forum"
+            android:textSize="23dip"
+
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="30dip"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:background="#6ec8f2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Tanya Jawab"
+            android:textStyle="bold"
+            android:textSize="23dp"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:id="@+id/choose_forum_1"/>
+
+        <Button
+            android:textStyle="bold"
+            android:background="@color/whitedrawer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Request Jadwal Asistensi"
+            android:textSize="23dp"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:id="@+id/choose_forum_2"/>
+
+        <Button
+            android:background="#6ec8f2"
+            android:textStyle="bold"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Polling Jadwal Asistensi"
+            android:textSize="23dp"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:id="@+id/choose_forum_3"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="5dp"
+    android:background="#DADADC"
+    android:id="@+id/container">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:paddingRight="10dp">
+
+            <TextView
+
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:hint="kelas"
+                android:id="@+id/req_jadwal_asis_2_namamatkul"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="27sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/req_jadwal_asis_2_keterangan"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_marginTop="7dp"
+                android:layout_width="0sp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:layout_marginLeft="12dp"
+                android:id="@+id/req_jadwal_asis_2_desc" />
+
+            <ImageView
+
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:id="@+id/customer_mobile"
+                android:src="@drawable/avahome" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_gravity="end"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_marginTop="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Request Asistensi"
+                android:textSize="16sp"
+                android:layout_gravity="right"/>
+
+            <TextView
+                android:id="@+id/req_jadwal_asis_2_tanggal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_gravity="right"/>
+
+            <TextView
+                android:id="@+id/req_jadwal_asis_2_waktu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_gravity="right"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:background="@color/whitedrawer"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/list_reply_req"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:layout_marginRight="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:textColor="@color/list_divider"
+            android:hint="Berikan komentar disini"
+            android:textSize="16sp"
+            android:id="@+id/text_reply"/>
+        <ImageButton
+
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonReplyReq"
+            android:layout_alignParentEnd="true"
+            android:background="@color/ColorPrimary"
+            android:backgroundTint="@color/ColorPrimary"
+            android:src="@drawable/ic_send_white"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:onClick="ReplyReq"
+            android:text="Kirim Pertanyaan"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal|top"
+            android:minWidth="40dp"
+            android:minHeight="35dp"/>
+    </RelativeLayout>
+</RelativeLayout>

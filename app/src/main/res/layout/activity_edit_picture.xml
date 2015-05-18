@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/background"
+        android:orientation="vertical"
+
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/list_selector"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:paddingTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/ubah_foto_profil"
+                android:layout_gravity="start"
+                android:textSize="22sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/background"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="fill_parent" />
+            <Button
+                android:background="@color/background"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/gal"
+                android:onClick="gallery"
+                android:text="Galeri"
+                android:layout_gravity="center"
+                />
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="fill_parent" />
+            <Button
+                android:layout_marginBottom="20dp"
+                android:background="@color/background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/rm"
+                android:text="Hapus Foto"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

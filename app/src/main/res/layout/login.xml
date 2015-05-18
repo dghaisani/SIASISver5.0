@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/backgroundnew">
+
+        <LinearLayout android:id="@+id/header"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:paddingTop="5dip"
+
+            android:layout_weight="1">
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/ic_logo"
+                android:layout_gravity="center"
+                android:layout_weight="0.7"/>
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <!-- Login Form -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.6"/>
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:layout_below="@id/header"
+                android:layout_weight="0.25">
+                <!--  Email Label -->
+                <TextView android:id="@+id/link_to_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="10dip"
+                    android:text="Silakan login dengan akun SSO UI anda"
+                    android:gravity="center"
+                    android:textSize="16dip"
+                    android:textColor="@color/white"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:background="@color/twitter_blue"
+                        android:src="@drawable/ic_person_white"/>
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:background="@color/white"
+                        android:hint="username"
+                        android:id="@+id/editText8"
+                        android:paddingLeft="8dp"
+                        android:textSize="16dp"
+                        android:singleLine="true"/>
+
+                </LinearLayout>
+
+
+                <!--  Password Label -->
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_login"
+                        android:layout_marginTop="10dip"
+                        android:background="@color/twitter_blue"/>
+
+                    <EditText android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dip"
+                        android:singleLine="true"
+                        android:password="true"
+                        android:hint="password"
+                        android:paddingLeft="8dp"
+                        android:textSize="16dp"
+                        android:id="@+id/editText9"
+                        android:background="@color/white"/>
+                </LinearLayout>
+
+                <!-- Login button -->
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:text="Login"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/button3"
+                    android:background="@color/twitter_blue"
+                    android:layout_marginBottom="85dip"/>
+                <!-- Link to Registration Screen -->
+
+
+                <Space
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.6"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/container">
+
+    <LinearLayout
+        android:paddingTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/whitedrawer"
+        android:backgroundTint="@color/whitedrawer"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:id="@+id/judul"
+            android:layout_column="1"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:id="@+id/pic"
+            android:src="@drawable/book"
+            android:layout_column="5" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:id="@+id/asisten"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hp"
+                android:layout_centerHorizontal="true"
+
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:id="@+id/tanggal"
+
+                android:textSize="20sp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:id="@+id/waktu"
+
+                android:textSize="18sp"
+                android:gravity="center"
+                />
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:id="@+id/ruangan"
+
+                android:textSize="18sp"
+                android:gravity="center"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/list_divider">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="208dp">
+
+        <RelativeLayout
+            android:background="@color/whitedrawer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:text="Deskripsi"
+                android:textSize="18sp"
+                android:textColor="@color/list_divider"
+                ></TextView>
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="200dp">
+                <TextView
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="265dp"
+                    android:id="@+id/deskripsi"
+                    android:textSize="16sp"></TextView>
+            </ScrollView>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/list_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"></LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:text="Edit"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_new_white"
+            android:background="@color/ColorPrimary"
+            android:id="@+id/button12"
+            android:layout_column="0" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/whitedrawer"
+        android:backgroundTint="@color/whitedrawer"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1">
+        <Button
+            android:layout_alignParentBottom="true"
+            android:layout_width="90dp"
+            android:text="Hadir"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_new_white"
+            android:background="@color/ColorPrimary"
+            android:id="@+id/button5"
+            android:layout_column="0" />
+        <RelativeLayout
+            android:background="@color/whitedrawer"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+            <TextView
+                android:paddingLeft="130dp"
+                android:paddingTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:textSize="24sp"
+                android:id="@+id/textView11"
+                android:layout_column="0">
+            </TextView>
+            <TextView
+                android:paddingLeft="150dp"
+                android:paddingTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:textSize="20sp"
+                android:text="partisipan">
+            </TextView>
+            <Button
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:text="Partisipan"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:id="@+id/button6"
+                android:layout_column="0" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>
