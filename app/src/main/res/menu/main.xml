@@ -20,4 +20,21 @@
         android:icon="@drawable/action_search"
         android:title="@string/action_websearch"
          />
+    <item android:id="@+id/action_back"
+        android:icon="@drawable/ic_back_white"
+        android:title="@string/action_websearch"
+        />
+    <item android:id="@+id/action_edit"
+        android:icon="@drawable/ic_edit"
+        android:title="@string/action_websearch"
+        />
+    <item android:id="@+id/action_send"
+        android:icon="@drawable/ic_send_white"
+        android:title="@string/action_websearch"
+        />
+    <item android:id="@+id/action_save"
+        android:icon="@drawable/ic_save"
+        android:title="@string/action_websearch"
+        />
+
 </menu>

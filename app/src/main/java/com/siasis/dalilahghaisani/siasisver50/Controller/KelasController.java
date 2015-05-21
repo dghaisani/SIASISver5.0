@@ -153,7 +153,7 @@ public class KelasController extends Activity {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     kelas.add(createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    e.printStackTrace();return kelas;
                 }
             }
         }return kelas;
@@ -171,6 +171,7 @@ public class KelasController extends Activity {
                     kelas.add(createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    return kelas;
                 }
             }
         }return kelas;

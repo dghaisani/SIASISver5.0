@@ -3,19 +3,10 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:gravity="center_vertical|center_horizontal">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="20sp"
-            android:layout_height="20sp"
-            android:paddingRight="10dp"
-            android:src="@drawable/timeline"/>
-
-    </RelativeLayout>
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -27,18 +18,29 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Judul"
+            android:textColor="@color/black"
             android:id="@+id/judul"
             android:textSize="22sp"
-            android:textStyle="bold"/>
+            />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
+            android:text="Asdos:"
+
+            android:layout_weight="1"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:layout_marginLeft="50dp"
             android:text="Asisten"
+
             android:id="@+id/asisten"
             android:layout_weight="1"
-            android:textSize="16sp"/>
+            android:textSize="19sp"/>
 
         <RelativeLayout
             android:orientation="vertical"
@@ -49,35 +51,49 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="54dp"
+                android:layout_marginTop="40dp"
+                android:text="Waktu:"
+                android:textSize="16sp"
+
+                android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="45dp"
                 android:text="Waktu"
+                android:textSize="16sp"
                 android:id="@+id/waktu"
+
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="54dp"
-                android:layout_marginLeft="110dp"
-                android:text="R."
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="140dp"
+                android:text="Ruangan:"
+                android:textSize="16sp"
 
                 android:layout_weight="1" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="54dp"
-                android:layout_marginLeft="120dp"
+                android:layout_marginTop="40dp"
+                android:textSize="16sp"
+                android:layout_marginLeft="200dp"
                 android:text="Ruangan"
                 android:id="@+id/ruangan"
+
                 android:layout_weight="1" />
         </RelativeLayout>
     </RelativeLayout>
 
     <ImageView
         android:layout_marginRight="15dp"
-        android:layout_width="85sp"
-        android:layout_height="85sp"
+        android:layout_width="83sp"
+        android:layout_height="83sp"
         android:id="@+id/customer_mobile"
         android:layout_weight="1"
-        android:src="@drawable/avahome" />
+        android:src="@drawable/ava" />
 </LinearLayout>

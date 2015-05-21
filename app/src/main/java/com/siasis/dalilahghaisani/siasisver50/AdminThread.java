@@ -1,7 +1,6 @@
 package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,7 +18,6 @@ public class AdminThread extends Fragment implements
 
 	private View rootView;
 	private TabsPagerAdapter mAdapter;
-	private ActionBar actionBar;
 	// Tab titles
 	private String[] tabs = { "Tanya Jawab", "Request Asitensi", "Polling Jadwal" };
 
@@ -28,15 +26,16 @@ public class AdminThread extends Fragment implements
 							 Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		rootView = inflater.inflate(R.layout.activity_admin_forum, container, false);
+		getActivity().setContentView(R.layout.activity_admin_forum);
 
 		// Initilization
 		viewPager = (ViewPager) rootView.findViewById(R.id.pager);
-		actionBar = getActivity().getActionBar();
+		final ActionBar actionBar = getActivity().getActionBar();
 		mAdapter = new TabsPagerAdapter(getActivity().getSupportFragmentManager());
 
 		viewPager.setAdapter(mAdapter);
-		actionBar.setHomeButtonEnabled(true);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
+		assert actionBar != null;
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Adding Tabs
 		for (String tab_name : tabs) {
@@ -69,18 +68,19 @@ public class AdminThread extends Fragment implements
 	}
 
 	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-	}
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 		// on tab selected
 		// show respected fragment view
 		viewPager.setCurrentItem(tab.getPosition());
 	}
 
 	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
 	}
 
+	@Override
+	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+	}
 }

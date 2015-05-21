@@ -21,10 +21,6 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
     public void init(Bundle savedInstanceState) {
 
         Bundle bundle = new Bundle();
-        bundle.putString("instruction", "This example has an image header in the drawer. " +
-                "See the method headerType in the source code. And don't forget to call " +
-                "setCustomMenu(), to set your menu and setDrawerHeaderImage(), to set your image.");
-
         drawer = this;
 
         MaterialMenu menu = new MaterialMenu();
@@ -40,6 +36,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         profil.setFragmentTitle("Profil");
         MaterialSection kelas = this.newSection("Kelas", this.getResources().getDrawable(R.drawable.kelas), new KelasFragment(), false, menu).setSectionColor(Color.parseColor("#57c6ef"));
         kelas.setFragmentTitle("Kelas");
+
         // add devisor
         this.newDevisor(menu);
         // section with own in click listener

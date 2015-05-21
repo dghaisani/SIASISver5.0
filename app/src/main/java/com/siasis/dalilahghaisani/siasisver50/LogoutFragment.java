@@ -1,5 +1,6 @@
 package com.siasis.dalilahghaisani.siasisver50;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,8 @@ public class LogoutFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 session.logoutUser();
+                Intent showDetails = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                startActivity(showDetails);
                 getActivity().finish();
             }
         });

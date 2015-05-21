@@ -109,7 +109,7 @@ public class RoleController extends Activity {
         }
     }
 
-    public void denny (String username, int idKelas){
+    public void deny(String username, int idKelas){
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
         nameValuePairs.add(new BasicNameValuePair("Username", username));
         nameValuePairs.add(new BasicNameValuePair("Id_Kelas", Integer.toString(idKelas)));
@@ -218,16 +218,16 @@ public class RoleController extends Activity {
                         linearLayout.addView(approve);
                     }
 
-                    final Button denny = new Button(getApplicationContext());
-                    denny.setId(i);
-                    denny.setText("Deny");
-                    denny.setOnClickListener(new View.OnClickListener() {
+                    final Button deny = new Button(getApplicationContext());
+                    deny.setId(i);
+                    deny.setText("Deny");
+                    deny.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            int pos = denny.getId();
+                            int pos = deny.getId();
                             String username = pilihan.get(pos).getUsername();
                             int idKelas = pilihan.get(pos).getIdKelas();
-                            denny(username, idKelas);
+                            deny(username, idKelas);
                             Intent showDetails = new Intent(getApplicationContext(), RoleController.class);
                             //asumsi username gak null
                             showDetails.putExtra("Username", username);
@@ -235,7 +235,7 @@ public class RoleController extends Activity {
                             finish();
                         }
                     });
-                    linearLayout.addView(denny);
+                    linearLayout.addView(deny);
                     linearLayout3.addView(linearLayout);
                 }
                 scrollView.addView(linearLayout3);

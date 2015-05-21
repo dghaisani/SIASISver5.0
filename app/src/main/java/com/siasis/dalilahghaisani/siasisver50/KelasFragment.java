@@ -118,22 +118,22 @@ public class KelasFragment extends Fragment {
             listDataChild = new HashMap<String, List<String>>();
             //String k = "";
 
-            try {
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject ob = jsonArray.getJSONObject(i);
-                    String kelas = ob.getString("Nama");
-                    //k=kelas;
-                    listDataHeader.add(kelas);
-                    List<String> listChild = (new EnrollController()).getAllAsdosKelas(ob.getInt("Id"));
-                    listDataChild.put(kelas, listChild);
+            if(jsonArray != null) {
+                try {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject ob = jsonArray.getJSONObject(i);
+                            String kelas = ob.getString("Nama");
+                            listDataHeader.add(kelas);
+                            List<String> listChild = (new EnrollController()).getAllAsdosKelas(ob.getInt("Id"));
+                            listDataChild.put(kelas, listChild);
+                        }
+                } catch(JSONException e){
+                    e.printStackTrace();
                 }
-            } catch(JSONException e){
-                e.printStackTrace();
-                //Toast.makeText(getApplicationContext(), k, Toast.LENGTH_LONG).show();
-            }
 
-            ExpandableListAdapter listAdapter = new ExpandableEnrollAdapter(KelasFragment.this.getActivity(), listDataHeader, listDataChild, username);
-            expListView.setAdapter(listAdapter);
+                ExpandableListAdapter listAdapter = new ExpandableEnrollAdapter(KelasFragment.this.getActivity(), listDataHeader, listDataChild, username);
+                expListView.setAdapter(listAdapter);
+            }
             if (dialog.isShowing()) {
                 dialog.dismiss();
             }

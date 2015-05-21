@@ -132,16 +132,19 @@ public class MenjabatController extends Activity{
         ArrayList<Menjabat> temp = new ArrayList<Menjabat>();
 
         JSONArray jsonAllMenjabat = (new JSONParser()).getJSONArrayFromUrl(url);
-        int length = jsonAllMenjabat.length();
+        if(jsonAllMenjabat != null) {
+            int length = jsonAllMenjabat.length();
 
-        for(int i=0; i<length; i++){
-            try {
-                JSONObject jsonObject = jsonAllMenjabat.getJSONObject(i);
-                temp.add(new Menjabat(jsonObject.getString("Username"), jsonObject.getInt("Id_Kelas")));
-            } catch (JSONException e) {
-                e.printStackTrace();
+            for (int i = 0; i < length; i++) {
+                try {
+                    JSONObject jsonObject = jsonAllMenjabat.getJSONObject(i);
+                    temp.add(new Menjabat(jsonObject.getString("Username"), jsonObject.getInt("Id_Kelas")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        } this.allMenjabat = temp;
+            this.allMenjabat = temp;
+        }
     }
 
     public ArrayList<Menjabat> getAllMenjabat(){
@@ -151,16 +154,18 @@ public class MenjabatController extends Activity{
     public ArrayList<Menjabat> getListMenjabat(){
         String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=getMenjabat&username=" + this.username;
         JSONArray role = (new JSONParser()).getJSONArrayFromUrl(url);
-
-        int length = role.length();
         ArrayList<Menjabat> menjabat = new ArrayList<Menjabat>();
 
-        for(int i=0; i<length; i++){
-            try {
-                JSONObject jsonObject = role.getJSONObject(i);
-                menjabat.add(new Menjabat(jsonObject.getString("Username"), jsonObject.getInt("Id_Kelas")));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if(role != null) {
+            int length = role.length();
+
+            for (int i = 0; i < length; i++) {
+                try {
+                    JSONObject jsonObject = role.getJSONObject(i);
+                    menjabat.add(new Menjabat(jsonObject.getString("Username"), jsonObject.getInt("Id_Kelas")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         } return menjabat;
     }
@@ -177,16 +182,16 @@ public class MenjabatController extends Activity{
         String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=getKelas&Id_Kelas=" + listIdKelas;
 
         JSONArray jsonkelas = (new JSONParser()).getJSONArrayFromUrl(url);
-
-        int length = jsonkelas.length();
         ArrayList<Kelas> kelas = new ArrayList<Kelas>();
-
-        for(int i=0; i<length; i++){
-            try {
-                JSONObject jsonObject = jsonkelas.getJSONObject(i);
-                kelas.add((new KelasController()).createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if(jsonkelas != null){
+            int length = jsonkelas.length();
+            for(int i=0; i<length; i++) {
+                try {
+                    JSONObject jsonObject = jsonkelas.getJSONObject(i);
+                    kelas.add((new KelasController()).createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         } return kelas;
     }

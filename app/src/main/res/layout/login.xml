@@ -10,14 +10,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/backgroundnew">
+        android:background="@drawable/background">
 
         <LinearLayout android:id="@+id/header"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
             android:paddingTop="5dip"
-
             android:layout_weight="1">
 
             <Space
@@ -28,9 +27,9 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:src="@drawable/ic_logo"
+                android:src="@drawable/logo"
                 android:layout_gravity="center"
-                android:layout_weight="0.7"/>
+                android:layout_weight="0.8"/>
             <Space
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -72,10 +71,13 @@
                     android:layout_height="fill_parent"
                     android:orientation="horizontal">
 
-                    <ImageView android:layout_height="30dp"
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
                         android:background="@color/twitter_blue"
-                        android:src="@drawable/ic_person_white"/>
+                        android:src="@drawable/ic_person"/>
 
                     <EditText
                         android:layout_width="fill_parent"
@@ -97,7 +99,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_login"
                         android:layout_marginTop="10dip"

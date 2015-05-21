@@ -63,6 +63,7 @@ public class JadwalController extends Activity {
     private JSONArray mahasiswa;
     private LinearLayout kehadiran;
 
+
     SessionManager session;
 
     @Override
@@ -76,6 +77,7 @@ public class JadwalController extends Activity {
         HashMap<String, String> detailMahasiswa = session.getUserDetails();
         this.username = detailMahasiswa.get("username");
         this.op = getIntent().getStringExtra("View");
+
 
         if (op.equals("detailJadwal")) {
             setContentView(R.layout.detail_jadwal);
@@ -578,7 +580,7 @@ public class JadwalController extends Activity {
         protected void onPostExecute(final JSONObject jadwal) {
             try {
                 final Jadwal kJadwal = new Jadwal(jadwal.getInt("Id"), jadwal.getString("Judul"), jadwal.getString("Tanggal"), jadwal.getString("W_Mulai"),
-                        jadwal.getString("W_Akhir"), jadwal.getString("Ruangan"), jadwal.getString("Deskripsi"), jadwal.getInt("Id_Kelas"),
+                        jadwal.getString("W_Akhir"), jadwal.getString("Ruangan"), jadwal.getString("Deskripsi"), jadwal.getInt("Id_kelas"),
                         jadwal.getString("Username"));
                 String asdos = kJadwal.getUsername();
                 final String judul = kJadwal.getJudul();
