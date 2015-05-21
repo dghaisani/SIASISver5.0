@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -18,8 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.navigationdrawerexample.Controller.JSONParser;
-import com.example.android.navigationdrawerexample.Controller.ListRoleAdapter;
+import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
+import com.siasis.dalilahghaisani.siasisver50.Controller.ListRoleAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

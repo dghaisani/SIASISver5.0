@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample.Controller;
+package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -24,10 +24,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.android.navigationdrawerexample.Model.Jadwal;
-import com.example.android.navigationdrawerexample.Model.Kelas;
-import com.example.android.navigationdrawerexample.Model.Mahasiswa;
-import com.example.android.navigationdrawerexample.R;
+import com.siasis.dalilahghaisani.siasisver50.Model.Jadwal;
+import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
+import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
+import com.siasis.dalilahghaisani.siasisver50.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

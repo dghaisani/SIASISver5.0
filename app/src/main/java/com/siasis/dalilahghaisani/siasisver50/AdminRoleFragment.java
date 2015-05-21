@@ -1,22 +1,24 @@
-package com.siasis.dalilahghaisani.siasisver50.Controller;
+package com.siasis.dalilahghaisani.siasisver50;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
+import com.siasis.dalilahghaisani.siasisver50.Controller.KelasController;
 import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
 import com.siasis.dalilahghaisani.siasisver50.Model.RequestRole;
-import com.siasis.dalilahghaisani.siasisver50.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -38,29 +40,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lenovo on 4/13/2015.
+ * Created by ASUS on 5/20/2015.
  */
-public class RoleController extends Activity {
+public class AdminRoleFragment extends Fragment{
+
     private LinearLayout linearMain;
 
     private ArrayList<RequestRole> pilihan = new ArrayList<RequestRole>();
 
+    private View rootView;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        setContentView(R.layout.approve_denny);
-        linearMain = (LinearLayout) findViewById(R.id.container);
+        rootView = inflater.inflate(R.layout.approve_denny, container, false);
+        linearMain = (LinearLayout) rootView.findViewById(R.id.container);
 
-        new GetAllRequestRoleTask(RoleController.this).execute(linearMain);
+        new GetAllRequestRoleTask(AdminRoleFragment.this).execute(linearMain);
+
+        return rootView;
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        new GetAllRequestRoleTask(RoleController.this).execute(linearMain);
+        new GetAllRequestRoleTask(AdminRoleFragment.this).execute(linearMain);
     }
 
     public ArrayList<RequestRole> getAll(){
@@ -97,7 +105,7 @@ public class RoleController extends Activity {
             is = entity.getContent();
 
             String msg = "Berhasil";
-            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_LONG).show();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -126,7 +134,7 @@ public class RoleController extends Activity {
             is = entity.getContent();
 
             String msg = "Berhasil";
-            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), msg, Toast.LENGTH_LONG).show();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -148,11 +156,11 @@ public class RoleController extends Activity {
     private class GetAllRequestRoleTask extends AsyncTask<LinearLayout,Long,LinearLayout>
     {
         private ProgressDialog dialog;
-        private RoleController activity;
+        private AdminRoleFragment activity;
 
-        public GetAllRequestRoleTask(RoleController activity) {
+        public GetAllRequestRoleTask(AdminRoleFragment activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity.getActivity());
         }
 
         @Override
@@ -168,10 +176,10 @@ public class RoleController extends Activity {
 
         @Override
         protected void onPostExecute(LinearLayout a) {
-            ScrollView scrollView = new ScrollView(getApplicationContext());
+            ScrollView scrollView = new ScrollView(getActivity().getApplicationContext());
             scrollView.setLayoutParams(new ScrollView.LayoutParams(ScrollView.LayoutParams.MATCH_PARENT, ScrollView.LayoutParams.MATCH_PARENT));
 
-            LinearLayout linearLayout3 = new LinearLayout(getApplicationContext());
+            LinearLayout linearLayout3 = new LinearLayout(getActivity().getApplicationContext());
             linearLayout3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             linearLayout3.setOrientation(LinearLayout.VERTICAL);
 
@@ -179,21 +187,21 @@ public class RoleController extends Activity {
             ArrayList<Kelas> kelas  = (new KelasController()).getAll();
             if (!pilihan.isEmpty() && !kelas.isEmpty()){
                 for (int i = 0; i < pilihan.size(); i++) {
-                    LinearLayout linearLayout = new LinearLayout(getApplicationContext());
+                    LinearLayout linearLayout = new LinearLayout(getActivity().getApplicationContext());
                     linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-                    LinearLayout linearLayout2 = new LinearLayout(getApplicationContext());
+                    LinearLayout linearLayout2 = new LinearLayout(getActivity().getApplicationContext());
                     linearLayout2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     linearLayout2.setOrientation(LinearLayout.VERTICAL);
 
-                    TextView textView = new TextView(getApplicationContext());
+                    TextView textView = new TextView(getActivity().getApplicationContext());
                     textView.setId(i);
                     textView.setText(getNamaKelas(kelas,pilihan.get(i).getIdKelas()));
                     textView.setTextColor(getResources().getColor(R.color.black));
                     linearLayout2.addView(textView);
 
-                    TextView textView2 = new TextView(getApplicationContext());
+                    TextView textView2 = new TextView(getActivity().getApplicationContext());
                     textView2.setId(i+pilihan.size());
                     textView2.setText(pilihan.get(i).getUsername());
                     textView2.setTextColor(getResources().getColor(R.color.black));
@@ -202,7 +210,7 @@ public class RoleController extends Activity {
                     linearLayout.addView(linearLayout2);
 
                     if (pilihan.get(i).getStatus() == 0){
-                        final Button approve = new Button(getApplicationContext());
+                        final Button approve = new Button(getActivity().getApplicationContext());
                         approve.setId(i);
                         approve.setText("Approve");
                         approve.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +226,7 @@ public class RoleController extends Activity {
                         linearLayout.addView(approve);
                     }
 
-                    final Button denny = new Button(getApplicationContext());
+                    final Button denny = new Button(getActivity().getApplicationContext());
                     denny.setId(i);
                     denny.setText("Deny");
                     denny.setOnClickListener(new View.OnClickListener() {
@@ -228,11 +236,11 @@ public class RoleController extends Activity {
                             String username = pilihan.get(pos).getUsername();
                             int idKelas = pilihan.get(pos).getIdKelas();
                             denny(username, idKelas);
-                            Intent showDetails = new Intent(getApplicationContext(), RoleController.class);
+                            /*Intent showDetails = new Intent(getActivity().getApplicationContext(), RoleController.class);
                             //asumsi username gak null
                             showDetails.putExtra("Username", username);
                             startActivity(showDetails);
-                            finish();
+                            finish();*/
                         }
                     });
                     linearLayout.addView(denny);

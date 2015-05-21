@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.android.navigationdrawerexample.Controller.JSONParser;
-import com.example.android.navigationdrawerexample.Controller.ListReqAdapter;
+import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
+import com.siasis.dalilahghaisani.siasisver50.Controller.ListReqAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -51,7 +51,7 @@ public class RequestRole extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_request_role, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

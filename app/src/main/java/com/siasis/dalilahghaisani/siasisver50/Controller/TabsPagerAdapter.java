@@ -1,12 +1,12 @@
-package com.example.android.navigationdrawerexample.Controller;
+package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.android.navigationdrawerexample.PollingJadwalFragment;
-import com.example.android.navigationdrawerexample.RequestAsistensiFragment;
-import com.example.android.navigationdrawerexample.TanyaJawabFragment;
+import com.siasis.dalilahghaisani.siasisver50.PollingJadwalFragment;
+import com.siasis.dalilahghaisani.siasisver50.RequestAsistensiFragment;
+import com.siasis.dalilahghaisani.siasisver50.TanyaJawabFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 

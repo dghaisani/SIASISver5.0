@@ -1,10 +1,10 @@
-package com.example.android.navigationdrawerexample.Controller;
+package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.app.Activity;
 import android.util.Log;
 
-import com.example.android.navigationdrawerexample.Model.Mahasiswa;
-import com.example.android.navigationdrawerexample.Menjabat;
+import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
+import com.siasis.dalilahghaisani.siasisver50.Model.Menjabat;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

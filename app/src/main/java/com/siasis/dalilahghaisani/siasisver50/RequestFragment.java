@@ -1,48 +1,69 @@
 package com.siasis.dalilahghaisani.siasisver50;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.siasis.dalilahghaisani.siasisver50.Controller.DetailQAController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.DetailReqController;
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
-import com.siasis.dalilahghaisani.siasisver50.Controller.ListQuestionAdapter;
-import com.siasis.dalilahghaisani.siasisver50.Controller.QAController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.ListForumAdapter;
+import com.siasis.dalilahghaisani.siasisver50.Controller.RequestController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-public class ForumQA extends Activity {
+/**
+ * Created by ASUS on 5/20/2015.
+ */
+public class RequestFragment extends Fragment{
 
     private JSONArray jsonArray;
-    ListQuestionAdapter adapt;
+    ListForumAdapter adapt;
     String username;
-    private ListView getAllQuestion;
+    private ListView getAllRequest;
+
+    private View rootView;
+
+    private ImageView buttonAdd;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_thread_question);
 
-        this.username = getIntent().getStringExtra("Username");
-        getAllQuestion = (ListView) findViewById(R.id.listViewForumQuestion);
-        
-        new GetAllForumQuestion().execute(username);
+        rootView = inflater.inflate(R.layout.view_thread_request, container, false);
 
-        getAllQuestion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.username = "rian.fitriansyah";
+        getAllRequest = (ListView) rootView.findViewById(R.id.listViewForumReq);
+
+        buttonAdd = (ImageView) rootView.findViewById(R.id.buttonAddForumReq);
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RequestFragment.this.getActivity(), RequestController.class);
+                intent.putExtra("Username", username);
+                startActivity(intent);
+            }
+        });
+
+        new GetAllForumReq().execute(username);
+
+        getAllRequest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     // GEt the customer which was clicked
-                    JSONObject reqClicked= jsonArray.getJSONObject(position);
+                    JSONObject reqClicked = jsonArray.getJSONObject(position);
                     int reqp = reqClicked.getInt("Id");
                     int kelasp = reqClicked.getInt("Id_Kelas");
 
@@ -50,7 +71,7 @@ public class ForumQA extends Activity {
 //                                , Toast.LENGTH_LONG).show();
 
                     // Send Customer ID
-                    Intent showDetails = new Intent (getBaseContext(), DetailQAController.class);
+                    Intent showDetails = new Intent(getActivity().getBaseContext(), DetailReqController.class);
                     showDetails.putExtra("Username", username);
                     showDetails.putExtra("RequestID", reqp);
                     showDetails.putExtra("KelasID", kelasp);
@@ -65,22 +86,24 @@ public class ForumQA extends Activity {
 
             }
         });
+
+        return rootView;
     }
 
     @Override
-    protected void onResume(){
+    public void onResume(){
         super.onResume();
 
-        new GetAllForumQuestion().execute(username);
+        new GetAllForumReq().execute(username);
     }
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -97,14 +120,14 @@ public class ForumQA extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class GetAllForumQuestion extends AsyncTask<String,Long,JSONArray>
+    private class GetAllForumReq extends AsyncTask<String,Long,JSONArray>
     {
         @Override
         protected JSONArray doInBackground(String... params) {
 
             // it is executed on Background thread
             JSONParser jsonParser = new JSONParser();
-            String url = "http://ppl-a08.cs.ui.ac.id/question.php?fun=listfaq&username=" + params[0];
+            String url = "http://ppl-a08.cs.ui.ac.id/request.php?fun=listfaq&username=" + params[0];
             return (jsonParser.getJSONArrayFromUrl(url));
         }
 
@@ -116,15 +139,9 @@ public class ForumQA extends Activity {
     }
 
     public  void setListAdapter(JSONArray jsonArray) {
-        ListView listForumQuestion = (ListView) findViewById(R.id.listViewForumQuestion);
+        ListView listForumReq = (ListView) rootView.findViewById(R.id.listViewForumReq);
         this.jsonArray = jsonArray;
-        adapt = new ListQuestionAdapter(jsonArray, this);
-        listForumQuestion.setAdapter(adapt);
-    }
-
-    public void addQuestion (View view){
-        Intent intent = new Intent(this, QAController.class);
-        intent.putExtra("Username", username);
-        startActivity(intent);
+        adapt = new ListForumAdapter(jsonArray, this.getActivity());
+        listForumReq.setAdapter(adapt);
     }
 }

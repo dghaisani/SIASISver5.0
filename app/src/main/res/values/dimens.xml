@@ -11,6 +11,9 @@
     <dimen name="sectionNotificationSize">16sp</dimen>
     <dimen name="labelSize">15sp</dimen>
 
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="toolbar_iconsize">55dip</dimen>
     <!-- match_parent = -1dp / wrap_content = -2dp -->
     <dimen name="drawerWidth">-1dp</dimen>
 

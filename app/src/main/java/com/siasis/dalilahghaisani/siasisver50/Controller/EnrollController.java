@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample.Controller;
+package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -14,8 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.example.android.navigationdrawerexample.Model.Kelas;
-import com.example.android.navigationdrawerexample.R;
+import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
+import com.siasis.dalilahghaisani.siasisver50.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -14,9 +14,9 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.example.android.navigationdrawerexample.Controller.PollingController;
-import com.example.android.navigationdrawerexample.Controller.SessionManager;
-import com.example.android.navigationdrawerexample.Model.Polling;
+import com.siasis.dalilahghaisani.siasisver50.Controller.PollingController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
+import com.siasis.dalilahghaisani.siasisver50.Model.Polling;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

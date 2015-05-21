@@ -1,6 +1,5 @@
-package com.siasis.dalilahghaisani.siasisver50.Controller;
+package com.siasis.dalilahghaisani.siasisver50;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -9,8 +8,11 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,8 +20,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
+import com.siasis.dalilahghaisani.siasisver50.Controller.KelasController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
 import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
-import com.siasis.dalilahghaisani.siasisver50.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -38,71 +42,77 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by lenovo on 4/5/2015.
+ * Created by ASUS on 5/20/2015.
  */
-public class KelasController extends Activity {
+public class AdminKelasFragment extends Fragment {
+
     private String username;
     private String op;
     private LinearLayout linearMain;
     SessionManager session;
 
-    private ArrayList<Kelas> pilihan = new ArrayList<Kelas>();
+    private View rootView;
 
-    public KelasController(){
-    }
+    private ArrayList<Kelas> pilihan = new ArrayList<Kelas>();
 
     public Kelas createKelas(int id, int id_semester, String name){
         return new Kelas(id, id_semester, name);
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        session = new SessionManager(getApplicationContext());
-        HashMap<String, String> detailMahasiswa = session.getUserDetails();
-        this.username = detailMahasiswa.get("username");
-        this.op = getIntent().getStringExtra("View");
+        //session = new SessionManager(getActivity().getApplicationContext());
+        //HashMap<String, String> detailMahasiswa = session.getUserDetails();
+        //this.username = detailMahasiswa.get("username");
+        this.username = "rian.fitriansyah";
+
+        op = getActivity().getIntent().getStringExtra("View");
+
+        if (op==null){
+            op = "listKelas";
+        }
 
         if (op.equals("listKelas")) {
 
-            setContentView(R.layout.list_kelas);
+            rootView = inflater.inflate(R.layout.list_kelas, container, false);
 
-            Button create = (Button) this.findViewById(R.id.button11);
-            linearMain = (LinearLayout) findViewById(R.id.container);
+            Button create = (Button) rootView.findViewById(R.id.button11);
+            linearMain = (LinearLayout) rootView.findViewById(R.id.container);
 
-            new GetAllKelasTask(KelasController.this).execute(linearMain);
+            new GetAllKelasTask(AdminKelasFragment.this).execute(linearMain);
 
             create.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
-                    Intent showDetails = new Intent(getApplicationContext(), KelasController.class);
+                    Intent showDetails = new Intent(getActivity().getApplicationContext(), KelasController.class);
                     //asumsi username gak null
                     showDetails.putExtra("Username", username);
                     showDetails.putExtra("View", "createKelas");
                     startActivity(showDetails);
-                    finish();
                 }
             });
         } else if (op.equals("createKelas")){
-            setContentView(R.layout.form_kelas);
-            Button ok = (Button) findViewById(R.id.button2);
-            final EditText nama = (EditText) findViewById(R.id.editText);
+            rootView = inflater.inflate(R.layout.form_kelas, container, false);
+
+            Button ok = (Button) rootView.findViewById(R.id.button2);
+            final EditText nama = (EditText) rootView.findViewById(R.id.editText);
 
             ok.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     if(nama.getText().toString().equals("")){
-                        Toast.makeText(getApplicationContext(), "Hei Isi Namanya", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Hei Isi Namanya", Toast.LENGTH_LONG).show();
                         nama.setHintTextColor(Color.parseColor("#FF0000"));
                     } else if(nama.getText().toString().length() > 25) {
                         nama.setText(null);
@@ -110,11 +120,17 @@ public class KelasController extends Activity {
                         nama.setHint("max 15 karakter");
 
                     } else {
-                        finish();
+                        addKelas(nama.getText().toString());
+                        Intent showDetails = new Intent(getActivity().getApplicationContext(), AdminKelasFragment.class);
+                        showDetails.putExtra("Username", username);
+                        showDetails.putExtra("View", "listKelas");
+                        startActivity(showDetails);
+                        getActivity().finish();
                     }
                 }
             });
         }
+        return rootView;
     }
 
     public void addKelas(String nama){
@@ -204,11 +220,11 @@ public class KelasController extends Activity {
     private class GetAllKelasTask extends AsyncTask<LinearLayout,Long,LinearLayout>
     {
         private ProgressDialog dialog;
-        private KelasController activity;
+        private AdminKelasFragment activity;
 
-        public GetAllKelasTask(KelasController activity) {
+        public GetAllKelasTask(AdminKelasFragment activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity.getActivity());
         }
 
         @Override
@@ -224,21 +240,21 @@ public class KelasController extends Activity {
 
         @Override
         protected void onPostExecute(LinearLayout a) {
-            ScrollView scrollView = new ScrollView(getApplicationContext());
+            ScrollView scrollView = new ScrollView(getActivity().getApplicationContext());
             scrollView.setLayoutParams(new ScrollView.LayoutParams(ScrollView.LayoutParams.MATCH_PARENT, ScrollView.LayoutParams.MATCH_PARENT));
 
-            LinearLayout linearLayout3 = new LinearLayout(getApplicationContext());
+            LinearLayout linearLayout3 = new LinearLayout(getActivity().getApplicationContext());
             linearLayout3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             linearLayout3.setOrientation(LinearLayout.VERTICAL);
 
             pilihan = (new KelasController()).getAll();
             if (!pilihan.isEmpty()){
                 for (int i = 0; i < pilihan.size(); i++) {
-                    LinearLayout linearLayout = new LinearLayout(getApplicationContext());
+                    LinearLayout linearLayout = new LinearLayout(getActivity().getApplicationContext());
                     linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-                    TextView textView = new TextView(getApplicationContext());
+                    TextView textView = new TextView(getActivity().getApplicationContext());
                     textView.setId(i);
                     //Toast.makeText(getApplicationContext(), jsonArray.getJSONObject(i).getString("Nama"), Toast.LENGTH_LONG).show();
                     final String namaKelas = pilihan.get(i).getNama();
@@ -246,13 +262,13 @@ public class KelasController extends Activity {
                     textView.setTextColor(getResources().getColor(R.color.black));
                     linearLayout.addView(textView);
 
-                    final Button button = new Button(getApplicationContext());
+                    final Button button = new Button(getActivity().getApplicationContext());
                     button.setId(i);
                     button.setText("Delete");
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(KelasController.this);
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AdminKelasFragment.this.getActivity());
                             alertDialogBuilder.setTitle("Delete Class");
                             alertDialogBuilder.setMessage("Are you sure you want to delete " + namaKelas + " ?").setCancelable(false)
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -263,14 +279,14 @@ public class KelasController extends Activity {
 
                                             int pos = button.getId();
                                             int idKelas = pilihan.get(pos).getId();
-                                            Toast.makeText(getApplicationContext(), idKelas + "", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getActivity().getApplicationContext(), idKelas + "", Toast.LENGTH_LONG).show();
                                             deleteKelas(idKelas);
-                                            Intent showDetails = new Intent(getApplicationContext(), KelasController.class);
+                                            Intent showDetails = new Intent(getActivity().getApplicationContext(), AdminKelasFragment.class);
                                             //asumsi username gak null
                                             showDetails.putExtra("Username", username);
                                             showDetails.putExtra("View", "listKelas");
                                             startActivity(showDetails);
-                                            finish();
+                                            getActivity().finish();
                                         }
                                     })
                                     .setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample.Controller;
+package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.navigationdrawerexample.Model.Kelas;
-import com.example.android.navigationdrawerexample.Model.QuestionAndAnswers;
-import com.example.android.navigationdrawerexample.R;
+import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
+import com.siasis.dalilahghaisani.siasisver50.Model.QuestionAndAnswers;
+import com.siasis.dalilahghaisani.siasisver50.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -114,7 +114,7 @@ public class QAController extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_qacontroller, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

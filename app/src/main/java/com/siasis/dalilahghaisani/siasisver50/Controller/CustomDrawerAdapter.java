@@ -1,6 +1,7 @@
-package com.example.android.navigationdrawerexample.Controller; /**
+package com.siasis.dalilahghaisani.siasisver50.Controller; /**
  * Created by Dalilah Ghaisani on 10/04/2015.
  */
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.navigationdrawerexample.R;
+import com.siasis.dalilahghaisani.siasisver50.R;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
-package com.siasis.dalilahghaisani.siasisver50.Controller;
+package com.siasis.dalilahghaisani.siasisver50;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,33 +8,40 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.siasis.dalilahghaisani.siasisver50.R;
+import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by lenovo on 5/5/2015.
+ * Created by ASUS on 5/20/2015.
  */
-public class Database extends Activity {
-    final Context context = this;
+public class AdminDatabaseFragment extends Fragment{
+
+    final Context context = this.context;
     TextView result;
 
+    private View rootView;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        setContentView(R.layout.new_semester);
-        result = (TextView) this.findViewById(R.id.textView12);
-        Button semester = (Button) this.findViewById(R.id.button13);
+        rootView = inflater.inflate(R.layout.new_semester, container, false);
+
+        result = (TextView) rootView.findViewById(R.id.textView12);
+        Button semester = (Button) rootView.findViewById(R.id.button13);
         semester.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -67,7 +73,7 @@ public class Database extends Activity {
                                             result.setTextColor(Color.parseColor("#FF0000"));
                                             dialog.cancel();
                                         } else {
-                                            new Newdatabase(Database.this).execute(nama);
+                                            new Newdatabase(AdminDatabaseFragment.this).execute(nama);
                                         }
                                     }
                                 })
@@ -85,16 +91,18 @@ public class Database extends Activity {
                 alertDialog.show();
             }
         });
+
+        return rootView;
     }
 
     private class Newdatabase extends AsyncTask<String,Long,JSONObject>
     {
         private ProgressDialog dialog;
-        private Database activity;
+        private AdminDatabaseFragment activity;
 
-        public Newdatabase(Database activity) {
+        public Newdatabase(AdminDatabaseFragment activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity.getActivity());
         }
 
         @Override

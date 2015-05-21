@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -52,7 +52,7 @@ public class FormQA extends Activity implements View.OnClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_form_q, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

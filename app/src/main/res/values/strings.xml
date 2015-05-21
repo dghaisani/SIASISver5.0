@@ -6,5 +6,46 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="title_activity_qacontroller">QAController</string>
+    <string name="title_activity_form_q">FormQA</string>
+    <string name="title_activity_edit_picture">EditPicture</string>
+
+    <string name="profile_pref">Profile_Pref</string>
+    <string name="path_foto">Photo</string>
+    <string name="nama_pref">Nama_Pref</string>
+    <string name="npm_pref">NPM_Pref</string>
+    <string name="email_pref">Email_Pref</string>
+    <string name="hp_pref">HP_Pref</string>
+    <string name="status_pref">Status_Pref</string>
+    <string name="cek_pref">Count</string>
+
+    <string name="dialog_confirm_profile">Apakah kamu ingin merubah profil?</string>
+    <string name="agree">Ya</string>
+    <string name="disagree">Tidak</string>
+    <string name="title_activity_request_role">RequestRole</string>
+    <string name="title_activity_forum_request">ForumRequest</string>
+
+    <string name="profil">Profil</string>
+    <string name="namaMahasiswa">Nama Mahasiswa</string>
+    <string name="npmMahasiswa">120XXXXXXX</string>
+    <string name="nohpMahasiswa">+62812345678</string>
+    <string name="emailMahasiswa">nama.mahasiswa@ui.ac.id</string>
+    <string name="role">Role</string>
+    <string name="req_jadwal_asis">Request Jadwal Asistensi</string>
+    <string name="galeri">Galeri</string>
+    <string name="hapus_foto">Hapus Foto</string>
+    <string name="ubah_foto_profil">Ubah Foto Profil</string>
+    <string name="asisten_dosen">Asisten Dosen</string>
+    <string name="title_activity_request_controller">RequestController</string>
+    <string name="title_activity_pilihan_controller">PilihanController</string>
+    <string name="title_activity_forum_q">ForumQA</string>
+    <string name="title_activity_detail_qacontroller">DetailQAController</string>
+    <string name="title_activity_detail_req_controller">DetailReqController</string>
+    <string name="title_activity_forum_polling">ForumPolling</string>
+    <string name="title_activity_polling_controller">PollingController</string>
 
 </resources>

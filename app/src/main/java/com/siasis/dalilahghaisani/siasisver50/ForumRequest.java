@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.android.navigationdrawerexample.Controller.DetailReqController;
-import com.example.android.navigationdrawerexample.Controller.JSONParser;
-import com.example.android.navigationdrawerexample.Controller.ListForumAdapter;
-import com.example.android.navigationdrawerexample.Controller.RequestController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.DetailReqController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
+import com.siasis.dalilahghaisani.siasisver50.Controller.ListForumAdapter;
+import com.siasis.dalilahghaisani.siasisver50.Controller.RequestController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,7 +78,7 @@ public class ForumRequest extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_forum_request, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

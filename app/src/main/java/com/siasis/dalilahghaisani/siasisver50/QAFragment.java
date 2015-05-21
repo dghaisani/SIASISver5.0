@@ -1,13 +1,15 @@
 package com.siasis.dalilahghaisani.siasisver50;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.siasis.dalilahghaisani.siasisver50.Controller.DetailQAController;
@@ -19,22 +21,40 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-public class ForumQA extends Activity {
+/**
+ * Created by ASUS on 5/20/2015.
+ */
+public class QAFragment extends Fragment {
 
     private JSONArray jsonArray;
     ListQuestionAdapter adapt;
     String username;
     private ListView getAllQuestion;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_thread_question);
+    private ImageView buttonAdd;
 
-        this.username = getIntent().getStringExtra("Username");
-        getAllQuestion = (ListView) findViewById(R.id.listViewForumQuestion);
-        
+    private View rootView;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        rootView = inflater.inflate(R.layout.view_thread_question, container, false);
+
+        this.username = "rian.fitriansyah";
+        getAllQuestion = (ListView) rootView.findViewById(R.id.listViewForumQuestion);
+        buttonAdd = (ImageView) rootView.findViewById(R.id.buttonAddForumQuestion);
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QAFragment.this.getActivity(), QAController.class);
+                intent.putExtra("Username", username);
+                startActivity(intent);
+            }
+        });
+
         new GetAllForumQuestion().execute(username);
 
         getAllQuestion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -42,7 +62,7 @@ public class ForumQA extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     // GEt the customer which was clicked
-                    JSONObject reqClicked= jsonArray.getJSONObject(position);
+                    JSONObject reqClicked = jsonArray.getJSONObject(position);
                     int reqp = reqClicked.getInt("Id");
                     int kelasp = reqClicked.getInt("Id_Kelas");
 
@@ -50,7 +70,7 @@ public class ForumQA extends Activity {
 //                                , Toast.LENGTH_LONG).show();
 
                     // Send Customer ID
-                    Intent showDetails = new Intent (getBaseContext(), DetailQAController.class);
+                    Intent showDetails = new Intent(getActivity().getBaseContext(), DetailQAController.class);
                     showDetails.putExtra("Username", username);
                     showDetails.putExtra("RequestID", reqp);
                     showDetails.putExtra("KelasID", kelasp);
@@ -65,22 +85,24 @@ public class ForumQA extends Activity {
 
             }
         });
+
+        return rootView;
     }
 
     @Override
-    protected void onResume(){
+    public void onResume(){
         super.onResume();
 
         new GetAllForumQuestion().execute(username);
     }
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -116,14 +138,14 @@ public class ForumQA extends Activity {
     }
 
     public  void setListAdapter(JSONArray jsonArray) {
-        ListView listForumQuestion = (ListView) findViewById(R.id.listViewForumQuestion);
+        ListView listForumQuestion = (ListView) rootView.findViewById(R.id.listViewForumQuestion);
         this.jsonArray = jsonArray;
-        adapt = new ListQuestionAdapter(jsonArray, this);
+        adapt = new ListQuestionAdapter(jsonArray, this.getActivity());
         listForumQuestion.setAdapter(adapt);
     }
 
     public void addQuestion (View view){
-        Intent intent = new Intent(this, QAController.class);
+        Intent intent = new Intent(this.getActivity(), QAController.class);
         intent.putExtra("Username", username);
         startActivity(intent);
     }

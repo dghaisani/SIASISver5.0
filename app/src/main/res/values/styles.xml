@@ -89,4 +89,9 @@
         <item name="backgroundGradient">@drawable/red_gradient</item>
     </style>
 
+    <style name="AppTheme"
+        parent="android:Theme.Holo.Light">
+        <!-- <item name="colorPrimary">@color/twitter_blue</item> -->
+        <!-- Customize your theme here. --></style>
+
 </resources>

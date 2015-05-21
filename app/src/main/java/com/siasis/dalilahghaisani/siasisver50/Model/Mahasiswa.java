@@ -1,8 +1,4 @@
-package com.example.android.navigationdrawerexample.Model;
-
-import com.example.android.navigationdrawerexample.Enroll;
-import com.example.android.navigationdrawerexample.Menjabat;
-import com.example.android.navigationdrawerexample.RequestRole;
+package com.siasis.dalilahghaisani.siasisver50.Model;
 
 import java.util.ArrayList;
 

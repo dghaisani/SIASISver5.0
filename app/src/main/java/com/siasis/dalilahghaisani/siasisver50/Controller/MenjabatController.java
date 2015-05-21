@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample.Controller;
+package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,10 +9,10 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.android.navigationdrawerexample.Menjabat;
-import com.example.android.navigationdrawerexample.Model.Kelas;
-import com.example.android.navigationdrawerexample.Model.Mahasiswa;
-import com.example.android.navigationdrawerexample.R;
+import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
+import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
+import com.siasis.dalilahghaisani.siasisver50.Model.Menjabat;
+import com.siasis.dalilahghaisani.siasisver50.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

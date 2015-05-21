@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,11 +29,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.android.navigationdrawerexample.Controller.JSONParser;
-import com.example.android.navigationdrawerexample.Controller.PilihanController;
-import com.example.android.navigationdrawerexample.Controller.ProfileController;
-import com.example.android.navigationdrawerexample.Controller.SessionManager;
-import com.example.android.navigationdrawerexample.Model.Mahasiswa;
+import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
+import com.siasis.dalilahghaisani.siasisver50.Controller.ProfileController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
+import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         session = new SessionManager(getApplicationContext());
 
         if(session.isLoggedIn()){
-            Intent showDetails = new Intent(getApplicationContext(), PilihanController.class);
+            Intent showDetails = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
             startActivity(showDetails);
             finish();
         }
@@ -69,7 +68,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -130,7 +129,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         dialog.dismiss();
                     }
 
-                    Intent showDetails = new Intent(getApplicationContext(), PilihanController.class);
+                    Intent showDetails = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
                     startActivity(showDetails);
                     finish();
                 } else {

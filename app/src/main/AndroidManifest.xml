@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.siasis.dalilahghaisani.siasisver50" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="21" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
@@ -10,12 +20,92 @@
         <activity
             android:name=".NavigationDrawerActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Controller.QAController"
+            android:label="@string/title_activity_qacontroller" >
+        </activity>
+        <activity
+            android:name=".FormQA"
+            android:label="@string/title_activity_form_q" >
+        </activity>
+        <activity
+            android:name=".ViewPicture"
+            android:label="@string/title_activity_edit_picture" >
+        </activity>
+        <activity
+            android:name=".EditPicture"
+            android:label="@string/title_activity_edit_picture" >
+        </activity>
+        <activity
+            android:name=".RequestRole"
+            android:label="@string/title_activity_request_role" >
+        </activity>
+        <activity
+            android:name=".ForumRequest"
+            android:label="@string/title_activity_forum_request" >
+        </activity>
+        <activity
+            android:name=".Controller.RequestController"
+            android:label="@string/title_activity_request_controller" >
+        </activity>
+        <activity
+            android:name=".Controller.JadwalController"
+            android:label="Jadwal Asistensi" >
+        </activity>
+        <activity
+            android:name=".Controller.PilihanController"
+            android:label="SIASIS" >
+        </activity>
+        <activity
+            android:name=".ForumQA"
+            android:label="@string/title_activity_forum_q" >
+        </activity>
+        <activity
+            android:name=".Controller.EnrollController"
+            android:label="SIASIS" >
+        </activity>
+        <activity
+            android:name=".Controller.DetailQAController"
+            android:label="@string/title_activity_detail_qacontroller" >
+        </activity>
+        <activity
+            android:name=".Controller.DetailReqController"
+            android:label="@string/title_activity_detail_req_controller" >
+        </activity>
+        <activity
+            android:name=".Controller.RoleController"
+            android:label="SIASIS" />
+        <activity
+            android:name=".Controller.KelasController"
+            android:label="SIASIS" />
+        <activity
+            android:name=".ForumPolling"
+            android:label="@string/title_activity_forum_polling" >
+        </activity>
+        <activity
+            android:name=".Controller.PollingController"
+            android:label="@string/title_activity_polling_controller"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:name=".Controller.DetailPolController"
+            android:label="DetailPollingController">
+        </activity>
+
+        <activity android:label="SIASIS" android:name=".Controller.ProfileController"/>
+        <activity android:label="SIASIS" android:name=".Controller.MenjabatController"/>
+        <activity android:label="SIASIS" android:name=".Controller.Database"/>
     </application>
 
 </manifest>

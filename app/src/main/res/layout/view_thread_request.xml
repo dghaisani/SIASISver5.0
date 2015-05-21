@@ -21,7 +21,6 @@
         android:layout_height="60sp"
         android:src="@drawable/ic_add_blue"
         android:id="@+id/buttonAddForumReq"
-        android:onClick="addRequest"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

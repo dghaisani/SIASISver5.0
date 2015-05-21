@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.android.navigationdrawerexample.Controller.DetailPolController;
-import com.example.android.navigationdrawerexample.Controller.JSONParser;
-import com.example.android.navigationdrawerexample.Controller.ListQuestionAdapter;
-import com.example.android.navigationdrawerexample.Controller.PollingController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.DetailPolController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
+import com.siasis.dalilahghaisani.siasisver50.Controller.ListQuestionAdapter;
+import com.siasis.dalilahghaisani.siasisver50.Controller.PollingController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,7 +78,7 @@ public class ForumPolling extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_forum_request, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

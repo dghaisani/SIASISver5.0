@@ -1,35 +1,41 @@
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.example.android.navigationdrawerexample.Controller.TabsPagerAdapter;
+import com.siasis.dalilahghaisani.siasisver50.Controller.TabsPagerAdapter;
 
-public class AdminThread extends FragmentActivity implements
+public class AdminThread extends Fragment implements
 		ActionBar.TabListener {
 
 	private ViewPager viewPager;
+
+	private View rootView;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	// Tab titles
 	private String[] tabs = { "Tanya Jawab", "Request Asitensi", "Polling Jadwal" };
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_admin_forum);
+		rootView = inflater.inflate(R.layout.activity_admin_forum, container, false);
 
 		// Initilization
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		actionBar = getActionBar();
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		viewPager = (ViewPager) rootView.findViewById(R.id.pager);
+		actionBar = getActivity().getActionBar();
+		mAdapter = new TabsPagerAdapter(getActivity().getSupportFragmentManager());
 
 		viewPager.setAdapter(mAdapter);
-		actionBar.setHomeButtonEnabled(false);
+		actionBar.setHomeButtonEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
 
 		// Adding Tabs
@@ -58,6 +64,8 @@ public class AdminThread extends FragmentActivity implements
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
+
+		return rootView;
 	}
 
 	@Override

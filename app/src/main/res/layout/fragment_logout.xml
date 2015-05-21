@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Apakah kamu yakin ingin Logout?"
+        android:id="@+id/textViewLogout"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:id="@+id/buttonLogoutYes"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/textViewLogout"
+        android:layout_alignLeft="@+id/textViewLogout"
+        android:layout_alignStart="@+id/textViewLogout"
+        android:layout_marginTop="77dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No"
+        android:id="@+id/buttonLogoutNo"
+        android:layout_alignTop="@+id/buttonLogoutYes"
+        android:layout_alignRight="@+id/textViewLogout"
+        android:layout_alignEnd="@+id/textViewLogout" />
+</RelativeLayout>

@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-package com.example.android.navigationdrawerexample.Controller;
+package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -33,16 +27,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
@@ -53,38 +42,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.navigationdrawerexample.AdminThread;
-import com.example.android.navigationdrawerexample.ConfirmProfile;
-import com.example.android.navigationdrawerexample.ForumPolling;
-import com.example.android.navigationdrawerexample.ForumQA;
-import com.example.android.navigationdrawerexample.ForumRequest;
-import com.example.android.navigationdrawerexample.FragmentOne;
-import com.example.android.navigationdrawerexample.Model.Mahasiswa;
-import com.example.android.navigationdrawerexample.R;
-import com.example.android.navigationdrawerexample.RequestRole;
-import com.example.android.navigationdrawerexample.ViewPicture;
+import com.siasis.dalilahghaisani.siasisver50.AdminThread;
+import com.siasis.dalilahghaisani.siasisver50.ConfirmProfile;
+import com.siasis.dalilahghaisani.siasisver50.ForumPolling;
+import com.siasis.dalilahghaisani.siasisver50.ForumQA;
+import com.siasis.dalilahghaisani.siasisver50.ForumRequest;
+import com.siasis.dalilahghaisani.siasisver50.FragmentOne;
+import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
+import com.siasis.dalilahghaisani.siasisver50.R;
+import com.siasis.dalilahghaisani.siasisver50.RequestRole;
+import com.siasis.dalilahghaisani.siasisver50.ViewPicture;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PilihanController extends Activity implements ConfirmProfile.ConfirmProfileListener{
+public class PilihanController extends Fragment{
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList, getAllRole;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -97,6 +74,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
     Fragment fragment;
 
     private int count;
+    private int MODE_PRIVATE = 0;
 
     Button fetch;
     TextView text;
@@ -112,6 +90,12 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
     private String username;
     private int role;
 
+    // User name (make variable public to access from outside)
+    public static final String KEY_NAME = "username";
+
+    // Email address (make variable public to access from outside)
+    public static final String KEY_ROLE = "role";
+
     private ExpandableListView GetAllJadwalListView;
     private View view;
 
@@ -125,99 +109,87 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
     SessionManager session;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        session = new SessionManager(getApplicationContext());
+        session = new SessionManager(getActivity().getApplicationContext());
         this.detailMahasiswa = session.getUserDetails();
-        this.username = detailMahasiswa.get("username");
-        this.detailMahasiswa.put("role","2");
-        this.role = Integer.parseInt(detailMahasiswa.get("role"));
+        this.username = this.detailMahasiswa.get(KEY_NAME);
+        this.role = Integer.parseInt(this.detailMahasiswa.get(KEY_ROLE));
 
-        mTitle = mDrawerTitle = getTitle();
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        fetch = (Button) findViewById(R.id.fetch);
-        text = (TextView) findViewById(R.id.text);
-        et = (EditText) findViewById(R.id.et);
+        View view = inflater.inflate(R.layout.list_jadwal, container, false);
+        GetAllJadwalListView = (ExpandableListView) view.findViewById(R.id.GetAllJadwalListView);
+        ImageView buat = (ImageView) view.findViewById(R.id.button);
+        //Button pilihan = (Button) view.findViewById(R.id.button9);
+        if (role == 0)
+            buat.setVisibility(View.GONE);
+        else
+            buat.setVisibility(View.VISIBLE);
 
-        dataList = new ArrayList<DrawerItem>();
+        new GetAllJadwalTask(PilihanController.this).execute(username);
 
-        dataList.add(new DrawerItem("Jadwal Asistensi", R.drawable.ic_jadwal));
-        dataList.add(new DrawerItem("Profil", R.drawable.ic_person_grey));
-        dataList.add(new DrawerItem("Kelas", R.drawable.ic_kelas));
-        dataList.add(new DrawerItem("Forum", R.drawable.ic_forum));
-        dataList.add(new DrawerItem("Admin", R.drawable.ic_admin));
-        dataList.add(new DrawerItem("Logout", R.drawable.ic_logout));
+        GetAllJadwalListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
-        adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
-                dataList);
-        // set a custom shadow that overlays the main content when the drawer opens
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mPlanetTitles));*/
-        mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        // enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            public void onDrawerClosed(View view) {
-                getActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                GetAllJadwalListView.expandGroup(groupPosition);
+                return true;
             }
+        });
 
-            public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+        GetAllJadwalListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                try {
+                    //Toast.makeText(getApplicationContext(), listDataChild2.get(listDataHeader2.get(groupPosition)).get(childPosition).toString(), Toast.LENGTH_LONG).show();
+                    int jadwalp = listDataChild2.get(listDataHeader2.get(groupPosition)).get(childPosition).getInt("Id");
+                    int kelasp = listDataChild2.get(listDataHeader2.get(groupPosition)).get(childPosition).getInt("Id_kelas");
+////                                    JSONObject mahasiswaClicked = jsonArray.getJSONObject(groupPosition+childPosition);
+////                                    int jadwalp = mahasiswaClicked.getInt("Id");
+////                                    int kelasp = mahasiswaClicked.getInt("Id_kelas");
+                    Intent showDetails = new Intent(getActivity(), JadwalController.class);
+                    showDetails.putExtra("JadwalID", jadwalp);
+                    showDetails.putExtra("KelasID", kelasp);
+                    showDetails.putExtra("Username", username);
+                    showDetails.putExtra("View", "detailJadwal");
+                    startActivity(showDetails);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //Toast.makeText(getApplicationContext(), "lala masuk ex", Toast.LENGTH_LONG).show();
+                }
+                return false;
             }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        });
 
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
+        buat.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent showDetails = new Intent(getActivity(), JadwalController.class);
+                //asumsi username gak null
+                showDetails.putExtra("Username", username);
+                showDetails.putExtra("View", "createJadwal");
+
+                startActivity(showDetails);
+            }
+        });
+
+        return view;
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        if (fragment.getArguments().getInt("role")==1){
-            /*SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.profile_pref),
-                    MODE_PRIVATE);
-            String defaultS = "";
-            String path = sharedPreferences.getString(getString(R.string.path_foto), defaultS);*/
-            ProfileController profileController = new ProfileController(username);
-
-            mahasiswa = profileController.getMahasiswa(username);
-            if (mahasiswa.getPath() != null)
-                ((ImageButton) rootView.findViewById(R.id.foto_profil)).setBackgroundDrawable(new BitmapDrawable(BitmapFactory.decodeFile(mahasiswa.getPath())));
-            //new GetAllRole().execute(username);
-        }
-    }
-
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+        MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
-    }
+    }*/
 
     /* Called whenever we call invalidateOptionsMenu() */
     /**
@@ -229,111 +201,6 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
      return super.onPrepareOptionsMenu(menu);
      }
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // The action bar home/up action should open or close the drawer.
-        // ActionBarDrawerToggle will take care of this.
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle action buttons
-        switch (item.getItemId()) {
-            case R.id.action_websearch:
-                // create intent to perform web search for this planet
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-                // catch event that there's no activity to handle intent
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-                }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        InputStream is = null;
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.profile_pref),
-                MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        String sNama = ((TextView) rootView.findViewById(R.id.nama_mahasiswa)).getText().toString();
-        String sNPM = ((TextView) rootView.findViewById(R.id.npm_mahasiswa)).getText().toString();
-        String sEmail = ((TextView) rootView.findViewById(R.id.email_mahasiswa)).getText().toString();
-        String sNomor = ((TextView) rootView.findViewById(R.id.nohp_mahasiswa)).getText().toString();
-
-        editor.putString(getString(R.string.nama_pref), sNama);
-        editor.putString(getString(R.string.npm_pref), sNPM);
-        editor.putString(getString(R.string.email_pref), sEmail);
-        editor.putString(getString(R.string.hp_pref), sNomor);
-        editor.commit();
-
-        ((TextView) rootView.findViewById(R.id.nama_mahasiswa)).setText(sNama);
-        ((TextView) rootView.findViewById(R.id.npm_mahasiswa)).setText(sNPM);
-        ((TextView) rootView.findViewById(R.id.email_mahasiswa)).setText(sEmail);
-        ((TextView) rootView.findViewById(R.id.nohp_mahasiswa)).setText(sNomor);
-
-        ((TextView) rootView.findViewById(R.id.nama_mahasiswaText)).setText(sNama);
-        ((TextView) rootView.findViewById(R.id.npm_mahasiswaText)).setText(sNPM);
-        ((TextView) rootView.findViewById(R.id.email_mahasiswaText)).setText(sEmail);
-        ((TextView) rootView.findViewById(R.id.nohp_mahasiswaText)).setText(sNomor);
-
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("Nama", sNama));
-        nameValuePairs.add(new BasicNameValuePair("Username", username));
-        nameValuePairs.add(new BasicNameValuePair("NPM", sNPM));
-        nameValuePairs.add(new BasicNameValuePair("Email", sEmail));
-        nameValuePairs.add(new BasicNameValuePair("Nomor", sNomor));
-
-        try {
-            HttpClient httpClient = new DefaultHttpClient();
-
-            HttpPost httpPost = new HttpPost("http://ppl-a08.cs.ui.ac.id/profile.php");
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            HttpResponse response = httpClient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-            is = entity.getContent();
-
-            String msg = "Profile Updated";
-            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            Log.e("Client Protocol", "Log_Tag");
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.e("Log_Tag", "IOException");
-            e.printStackTrace();
-        }
-
-        ((TextView) rootView.findViewById(R.id.nama_mahasiswa)).setVisibility(View.INVISIBLE);
-        ((TextView) rootView.findViewById(R.id.npm_mahasiswa)).setVisibility(View.INVISIBLE);
-        ((TextView) rootView.findViewById(R.id.email_mahasiswa)).setVisibility(View.INVISIBLE);
-        ((TextView) rootView.findViewById(R.id.nohp_mahasiswa)).setVisibility(View.INVISIBLE);
-        ((TextView) rootView.findViewById(R.id.nama_mahasiswaText)).setVisibility(View.VISIBLE);
-        ((TextView) rootView.findViewById(R.id.npm_mahasiswaText)).setVisibility(View.VISIBLE);
-        ((TextView) rootView.findViewById(R.id.email_mahasiswaText)).setVisibility(View.VISIBLE);
-        ((TextView) rootView.findViewById(R.id.nohp_mahasiswaText)).setVisibility(View.VISIBLE);
-        ((ImageView) rootView.findViewById(R.id.buttonDone)).setVisibility(View.INVISIBLE);
-        ((ImageView) rootView.findViewById(R.id.buttonProfile)).setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-
-    }
-
-    /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
@@ -596,33 +463,33 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
                         }
                     };
                 } else {
-                    fragment = new FragmentOne();
-                    Toast.makeText(getApplicationContext(), "Hei Anda Bukan Admin", Toast.LENGTH_LONG).show();
+                    //fragment = new FragmentOne();
+                    Toast.makeText(getActivity().getApplicationContext(), "Hei Anda Bukan Admin", Toast.LENGTH_LONG).show();
                 }
                 args.putInt("role", 4);
                 break;
             case 5:
                 session.logoutUser();
-                finish();
+                getActivity().finish();
                 return;
         }
         /*args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);*/
-        fragment.setArguments(args);
+        /*fragment.setArguments(args);
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
-        setTitle(mPlanetTitles[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
+        getActivity().setTitle(mPlanetTitles[position]);
+        mDrawerLayout.closeDrawer(mDrawerList);*/
     }
 
-    @Override
+    /*@Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-        getActionBar().setTitle(mTitle);
-    }
+        getActivity().getActionBar().setTitle(mTitle);
+    }*/
 
     private class GetAllJadwalTask extends AsyncTask<String,Long,JSONArray> {
         private ProgressDialog dialog;
@@ -630,7 +497,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
 
         public GetAllJadwalTask(PilihanController activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(activity);
+            dialog = new ProgressDialog(activity.getActivity());
         }
 
         @Override
@@ -676,7 +543,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
                 e.printStackTrace();
                 //Toast.makeText(getApplicationContext(), "lalala masuk ex", Toast.LENGTH_LONG).show();
             }
-            ExpandableListAdapter listAdapter = new ExpandableJadwalAdapter(PilihanController.this, listDataHeader2, listDataChild2);
+            ExpandableListAdapter listAdapter = new ExpandableJadwalAdapter(PilihanController.this.getActivity(), listDataHeader2, listDataChild2);
             GetAllJadwalListView.setAdapter(listAdapter);
 //            Toast.makeText(getApplicationContext(), "luar for", Toast.LENGTH_LONG).show();
             for(int j=0; j<listDataHeader2.size(); j++){
@@ -691,7 +558,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
 
     public  void setListAdapterJadwal(JSONArray jsonArray) {
         this.jsonArray = jsonArray;
-        this.GetAllJadwalListView.setAdapter(new ListJadwalAdapter(jsonArray, this));
+        this.GetAllJadwalListView.setAdapter(new ListJadwalAdapter(jsonArray, this.getActivity()));
     }
 
     private class GetAllEnrollTask extends AsyncTask<String,Long,JSONArray>
@@ -701,7 +568,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
 
         public GetAllEnrollTask(PilihanController activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(activity);
+            dialog = new ProgressDialog(activity.getActivity());
         }
 
         @Override
@@ -740,7 +607,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
                 //Toast.makeText(getApplicationContext(), k, Toast.LENGTH_LONG).show();
             }
 
-            ExpandableListAdapter listAdapter = new ExpandableEnrollAdapter(PilihanController.this, listDataHeader, listDataChild, username);
+            ExpandableListAdapter listAdapter = new ExpandableEnrollAdapter(PilihanController.this.getActivity(), listDataHeader, listDataChild, username);
             expListView.setAdapter(listAdapter);
             if (dialog.isShowing()) {
                 dialog.dismiss();
@@ -753,7 +620,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
      * onPostCreate() and onConfigurationChanged()...
      */
 
-    @Override
+    /*@Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
@@ -765,7 +632,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
-    }
+    }*/
 
     /**
      * Fragment that appears in the "content_frame", shows a planet
@@ -783,7 +650,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
 
             rootView = inflater.inflate(R.layout.view_profile_personal, container, false);
 
-            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.profile_pref),
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.profile_pref),
                     MODE_PRIVATE);
 
             ProfileController profileController= new ProfileController(username);
@@ -856,7 +723,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
                 @Override
                 public void onClick(View v) {
                     ConfirmProfile dialog = ConfirmProfile.newInstance();
-                    dialog.show(getFragmentManager(), "ConfirmProfile");
+                    /*dialog.show(getFragmentManager(), "ConfirmProfile");*/
                 }
 
             });
@@ -893,7 +760,7 @@ public class PilihanController extends Activity implements ConfirmProfile.Confir
 
     public  void setRoleAdapter(JSONArray jsonArray) {
         this.jsonArray = jsonArray;
-        this.ListRole.setAdapter(new ListRoleAdapter(jsonArray, this));
+        this.ListRole.setAdapter(new ListRoleAdapter(jsonArray, this.getActivity()));
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.android.navigationdrawerexample;
+package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.android.navigationdrawerexample.Controller.ProfileController;
-import com.example.android.navigationdrawerexample.Model.Mahasiswa;
+import com.siasis.dalilahghaisani.siasisver50.Controller.ProfileController;
+import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -57,7 +57,7 @@ public class EditPicture extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_picture, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
