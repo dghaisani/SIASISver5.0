@@ -69,7 +69,7 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:id="@+id/customer_mobile"
-                android:src="@drawable/avahome" />
+                android:src="@drawable/ava" />
         </LinearLayout>
 
 

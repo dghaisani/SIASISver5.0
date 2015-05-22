@@ -26,7 +26,7 @@
             android:id="@+id/foto_profil"
             android:layout_width="fill_parent"
             android:layout_height="200dp"
-            android:src="@drawable/avatar"
+            android:src="@drawable/ava"
             />
         </LinearLayout>
         <TextView

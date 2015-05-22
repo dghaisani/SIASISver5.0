@@ -12,8 +12,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
@@ -41,7 +41,7 @@ public class AdminDatabaseFragment extends Fragment{
         rootView = inflater.inflate(R.layout.new_semester, container, false);
 
         result = (TextView) rootView.findViewById(R.id.textView12);
-        Button semester = (Button) rootView.findViewById(R.id.button13);
+        ImageView semester = (ImageView) rootView.findViewById(R.id.button13);
         semester.setOnClickListener(new View.OnClickListener() {
 
             @Override

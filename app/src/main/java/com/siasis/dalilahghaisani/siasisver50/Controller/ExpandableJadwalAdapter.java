@@ -69,7 +69,7 @@ public class ExpandableJadwalAdapter extends BaseExpandableListAdapter {
             waktu.setText(jsonObject.getString("W_Mulai").substring(0, jsonObject.getString("W_Mulai").length() - 3) +
                     " - " + jsonObject.getString("W_Akhir").substring(0, jsonObject.getString("W_Akhir").length() - 3));
             ruangan.setText(jsonObject.getString("Ruangan"));
-            mobile.setImageResource(R.drawable.avahome);
+            mobile.setImageResource(R.drawable.ava);
         } catch (JSONException e) {
             e.printStackTrace();
         }

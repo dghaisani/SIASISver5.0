@@ -9,8 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +53,7 @@ public class QAController extends Activity {
 
         this.username = getIntent().getStringExtra("Username");
 
-        Button sendQuestion = (Button) findViewById(R.id.buttonSendQuestion);
+        ImageView sendQuestion = (ImageView) findViewById(R.id.buttonSendQuestion);
 
         final Spinner idkelas = (Spinner)findViewById(R.id.spinnerQuestion);
         final TextView usernameQuestion = (TextView) findViewById(R.id.req_jadwal_question_username);

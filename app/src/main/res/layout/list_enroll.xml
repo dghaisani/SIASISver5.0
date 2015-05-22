@@ -1,52 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container">
 
-    <LinearLayout
 
-        android:layout_width="fill_parent"
+    <ExpandableListView
+        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/whitedrawer">
+        android:id="@+id/lvExp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
 
-        <TextView
-            android:paddingLeft="20dp"
-            android:layout_weight="1"
-            android:layout_width="0sp"
-            android:layout_height="wrap_content"
-            android:text="List Kelas Enroll"
-            android:textStyle="bold"
-            android:paddingTop="12dip"
-            android:textSize="25sp"/>
+    <ImageView
+        android:id="@+id/button"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/add"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 
-        <ImageView
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_marginRight="10dp"
-            android:background="@color/transparent"
-            android:src="@drawable/ic_add_black"
-            android:id="@+id/button"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:background="#f4f4f4" >
-
-        <ExpandableListView
-            android:id="@+id/lvExp"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"/>
-
-    </LinearLayout>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:paddingTop="30dip"
-        android:background="@color/whitedrawer"/>
-
-</LinearLayout>
+</RelativeLayout>

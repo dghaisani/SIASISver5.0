@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container">
-    <!--
+
     <include
-        android:id="@+id/tool_bar"
-        layout="@layout/tool_bar"
+        android:id="@+id/toolbar_detail"
+        layout="@layout/toolbar_detail"
         ></include>
-    -->
+
     <LinearLayout
         android:paddingTop="20dp"
         android:orientation="horizontal"
@@ -39,7 +39,7 @@
         android:layout_gravity="center_horizontal">
 
         <ImageView
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="120dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:paddingLeft="60dp"
+                    android:paddingLeft="52dp"
                     android:textSize="23sp"
                     android:textColor="@color/black"
                     android:gravity="center"
@@ -81,13 +81,20 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="27dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No.Hp Asdos:"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:paddingLeft="83dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/hp"
                     android:textSize="20sp"
@@ -95,7 +102,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="44dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -103,48 +110,62 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="Tanggal Asistensi:"
-
                     android:textSize="20sp"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:layout_marginLeft="120dp"
                     android:id="@+id/tanggal"
-
                     android:textSize="20sp"
                     android:gravity="center"/>
             </RelativeLayout>
-
-
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="62dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Waktu:"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:paddingLeft="44dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/waktu"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="78dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ruangan:"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:paddingLeft="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ruangan"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    />
+            </RelativeLayout>
         </RelativeLayout>
-
-
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="65dp"
-                android:id="@+id/waktu"
-
-                android:textSize="18sp"
-                android:gravity="center"
-                />
-
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:id="@+id/ruangan"
-
-                android:textSize="18sp"
-                android:gravity="center"
-                />
-
-
 
     </LinearLayout>
 
@@ -155,10 +176,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="5dp"
+
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="208dp">
+        android:layout_height="320dp">
 
         <RelativeLayout
             android:background="@color/whitedrawer"
@@ -166,6 +187,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="30dp"
                 android:text="Deskripsi"
@@ -174,14 +197,14 @@
                 ></TextView>
             <ScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="200dp">
+                android:layout_height="320dp">
                 <TextView
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_width="fill_parent"
-                    android:layout_height="265dp"
+                    android:layout_height="320dp"
                     android:id="@+id/deskripsi"
-                    android:textSize="16sp"></TextView>
+                    android:textSize="18sp"></TextView>
             </ScrollView>
         </RelativeLayout>
     </LinearLayout>
@@ -190,70 +213,54 @@
         android:background="@color/list_divider"
         android:layout_width="fill_parent"
         android:layout_height="2dp"></LinearLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-        <Button
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:text="Edit"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:drawableStart="@drawable/ic_new_white"
-            android:background="@color/ColorPrimary"
-            android:id="@+id/button12"
-            android:layout_column="0" />
-    </LinearLayout>
-    <LinearLayout
-        android:background="@color/whitedrawer"
-        android:backgroundTint="@color/whitedrawer"
-        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
         android:weightSum="1">
-        <Button
-            android:layout_alignParentBottom="true"
-            android:layout_width="90dp"
-            android:text="Hadir"
-            android:textColor="@color/white"
-            android:layout_height="match_parent"
-            android:drawableStart="@drawable/ic_new_white"
-            android:background="@color/ColorPrimary"
-            android:id="@+id/button5"
-            android:layout_column="0" />
         <RelativeLayout
-            android:background="@color/whitedrawer"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/twitter_blue">
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/new2"
+                android:id="@+id/button5"
+                android:layout_column="0" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@color/white"
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:orientation="horizontal">
             <TextView
-                android:paddingLeft="130dp"
+                android:paddingLeft="50dp"
                 android:paddingTop="10dp"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:textSize="24sp"
+                android:textColor="@color/black"
                 android:id="@+id/textView11"
                 android:layout_column="0">
             </TextView>
-            <TextView
-                android:paddingLeft="150dp"
-                android:paddingTop="10dp"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:textSize="20sp"
-                android:text="partisipan">
-            </TextView>
+
             <Button
-                android:layout_alignParentBottom="true"
-                android:layout_width="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:background="@color/white"
+                android:layout_width="fill_parent"
                 android:text="Partisipan"
-                android:textColor="@color/white"
+                android:paddingRight="170dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
                 android:layout_height="match_parent"
                 android:id="@+id/button6"
-                android:layout_column="0" />
+                />
         </RelativeLayout>
 
     </LinearLayout>

@@ -35,9 +35,9 @@ public class LogoutFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_logout, container, false);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setTitle("Unenroll Class");
-        alertDialogBuilder.setMessage("Apakah kamu yakin ingin logout ?").setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setTitle("Logout");
+        alertDialogBuilder.setMessage("Apakah kamu yakin ingin keluar dari SIASIS ?").setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -54,7 +54,7 @@ public class LogoutFragment extends Fragment {
                         getActivity().finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

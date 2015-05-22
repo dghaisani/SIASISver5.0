@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -63,7 +62,7 @@ public class RequestController extends Activity {
 
         ImageView bTanggalReq = (ImageView) findViewById(R.id.buttonTanggalReq);
         ImageView bWaktuReq = (ImageView) findViewById(R.id.buttonWaktuReq);
-        Button sendReq = (Button) findViewById(R.id.buttonSendReq);
+        ImageView sendReq = (ImageView) findViewById(R.id.buttonSendReq);
         final Calendar calendar = Calendar.getInstance();
         final Calendar calendarWaktu = Calendar.getInstance();
 

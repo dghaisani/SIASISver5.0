@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -84,8 +85,8 @@ public class AdminKelasFragment extends Fragment {
 
             rootView = inflater.inflate(R.layout.list_kelas, container, false);
 
-            Button create = (Button) rootView.findViewById(R.id.button11);
             linearMain = (LinearLayout) rootView.findViewById(R.id.container);
+            ImageView create = (ImageView) rootView.findViewById(R.id.button11);
 
             new GetAllKelasTask(AdminKelasFragment.this).execute(linearMain);
 

@@ -3,31 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
-    android:background="#DADADC"
     android:id="@+id/container">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:text="Kelas :"
-            android:id="@+id/textView7" />
-        <RadioGroup
-                android:id="@+id/kelas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></RadioGroup>
-    </LinearLayout>
+    <include
+        android:id="@+id/toolbar_jadwalbaru"
+        layout="@layout/toolbar_jadwalbaru"
+        ></include>
 
     <LinearLayout
         android:layout_marginTop="2dp"
@@ -43,18 +24,41 @@
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Judul :"
-            android:textStyle="bold"
-            android:textSize="27sp"
+            android:text="Judul:"
+            android:textColor="@color/black"
+            android:textSize="23sp"
             android:id="@+id/textView" />
 
         <EditText
-            android:textSize="27dp"
+            android:textSize="18dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:layout_gravity="right"
-            android:hint="contoh: Asistensi UTS, max 25 karakter"/>
+            android:hint="Judul asistensi"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="Kelas :"
+            android:id="@+id/textView7" />
+        <RadioGroup
+            android:id="@+id/kelas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></RadioGroup>
     </LinearLayout>
 
     <LinearLayout
@@ -72,8 +76,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tanggal :"
+            android:textColor="@color/black"
             android:id="@+id/textView2"
-            android:textSize="18sp"
+            android:textSize="19sp"
             />
         <TextView
             android:layout_marginTop="3dp"
@@ -81,7 +86,7 @@
             android:layout_width="0sp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:id="@+id/textView8"
             android:hint="tanggal asistensi"
             />
@@ -110,7 +115,8 @@
             android:layout_height="wrap_content"
             android:text="Waktu Mulai :"
             android:id="@+id/textView3"
-            android:textSize="18sp"
+            android:textSize="19sp"
+            android:textColor="@color/black"
             />
         <TextView
             android:layout_marginTop="3dp"
@@ -118,7 +124,7 @@
             android:layout_width="0sp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:id="@+id/textView9"
             android:hint="waktu mulai asistensi"/>
         <ImageView
@@ -146,8 +152,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Waktu Selesai :"
+            android:textColor="@color/black"
             android:id="@+id/textView4"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:gravity="center"
             />
         <TextView
@@ -156,7 +163,7 @@
             android:layout_width="0sp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:id="@+id/textView10"
             android:hint="waktu selesai asistensi"
             />
@@ -187,7 +194,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ruangan :"
-            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:id="@+id/textView5" />
 
         <EditText
@@ -195,7 +203,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText5"
             android:layout_gravity="right"
-            android:hint="contoh: 2403, max 10 karakter"/>
+            android:textSize="18sp"
+            android:hint="nama ruangan di Fasilkom"/>
     </LinearLayout>
 
     <LinearLayout
@@ -210,7 +219,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Deskripsi"
-            android:textSize="16sp"
+            android:textSize="19sp"
+            android:textColor="@color/twitter_blue"
             android:textAlignment="center"
             android:layout_marginLeft="12dp"
             android:id="@+id/textView6" />
@@ -219,25 +229,13 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/editText6"
+            android:textSize="19sp"
             android:layout_gravity="center_horizontal"
-            android:hint="contoh: untuk persiapan UTS.... max 255 karakter"/>
+            android:hint="Deskripsi dari asistensi yang akan dilaksanakan"/>
 
     </LinearLayout>
-    <RelativeLayout
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_submit"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
-            android:layout_alignBottom="@+id/GetAllJadwalListView"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+
 
 </LinearLayout>

@@ -84,7 +84,7 @@ public class ListJadwalAdapter extends BaseAdapter {
             cell.Waktu.setText(jsonObject.getString("W_Mulai") + " - " + jsonObject.getString("W_Akhir"));
             cell.Ruangan.setText(jsonObject.getString("Ruangan"));
 
-            cell.mobile.setImageResource(R.drawable.avahome);
+            cell.mobile.setImageResource(R.drawable.ava);
 
         }
         catch (JSONException e)

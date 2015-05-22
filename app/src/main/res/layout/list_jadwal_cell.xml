@@ -3,6 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:gravity="center_vertical|center_horizontal">
@@ -90,9 +91,9 @@
     </RelativeLayout>
 
     <ImageView
-        android:layout_marginRight="15dp"
-        android:layout_width="83sp"
-        android:layout_height="83sp"
+        android:layout_marginRight="12dp"
+        android:layout_width="85sp"
+        android:layout_height="93sp"
         android:id="@+id/customer_mobile"
         android:layout_weight="1"
         android:src="@drawable/ava" />

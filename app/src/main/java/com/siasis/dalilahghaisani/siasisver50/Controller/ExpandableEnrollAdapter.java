@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.siasis.dalilahghaisani.siasisver50.R;
@@ -95,7 +95,7 @@ public class ExpandableEnrollAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.parent_enroll, null);
 
-            Button unroll = (Button) convertView
+                ImageView unroll = (ImageView) convertView
                     .findViewById(R.id.button);
             unroll.setFocusable(false);
             unroll.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +103,9 @@ public class ExpandableEnrollAdapter extends BaseExpandableListAdapter {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(_context);
-                    alertDialogBuilder.setTitle("Unenroll Class");
-                    alertDialogBuilder.setMessage("Are you sure you want to unenroll " + headerTitle + " ?").setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    alertDialogBuilder.setTitle("Unenroll Kelas");
+                    alertDialogBuilder.setMessage("Apakah Anda yakin untuk meng-unenroll kelas " + headerTitle + " ?").setCancelable(false)
+                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -117,7 +117,7 @@ public class ExpandableEnrollAdapter extends BaseExpandableListAdapter {
                                     notifyDataSetChanged();
                                 }
                             })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();

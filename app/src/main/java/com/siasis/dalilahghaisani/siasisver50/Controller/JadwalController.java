@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -91,8 +93,8 @@ public class JadwalController extends Activity {
             TextView deskripsi = (TextView) this.findViewById(R.id.deskripsi);
             final TextView jumlah = (TextView) this.findViewById(R.id.textView11);
 
-            Button hadir = (Button) this.findViewById(R.id.button5);
-            Button edit = (Button) this.findViewById(R.id.button12);
+            ImageView hadir = (ImageView) this.findViewById(R.id.button5);
+            ImageView edit = (ImageView) this.findViewById(R.id.button12);
             Button partisipan = (Button) this.findViewById(R.id.button6);
 
             ImageView picture = (ImageView) this.findViewById(R.id.pic);
@@ -665,10 +667,15 @@ public class JadwalController extends Activity {
             } else {
                 TextView none = new TextView(getApplicationContext());
                 none.setText("Tidak ada yang menyatakan hadir");
+                none.setPadding(10, 10, 10, 10);
+                none.setGravity(Gravity.CENTER);
+                none.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
                 none.setTextColor(getResources().getColor(R.color.black));
                 kehadiran.addView(none);
             }
         }
+
+
     }
 
     public  void setListAdapterHadir(JSONArray mahasiswa) {
@@ -689,10 +696,10 @@ public class JadwalController extends Activity {
         private int kelasID;
 
         private ImageView picture;
-        private Button edit;
+        private ImageView edit;
 
         JadwalDetail(TextView judul, TextView asisten, TextView hp, TextView tanggal, TextView waktu, TextView ruangan, TextView deskripsi,
-                     int jadwalID, int kelasID, ImageView picture, Button edit) {
+                     int jadwalID, int kelasID, ImageView picture, ImageView edit) {
             this.judul = judul;
             this.asisten = asisten;
             this.hp = hp;
@@ -742,7 +749,7 @@ public class JadwalController extends Activity {
             return kelasID;
         }
 
-        public Button getEdit() {
+        public ImageView getEdit() {
             return this.edit;
         }
     }

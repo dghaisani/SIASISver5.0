@@ -12,7 +12,7 @@
             android:layout_width="20sp"
             android:layout_height="20sp"
             android:paddingRight="10dp"
-            android:src="@drawable/timeline"/>
+            android:src="@drawable/ic_label"/>
 
     </RelativeLayout>
     <RelativeLayout

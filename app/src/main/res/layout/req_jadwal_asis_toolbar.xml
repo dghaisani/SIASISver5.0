@@ -1,214 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:layout_marginTop="5dp"
-android:background="#DADADC"
-android:id="@+id/container">
-
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/whitedrawer">
-    <TextView
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Username:"
-        android:textSize="18sp"
-        />
-    <TextView
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:hint="username"
-        android:id="@+id/req_jadwal_asis_username"
-        android:textSize="18sp"/>
-</LinearLayout>
-
-<LinearLayout
-    android:layout_marginTop="2dp"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/white"
-    android:paddingRight="10dp">
+    android:layout_height="match_parent"
+    android:background="#DADADC"
+    android:id="@+id/container">
 
-    <TextView
-        android:layout_marginTop="7dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Judul :"
-        android:textStyle="bold"
-        android:textSize="27sp"
-        android:id="@+id/textView" />
+    <include
+        android:id="@+id/toolbar_createrequest"
+        layout="@layout/toolbar_createrequest"
+        ></include>
 
-    <EditText
-        android:textSize="27dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/req_jadwal_asis_judul"
-        android:layout_gravity="right" />
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/white"
-    android:paddingRight="10dp">
-
-    <TextView
+    <LinearLayout
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:text="Kelas :"
-        android:id="@+id/textView7" />
-    <Spinner
-        android:layout_weight="1"
-        android:scrollbarSize="25dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerReq" />
-</LinearLayout>
+        android:orientation="horizontal"
+        android:background="@color/whitedrawer">
+        <TextView
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username:"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:hint="username"
+            android:id="@+id/req_jadwal_asis_username"
+            android:textSize="18sp"/>
+    </LinearLayout>
 
-<LinearLayout
-    android:layout_marginTop="2dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/white"
-    android:paddingRight="10dp">
-
-    <TextView
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="12dp"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tanggal :"
-        android:id="@+id/textView2"
-        android:textSize="18sp"
-        />
-    <TextView
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="5dp"
-        android:layout_width="0sp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:id="@+id/textViewTanggalReq"
-        />
-    <ImageView
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:id="@+id/buttonTanggalReq"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:src="@drawable/ic_add_drakblue"/>
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/white"
-    android:paddingRight="10dp">
-
-    <TextView
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Waktu :"
-        android:id="@+id/textView3"
-        android:textSize="18sp"
-        />
-    <TextView
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="5dp"
-        android:layout_width="0sp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:id="@+id/textViewWaktuReq" />
-    <ImageView
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:src="@drawable/ic_add_drakblue"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:id="@+id/buttonWaktuReq"/>
-</LinearLayout>
-<ScrollView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@color/white"
         android:paddingRight="10dp">
+
         <TextView
             android:layout_marginTop="7dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deskripsi"
-            android:textColor="@color/twitter_blue"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:layout_marginLeft="12dp"
-            android:id="@+id/textView6" />
+            android:text="Judul:"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:id="@+id/textView" />
 
         <EditText
-            android:hint="Tulis deskripsi asistensi yang diinginkan"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="8dp"
+            android:textSize="18dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/req_jadwal_asis_deskripsi"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/req_jadwal_asis_judul"
+            android:layout_gravity="right"
+            android:hint="Judul pertanyaan"/>
     </LinearLayout>
-</ScrollView>
 
-<RelativeLayout
-    android:background="@color/white"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonSendReq"
-        android:background="@color/ColorPrimary"
-        android:backgroundTint="@color/ColorPrimary"
-        android:drawableStart="@drawable/ic_send_white"
-        android:paddingRight="3dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="3dp"
-        android:layout_marginBottom="5dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:text="Kirim Pertanyaan"
-        android:textColor="@color/white"
-        android:gravity="center_horizontal|top"
-        android:minWidth="40dp"
-        android:minHeight="35dp"/>
-</RelativeLayout>
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="Kelas :"
+            android:textColor="@color/black"
+            android:id="@+id/textView7" />
+        <Spinner
+            android:layout_weight="1"
+            android:scrollbarSize="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerReq" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="12dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal :"
+            android:id="@+id/textView2"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:id="@+id/textViewTanggalReq"
+            />
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:id="@+id/buttonTanggalReq"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:src="@drawable/ic_add_drakblue"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Waktu :"
+            android:textColor="@color/black"
+            android:id="@+id/textView3"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:id="@+id/textViewWaktuReq" />
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:src="@drawable/ic_add_drakblue"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:id="@+id/buttonWaktuReq"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_marginTop="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deskripsi"
+                android:textSize="19sp"
+                android:textColor="@color/twitter_blue"
+                android:textAlignment="center"
+                android:layout_marginLeft="12dp"
+                android:id="@+id/textView6" />
+
+            <EditText
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/req_jadwal_asis_deskripsi"
+                android:textSize="19sp"
+                android:layout_gravity="center_horizontal"
+                android:hint="Detail request asistensi yang diajukan"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

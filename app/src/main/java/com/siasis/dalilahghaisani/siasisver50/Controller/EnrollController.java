@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -58,7 +58,7 @@ public class EnrollController extends Activity{
 
         setContentView(R.layout.add_enroll);
         linearMain = (LinearLayout) findViewById(R.id.container);
-        Button enroll = (Button) findViewById(R.id.button);
+        ImageView enroll = (ImageView) findViewById(R.id.button);
 
         new GetAllKelasTask(EnrollController.this).execute(linearMain);
 
@@ -130,6 +130,7 @@ public class EnrollController extends Activity{
             LinearLayout linearLayout3 = new LinearLayout(getApplicationContext());
             linearLayout3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             linearLayout3.setOrientation(LinearLayout.VERTICAL);
+            linearLayout3.setPadding(30,30,30,30);
 
             pilihan = (new KelasController()).getAllClass(username);
             if (!pilihan.isEmpty()){
@@ -138,6 +139,8 @@ public class EnrollController extends Activity{
                     checkBox.setId(i);
                     checkBox.setText(pilihan.get(i).getNama());
                     checkBox.setTextColor(getResources().getColor(R.color.black));
+                    checkBox.setTextSize(22);
+
                     linearLayout3.addView(checkBox);
                     addKelas.add(checkBox);
                 } scrollView.addView(linearLayout3);

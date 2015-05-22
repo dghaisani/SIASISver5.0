@@ -4,20 +4,24 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="8dp"
-    android:background="#000000">
+    android:background="@color/whitedrawer">
 
     <TextView
+        android:layout_marginLeft="10dp"
         android:id="@+id/lblListHeader"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
         android:textSize="17dp"
-        android:textColor="#f9f93d"/>
+        android:textColor="@color/black"
+        android:layout_weight="1"/>
 
-    <Button
+    <ImageView
+        android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unenroll"
-        android:id="@+id/button"/>
+        android:src="@drawable/ic_deny"
+        android:id="@+id/button"
+        android:layout_gravity="right" />
 
 </LinearLayout>

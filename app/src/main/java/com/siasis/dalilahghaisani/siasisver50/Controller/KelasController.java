@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -247,9 +248,9 @@ public class KelasController extends Activity {
                     textView.setTextColor(getResources().getColor(R.color.black));
                     linearLayout.addView(textView);
 
-                    final Button button = new Button(getApplicationContext());
+                    final ImageView button = new ImageView(getApplicationContext());
                     button.setId(i);
-                    button.setText("Delete");
+                    button.setImageResource(R.drawable.ic_deny);
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

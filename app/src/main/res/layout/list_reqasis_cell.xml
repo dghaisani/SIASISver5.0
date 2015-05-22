@@ -32,6 +32,6 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:id="@+id/customer_mobile"
-        android:src="@drawable/avahome" />
+        android:src="@drawable/ava" />
 
 </RelativeLayout>
