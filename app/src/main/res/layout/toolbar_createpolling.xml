@@ -35,7 +35,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="21dp"
             android:layout_height="21dp"
-            android:id="@+id/button2"
+            android:id="@+id/buttonSendPolling"
             android:src="@drawable/sent"/>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>
