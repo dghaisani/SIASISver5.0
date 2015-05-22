@@ -184,6 +184,12 @@ public class PilihanController extends Fragment{
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        new GetAllJadwalTask(PilihanController.this).execute(username);
+    }
+
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getActivity().getMenuInflater();

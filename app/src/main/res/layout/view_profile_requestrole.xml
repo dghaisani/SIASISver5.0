@@ -22,6 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentStart="false"
         android:text="Tambah Role"
+        android:onClick="onClickAddRole"
         android:textColor="@color/white"
         android:gravity="center_horizontal|top"
         android:minWidth="40dp"

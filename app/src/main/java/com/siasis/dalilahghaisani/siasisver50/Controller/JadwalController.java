@@ -82,8 +82,6 @@ public class JadwalController extends Activity {
         if (op.equals("detailJadwal")) {
             setContentView(R.layout.detail_jadwal);
 
-            Log.e("masuk","na");
-
             TextView judul = (TextView) this.findViewById(R.id.judul);
             TextView asisten = (TextView) this.findViewById(R.id.asisten);
             TextView hp = (TextView) this.findViewById(R.id.hp);
@@ -417,9 +415,6 @@ public class JadwalController extends Activity {
                             finish();
                         } else {
                             addJadwal(nameValuePairs);
-                            Intent showDetails = new Intent(getApplicationContext(), PilihanController.class);
-                            showDetails.putExtra("Username", username);
-                            startActivity(showDetails);
                             finish();
                         }
                     } else {

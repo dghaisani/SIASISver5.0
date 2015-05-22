@@ -2,7 +2,6 @@ package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -71,7 +70,8 @@ public class EnrollController extends Activity{
                 for (int i = 0; i < addKelas.size(); i++) {
                     if (addKelas.get(i).isChecked()) {
                         kelas += pilihan.get(addKelas.get(i).getId()).getId() + " ";
-                        //Toast.makeText(getApplicationContext(), ""+ pilihan.get(addKelas.get(i).getId()).getId(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Kamu meng-enroll Kelas "+ pilihan.get(addKelas.get(i).getId()).getNama(), Toast.LENGTH_LONG).show();
                     }
                 }
                 if (!kelas.equals("")){
@@ -79,9 +79,6 @@ public class EnrollController extends Activity{
                     addEnroll(username, kelas);
                 }
 
-                Intent showDetails = new Intent(getApplicationContext(), EnrollController.class);
-                showDetails.putExtra("Username", username);
-                startActivity(showDetails);
                 finish();
             }
         });

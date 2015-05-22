@@ -14,10 +14,13 @@ import com.siasis.dalilahghaisani.siasisver50.Controller.DetailQAController;
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
 import com.siasis.dalilahghaisani.siasisver50.Controller.ListQuestionAdapter;
 import com.siasis.dalilahghaisani.siasisver50.Controller.QAController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 
 public class ForumQA extends Activity {
@@ -27,12 +30,28 @@ public class ForumQA extends Activity {
     String username;
     private ListView getAllQuestion;
 
+    private HashMap<String, String> detailMahasiswa;
+
+    private int role;
+
+    // User name (make variable public to access from outside)
+    public static final String KEY_NAME = "username";
+
+    // Email address (make variable public to access from outside)
+    public static final String KEY_ROLE = "role";
+
+    SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_thread_question);
 
-        this.username = getIntent().getStringExtra("Username");
+        session = new SessionManager(getApplicationContext());
+        this.detailMahasiswa = session.getUserDetails();
+        this.username = this.detailMahasiswa.get(KEY_NAME);
+        this.role = Integer.parseInt(this.detailMahasiswa.get(KEY_ROLE));
+
         getAllQuestion = (ListView) findViewById(R.id.listViewForumQuestion);
         
         new GetAllForumQuestion().execute(username);

@@ -71,8 +71,7 @@ public class ListRoleAdapter extends BaseAdapter {
         try
         {
             JSONObject jsonObject = this.dataArray.getJSONObject(position);
-            if (jsonObject.getInt("Status")==1) cell.Role.setText("Asisten Dosen " +
-                    jsonObject.getString("Nama"));
+            cell.Role.setText("Asisten Dosen " + jsonObject.getString("Nama"));
         }
         catch (JSONException e)
         {

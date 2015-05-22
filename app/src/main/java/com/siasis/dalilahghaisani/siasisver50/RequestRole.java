@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
 import com.siasis.dalilahghaisani.siasisver50.Controller.ListReqAdapter;
+import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -36,12 +38,31 @@ public class RequestRole extends Activity {
     private JSONArray jsonArray;
     private ListView listView;
     ListReqAdapter adapt;
-    String username = "rian.fitriansyah";
+
+    private String username;
+
+    // User name (make variable public to access from outside)
+    public static final String KEY_NAME = "username";
+
+    // Email address (make variable public to access from outside)
+    public static final String KEY_ROLE = "role";
+
+    private int role;
+    private HashMap<String, String> detailMahasiswa;
+
+    SessionManager session;
+    Bundle saved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        saved = savedInstanceState;
         setContentView(R.layout.view_profile_requestrole);
+
+        session = new SessionManager(getApplicationContext());
+        this.detailMahasiswa = session.getUserDetails();
+        this.username = this.detailMahasiswa.get(KEY_NAME);
+        this.role = Integer.parseInt(this.detailMahasiswa.get(KEY_ROLE));
 
         new GetAllRole().execute(username);
         listView = (ListView) findViewById(R.id.listViewReq);
@@ -85,6 +106,9 @@ public class RequestRole extends Activity {
         protected void onPostExecute(JSONArray jsonArray) {
             if(jsonArray != null)
                 setListAdapter(jsonArray);
+            else {
+                setContentView(R.layout.view_profile_requestrole_kosong);
+            }
         }
     }
 
@@ -95,7 +119,7 @@ public class RequestRole extends Activity {
         listReq.setAdapter(adapt);
     }
 
-    public void onClick(View v){
+    public void onClickAddRole(View v){
         InputStream is = null;
         ArrayList<String> listString = adapt.getSelectedStrings();
         for (int i = 0; i< listString.size();i++){
@@ -114,8 +138,11 @@ public class RequestRole extends Activity {
 
                 is = entity.getContent();
 
-                String msg = "Berhasil";
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                for (int j=0; j<nameValuePairs.size();j++){
+                    String msg = "Berhasil request role Asisten Dosen " + nameValuePairs.get(j);
+                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                }
+                new GetAllRole().execute(username);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ClientProtocolException e) {

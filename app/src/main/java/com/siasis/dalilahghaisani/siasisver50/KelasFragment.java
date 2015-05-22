@@ -86,6 +86,13 @@ public class KelasFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        
+        new GetAllEnrollTask(KelasFragment.this).execute(username);
+    }
+
     private class GetAllEnrollTask extends AsyncTask<String,Long,JSONArray>
     {
         private ProgressDialog dialog;

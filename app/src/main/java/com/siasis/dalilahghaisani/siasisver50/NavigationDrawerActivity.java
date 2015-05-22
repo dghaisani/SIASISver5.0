@@ -72,7 +72,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
 
         // add devisor
         this.newDevisor(menu);
-        this.newSection("Logout", this.getResources().getDrawable(R.drawable.logout), new LogoutFragment(), true, menu).setSectionColor(Color.parseColor("#000000"));
+        this.newSection("Logout", this.getResources().getDrawable(R.drawable.logout), new LogoutFragment(), true, menu).setSectionColor(Color.parseColor("#57c6ef"));
 
         // set start index
         menu.setStartIndex(0);
