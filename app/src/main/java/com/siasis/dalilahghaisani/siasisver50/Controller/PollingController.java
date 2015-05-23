@@ -1,6 +1,7 @@
 package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -113,6 +114,25 @@ public class PollingController extends Activity {
                 String sDeskripsi = deskripsiPolling.getText().toString();
                 String sJudulPolling = "";
                 String sWaktuPolling = "";
+
+                for (int i = 0; i<opsi.size();i++){
+                    View opsiPilihan = getViewByPosition(i, pilihanPolling);
+
+                    EditText judulPilihan = (EditText) opsiPilihan.findViewById(i);
+                    EditText waktuPilihan = (EditText) opsiPilihan.findViewById(i + 100);
+
+                    if(judulPilihan.getText().toString().isEmpty()){
+                        judulPilihan.setHint("Judul tidak boleh kosong");
+                        judulPilihan.setHintTextColor(Color.parseColor("#FF0000"));
+                        return;
+                    }
+
+                    if (waktuPilihan.getText().toString().isEmpty()){
+                        waktuPilihan.setHint("Waktu tidak boleh kosong");
+                        waktuPilihan.setHintTextColor(Color.parseColor("#FF0000"));
+                        return;
+                    }
+                }
 
                 for (int i = 0; i<opsi.size();i++){
                     View opsiPilihan = getViewByPosition(i, pilihanPolling);

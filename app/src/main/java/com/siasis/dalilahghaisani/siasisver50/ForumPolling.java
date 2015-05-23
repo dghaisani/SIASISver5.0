@@ -33,7 +33,7 @@ public class ForumPolling extends Activity {
         setContentView(R.layout.view_thread_polling);
 
         this.username = getIntent().getStringExtra("Username");
-        getAllPolling = (ListView) findViewById(R.id.listViewForumPol);
+        //getAllPolling = (ListView) findViewById(R.id.listViewForumPol);
 
         new GetAllForumPolling().execute(username);
 
@@ -116,10 +116,10 @@ public class ForumPolling extends Activity {
     }
 
     public  void setListAdapter(JSONArray jsonArray) {
-        ListView listForumQuestion = (ListView) findViewById(R.id.listViewForumPol);
+        //ListView listForumQuestion = (ListView) findViewById(R.id.listViewForumPol);
         this.jsonArray = jsonArray;
         adapt = new ListQuestionAdapter(jsonArray, this);
-        listForumQuestion.setAdapter(adapt);
+        //listForumQuestion.setAdapter(adapt);
     }
 
     public void addPolling (View view){

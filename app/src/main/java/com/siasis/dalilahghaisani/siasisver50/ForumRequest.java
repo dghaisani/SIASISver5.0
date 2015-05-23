@@ -33,7 +33,7 @@ public class ForumRequest extends Activity {
         setContentView(R.layout.view_thread_request);
 
         this.username = getIntent().getStringExtra("Username");
-        getAllRequest = (ListView) findViewById(R.id.listViewForumReq);
+        //getAllRequest = (ListView) findViewById(R.id.listViewForumReq);
 
         new GetAllForumReq().execute(username);
 
@@ -116,10 +116,10 @@ public class ForumRequest extends Activity {
     }
 
     public  void setListAdapter(JSONArray jsonArray) {
-        ListView listForumReq = (ListView) findViewById(R.id.listViewForumReq);
+        //ListView listForumReq = (ListView) findViewById(R.id.listViewForumReq);
         this.jsonArray = jsonArray;
         adapt = new ListForumAdapter(jsonArray, this);
-        listForumReq.setAdapter(adapt);
+        //listForumReq.setAdapter(adapt);
     }
 
     public void addRequest (View view){

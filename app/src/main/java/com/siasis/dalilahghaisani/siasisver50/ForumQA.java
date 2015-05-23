@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.siasis.dalilahghaisani.siasisver50.Controller.DetailQAController;
@@ -39,6 +40,7 @@ public class ForumQA extends Activity {
 
     // Email address (make variable public to access from outside)
     public static final String KEY_ROLE = "role";
+    private ExpandableListView GetAllQuestionView;
 
     SessionManager session;
 
@@ -52,11 +54,11 @@ public class ForumQA extends Activity {
         this.username = this.detailMahasiswa.get(KEY_NAME);
         this.role = Integer.parseInt(this.detailMahasiswa.get(KEY_ROLE));
 
-        getAllQuestion = (ListView) findViewById(R.id.listViewForumQuestion);
+        GetAllQuestionView = (ExpandableListView) findViewById(R.id.GetAllQAListView);
         
         new GetAllForumQuestion().execute(username);
 
-        getAllQuestion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        GetAllQuestionView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
@@ -135,10 +137,10 @@ public class ForumQA extends Activity {
     }
 
     public  void setListAdapter(JSONArray jsonArray) {
-        ListView listForumQuestion = (ListView) findViewById(R.id.listViewForumQuestion);
+        //ListViEew listForumQuestion = (ListView) findViewById(R.id.listViewForumQuestion);
         this.jsonArray = jsonArray;
         adapt = new ListQuestionAdapter(jsonArray, this);
-        listForumQuestion.setAdapter(adapt);
+        //listForumQuestion.setAdapter(adapt);
     }
 
     public void addQuestion (View view){

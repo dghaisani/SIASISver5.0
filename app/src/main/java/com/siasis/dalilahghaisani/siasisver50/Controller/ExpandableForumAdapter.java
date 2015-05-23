@@ -20,15 +20,15 @@ import java.util.List;
 /**
  * Created by lenovo on 5/2/2015.
  */
-public class ExpandableJadwalAdapter extends BaseExpandableListAdapter {
+public class ExpandableForumAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<JSONObject>> _listDataChild;
 
-    public ExpandableJadwalAdapter (Context context, List<String> listDataHeader,
-                                   HashMap<String, List<JSONObject>> listChildData) {
+    public ExpandableForumAdapter(Context context, List<String> listDataHeader,
+                                  HashMap<String, List<JSONObject>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -54,21 +54,14 @@ public class ExpandableJadwalAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.list_jadwal_cell, null);
+            convertView = infalInflater.inflate(R.layout.list_forum_all, null);
         }
 
-        TextView judul = (TextView) convertView.findViewById(R.id.judul);
-        TextView asisten = (TextView) convertView.findViewById(R.id.asisten);
-        TextView waktu = (TextView) convertView.findViewById(R.id.waktu);
-        TextView ruangan = (TextView) convertView.findViewById(R.id.ruangan);
-        ImageView mobile = (ImageView) convertView.findViewById(R.id.customer_mobile);
+        TextView judul = (TextView) convertView.findViewById(R.id.textViewJudulQuestion);
+        ImageView mobile = (ImageView) convertView.findViewById(R.id.customer_mobile_question);
 
         try {
             judul.setText(jsonObject.getString("Judul"));
-            asisten.setText(jsonObject.getString("Username"));
-            waktu.setText(jsonObject.getString("W_Mulai").substring(0, jsonObject.getString("W_Mulai").length() - 3) +
-                    " - " + jsonObject.getString("W_Akhir").substring(0, jsonObject.getString("W_Akhir").length() - 3));
-            ruangan.setText(jsonObject.getString("Ruangan"));
             mobile.setImageResource(R.drawable.ava);
         } catch (JSONException e) {
             e.printStackTrace();

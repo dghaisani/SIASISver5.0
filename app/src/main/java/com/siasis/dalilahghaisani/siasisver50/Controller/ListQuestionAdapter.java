@@ -52,7 +52,7 @@ public class ListQuestionAdapter extends BaseAdapter {
         ListCell cell;
         if (convertView == null)
         {
-            convertView = inflater.inflate(R.layout.list_question, null);
+            convertView = inflater.inflate(R.layout.list_forum_all, null);
             cell = new ListCell();
 
             cell.Judul = (TextView) convertView.findViewById(R.id.textViewJudulQuestion);

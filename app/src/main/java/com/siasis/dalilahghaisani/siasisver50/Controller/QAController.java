@@ -1,6 +1,7 @@
 package com.siasis.dalilahghaisani.siasisver50.Controller;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -41,8 +42,7 @@ import java.util.List;
 public class QAController extends Activity {
 
     String username;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,13 +99,41 @@ public class QAController extends Activity {
                 String sDeskripsi = deskripsiQuestion.getText().toString();
                 String sUsername = usernameQuestion.getText().toString();
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                nameValuePairs.add(new BasicNameValuePair("Id_Kelas", sKelas));
-                nameValuePairs.add(new BasicNameValuePair("Username", sUsername));
-                nameValuePairs.add(new BasicNameValuePair("Judul", sJudul));
-                nameValuePairs.add(new BasicNameValuePair("Deskripsi", sDeskripsi));
+                boolean temp = true;
+                if (sJudul.equals("") || sJudul.trim().length() <= 0) {
+                    //judul.setBackgroundColor(15918822);
+                    judulQuestion.setHint("Judul tidak boleh kosong");
+                    judulQuestion.setHintTextColor(Color.parseColor("#FF0000"));
+                    temp = false;
+                } else if (sJudul.length() > 25) {
+                    judulQuestion.setText(null);
+                    judulQuestion.setHintTextColor(Color.parseColor("#FF0000"));
+                    judulQuestion.setHint("Judul, max 25 karakter");
+                }
 
-                addQuestion(nameValuePairs);
+                if (sDeskripsi.equals("") || sDeskripsi.trim().length() <= 0) {
+                    deskripsiQuestion.setHintTextColor(Color.parseColor("#FF0000"));
+                    temp = false;
+                } else if (sDeskripsi.length() > 255) {
+                    deskripsiQuestion.setText(null);
+                    deskripsiQuestion.setHintTextColor(Color.parseColor("#FF0000"));
+                    deskripsiQuestion.setHint("contoh: 2403, max 10 karakter");
+                }
+
+                if (temp) {
+
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                    nameValuePairs.add(new BasicNameValuePair("Id_Kelas", sKelas));
+                    nameValuePairs.add(new BasicNameValuePair("Username", sUsername));
+                    nameValuePairs.add(new BasicNameValuePair("Judul", sJudul));
+                    nameValuePairs.add(new BasicNameValuePair("Deskripsi", sDeskripsi));
+
+                    addQuestion(nameValuePairs);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Pastikan isian valid", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Pastikan isian valid",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }

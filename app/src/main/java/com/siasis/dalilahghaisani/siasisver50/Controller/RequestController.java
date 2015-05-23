@@ -3,6 +3,7 @@ package com.siasis.dalilahghaisani.siasisver50.Controller;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -191,16 +192,69 @@ public class RequestController extends Activity {
                     return;
                 }
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                nameValuePairs.add(new BasicNameValuePair("Id_Kelas", sKelas));
-                nameValuePairs.add(new BasicNameValuePair("Username", sUsername));
-                nameValuePairs.add(new BasicNameValuePair("Judul", sJudul));
-                nameValuePairs.add(new BasicNameValuePair("Tanggal", sTanggal));
-                nameValuePairs.add(new BasicNameValuePair("Waktu", sMulai));
-                nameValuePairs.add(new BasicNameValuePair("Deskripsi", sDeskripsi));
+                boolean temp = true;
+                if (sJudul.equals("") || sJudul.trim().length() <= 0) {
+                    //judul.setBackgroundColor(15918822);
+                    judulReq.setHint("Judul tidak boleh kosong");
+                    judulReq.setHintTextColor(Color.parseColor("#FF0000"));
+                    temp = false;
+                } else if (sJudul.length() > 25) {
+                    judulReq.setText(null);
+                    judulReq.setHintTextColor(Color.parseColor("#FF0000"));
+                    judulReq.setHint("Judul, max 25 karakter");
+                    temp=false;
+                }
 
-                addReq(nameValuePairs);
-                finish();
+                if (sDeskripsi.equals("") || sDeskripsi.trim().length() <= 0) {
+                    deskripsiReq.setHint("Deskripsi tidak boleh kosong");
+                    deskripsiReq.setHintTextColor(Color.parseColor("#FF0000"));
+                    temp = false;
+                } else if (sDeskripsi.length() > 255) {
+                    deskripsiReq.setText(null);
+                    deskripsiReq.setHintTextColor(Color.parseColor("#FF0000"));
+                    deskripsiReq.setHint("contoh: 2403, max 10 karakter");
+                    temp=false;
+                }
+
+                if (sMulai.isEmpty()){
+                    textViewWaktuReq.setText("Waktu tidak boleh kosong");
+                    textViewWaktuReq.setHintTextColor(Color.parseColor("#FF0000"));
+                    temp = false;
+                }else if(date1.compareTo(date2)>=0){
+                    if (date3.compareTo(date2)<0){
+                        textViewWaktuReq.setHint("Waktu telah berlalu");
+                        textViewWaktuReq.setHintTextColor(Color.parseColor("#FF0000"));
+                        temp = false;
+                    }
+                }
+
+                if (sTanggal.isEmpty()){
+                    textViewTanggalReq.setHint("Tanggal tidak boleh kosong");
+                    textViewTanggalReq.setHintTextColor(Color.parseColor("#FF0000"));
+                    temp = false;
+                }else if(date1.compareTo(date2)<0){
+                    textViewTanggalReq.setHint("Tanggal telah berlalu");
+                    textViewTanggalReq.setHintTextColor(Color.parseColor("#FF0000"));
+                    temp = false;
+                }
+
+                if (temp) {
+
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                    nameValuePairs.add(new BasicNameValuePair("Id_Kelas", sKelas));
+                    nameValuePairs.add(new BasicNameValuePair("Username", sUsername));
+                    nameValuePairs.add(new BasicNameValuePair("Judul", sJudul));
+                    nameValuePairs.add(new BasicNameValuePair("Tanggal", sTanggal));
+                    nameValuePairs.add(new BasicNameValuePair("Waktu", sMulai));
+                    nameValuePairs.add(new BasicNameValuePair("Deskripsi", sDeskripsi));
+
+                    addReq(nameValuePairs);
+                    finish();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Pastikan isian valid", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Pastikan isian valid",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

@@ -95,7 +95,17 @@ public class JadwalController extends Activity {
 
             ImageView hadir = (ImageView) this.findViewById(R.id.button5);
             ImageView edit = (ImageView) this.findViewById(R.id.button12);
+            ImageView back = (ImageView) this.findViewById(R.id.back_detail);
             Button partisipan = (Button) this.findViewById(R.id.button6);
+
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+
+            GetAllHadirListView = (ListView) findViewById(R.id.GetAllHadirListView);
 
             ImageView picture = (ImageView) this.findViewById(R.id.pic);
 
@@ -121,7 +131,7 @@ public class JadwalController extends Activity {
                 public void onClick(View v) {
                     //bernilai true jika ia blm menghadiri
                     if (cekMenghadiri(jadwalID, kelasID)) {
-                        addMenghadiri(jadwalID, kelasID);
+                        addMenghadiri(jadwalID);
                         try {
                             jumlah.setText(Integer.toString(getJumlahMenghadiri(jadwalID, kelasID)));
                         } catch (JSONException e) {
@@ -148,6 +158,7 @@ public class JadwalController extends Activity {
             ImageView bTanggal = (ImageView) findViewById(R.id.button);
             ImageView bMulai = (ImageView) findViewById(R.id.button3);
             ImageView bSelesai = (ImageView) findViewById(R.id.button4);
+            ImageView back = (ImageView) findViewById(R.id.back_jadwalbaru);
             final Calendar calendar = Calendar.getInstance();
             final Calendar calendarMulai = Calendar.getInstance();
             final Calendar calendarSelesai = Calendar.getInstance();
@@ -160,6 +171,13 @@ public class JadwalController extends Activity {
             final EditText deskripsi = (EditText) findViewById(R.id.editText6);
 
             final ArrayList<Kelas> arrayKelas = (new MenjabatController(username)).getMenjabatKelas();
+
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 
             if (getIntent().getIntExtra("Update", 0) == 1) {
                 int namaKelas = getIntent().getIntExtra("KelasID", -1);
@@ -428,9 +446,16 @@ public class JadwalController extends Activity {
         } else if (op.equals("partisipasi")) {
             setContentView(R.layout.list_hadir);
 
-            Log.e("ko masuk","haha");
             GetAllHadirListView = (ListView) findViewById(R.id.GetAllHadirListView);
             kehadiran = (LinearLayout) findViewById(R.id.container);
+            ImageView back = (ImageView) findViewById(R.id.back_partisipan);
+
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 
             //Toast.makeText(getApplicationContext(),getIntent().getIntExtra("JadwalID", -1) + "",Toast.LENGTH_LONG).show();
 
@@ -462,12 +487,13 @@ public class JadwalController extends Activity {
     }
 
 
-    public void addMenghadiri(int id_jadwal, int id_kelas){
+    /*public void addMenghadiri(int id_jadwal, int id_kelas){
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+            GetAllHadirListView = (ListView) findViewById(R.id.GetAllHadirListView);
             nameValuePairs.add(new BasicNameValuePair("Id_Kelas", Integer.toString(id_kelas)));
             nameValuePairs.add(new BasicNameValuePair("Username", username));
             nameValuePairs.add(new BasicNameValuePair("Id_Jadwal", Integer.toString(id_jadwal)));
-            GetAllHadirListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            *//*GetAllHadirListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     try {
@@ -481,8 +507,8 @@ public class JadwalController extends Activity {
                         e.printStackTrace();
                     }
                 }
-            });
-        }
+            });*//*
+        }*/
 
     public boolean cekMenghadiri(int id_jadwal, int id_kelas) {
         String url = "http://ppl-a08.cs.ui.ac.id/jadwal.php?fun=cekHadir&Id=" + id_jadwal + "&Id_Kelas=" + id_kelas + "&Username=" + username;
@@ -617,7 +643,6 @@ public class JadwalController extends Activity {
                         showDetails.putExtra("ruangan", ruangan);
                         showDetails.putExtra("deskripsi", deskripsi);
                         startActivity(showDetails);
-                        finish();
                     }
                 });
                 Mahasiswa m = (new ProfileController()).getMahasiswa(asdos);
