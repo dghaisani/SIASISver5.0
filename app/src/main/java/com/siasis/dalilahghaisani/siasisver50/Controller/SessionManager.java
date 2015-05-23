@@ -41,6 +41,9 @@ public class SessionManager {
         editor = pref.edit();
     }
 
+//    public SessionManager(){
+//    }
+
     public void createLoginSession(String name, int role) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
@@ -53,6 +56,11 @@ public class SessionManager {
 
         // commit changes
         editor.commit();
+    }
+
+    public void setRole(int role) {
+        editor.putInt(KEY_ROLE, role);
+        //editor.remove(KEY_ROLE);
     }
 
     public HashMap<String, String> getUserDetails(){

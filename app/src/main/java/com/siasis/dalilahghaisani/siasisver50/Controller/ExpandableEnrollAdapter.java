@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,13 +91,19 @@ public class ExpandableEnrollAdapter extends BaseExpandableListAdapter {
     public View getGroupView(final int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         final String headerTitle = (String) getGroup(groupPosition);
+        Log.e("posisisi", groupPosition + "");
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.parent_enroll, null);
 
-                ImageView unroll = (ImageView) convertView
+            ImageView unroll = (ImageView) convertView
                     .findViewById(R.id.button);
+
+            final TextView lblListHeader = (TextView) convertView
+                    .findViewById(R.id.lblListHeader);
+            lblListHeader.setTypeface(null, Typeface.BOLD);
+            lblListHeader.setText(headerTitle);
             unroll.setFocusable(false);
             unroll.setOnClickListener(new View.OnClickListener() {
 
@@ -104,14 +111,14 @@ public class ExpandableEnrollAdapter extends BaseExpandableListAdapter {
                 public void onClick(View v) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(_context);
                     alertDialogBuilder.setTitle("Unenroll Kelas");
-                    alertDialogBuilder.setMessage("Apakah Anda yakin untuk meng-unenroll kelas " + headerTitle + " ?").setCancelable(false)
+                    alertDialogBuilder.setMessage("Apakah Anda yakin untuk meng-unenroll kelas " + lblListHeader.getText() + " ?").setCancelable(false)
                             .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                                     StrictMode.setThreadPolicy(policy);
 
-                                    (new EnrollController()).deleteEnroll(username,headerTitle);
+                                    (new EnrollController()).deleteEnroll(username, headerTitle);
                                     _listDataHeader.remove(groupPosition);
                                     _listDataChild.remove(headerTitle);
                                     notifyDataSetChanged();
@@ -128,11 +135,6 @@ public class ExpandableEnrollAdapter extends BaseExpandableListAdapter {
                 }
             });
         }
-
-        TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(headerTitle);
 
         return convertView;
     }

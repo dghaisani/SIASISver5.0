@@ -34,7 +34,7 @@ public class LogoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_logout, container, false);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setTitle("Logout");
         alertDialogBuilder.setMessage("Apakah kamu yakin ingin keluar dari SIASIS ?").setCancelable(false)
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
@@ -42,14 +42,15 @@ public class LogoutFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                         StrictMode.setThreadPolicy(policy);
-
-                        session = new SessionManager(getActivity().getApplicationContext());
-                        detailMahasiswa = session.getUserDetails();
-                        username = detailMahasiswa.get(KEY_NAME);
-                        role = Integer.parseInt(detailMahasiswa.get(KEY_ROLE));
+                        session = new SessionManager(getActivity());
+                        //detailMahasiswa = session.getUserDetails();
+                        //username = detailMahasiswa.get(KEY_NAME);
+                        //role = Intdeger.parseInt(detailMahasiswa.get(KEY_ROLE));
 
                         session.logoutUser();
+                        (new MainActivity()).deleteAlarm();
                         Intent showDetails = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                        dialog.dismiss();
                         startActivity(showDetails);
                         getActivity().finish();
                     }

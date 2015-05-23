@@ -22,18 +22,19 @@
             android:id="@+id/back_createqa"/>
 
         <TextView
-            android:layout_centerHorizontal="true"
+            android:layout_centerHorizontal="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Membuat Pertanyaan"
+            android:layout_marginLeft="40dp"
             android:textSize="22sp"
             android:textColor="@color/black"/>
 
         <ImageView
             android:layout_marginRight="5dp"
             android:layout_alignParentRight="true"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:id="@+id/buttonSendQuestion"
             android:src="@drawable/sent"/>
     </RelativeLayout>

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -84,14 +83,13 @@ public class QAFragment extends Fragment {
 
         new GetAllForumQuestion(QAFragment.this).execute(username);
 
-        GetAllQuestionView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        GetAllQuestionView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 try {
                     // GEt the customer which was clicked
-                    JSONObject reqClicked = jsonArray.getJSONObject(position);
-                    int reqp = reqClicked.getInt("Id");
-                    int kelasp = reqClicked.getInt("Id_Kelas");
+                    int reqp = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getInt("Id");
+                    int kelasp = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getInt("Id_kelas");
 
 //                        Toast.makeText(getApplicationContext(), "-j=" + jadwalp + "-k=" + kelasp
 //                                , Toast.LENGTH_LONG).show();
@@ -110,6 +108,7 @@ public class QAFragment extends Fragment {
                     e.printStackTrace();
                 }
 
+                return false;
             }
         });
 

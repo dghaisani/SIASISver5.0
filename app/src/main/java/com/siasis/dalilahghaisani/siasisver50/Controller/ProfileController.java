@@ -50,16 +50,26 @@ public class ProfileController extends Activity {
     }
 
     public boolean cekAdmin(){
-        return getRole() == 2;
+        return getRoleMahasiswa() == 2;
     }
 
-    public int getRole(){
-        return getMahasiswa(username).getStatus();
+    public int getRoleMahasiswa(){
+        try {
+            String url = "http://ppl-a08.cs.ui.ac.id/mahasiswa.php?fun=getStatus&Username=" + username;
+            JSONObject jsonObject = (new JSONParser()).getJSONObjectFromUrl(url);
+            if(jsonObject != null) {
+                return jsonObject.getInt("Status");
+            } else {
+                return -1;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     public boolean punyaProfile(){
         Mahasiswa temp = getMahasiswa(username);
-        //Toast.makeText(this, "" + !temp.equals(null), Toast.LENGTH_LONG).show();
         return temp == null;
     }
 
@@ -97,7 +107,7 @@ public class ProfileController extends Activity {
         try {
             String url = "http://ppl-a08.cs.ui.ac.id/mahasiswa.php?fun=getMahasiswa&Username=" + username;
             JSONObject jsonObject = (new JSONParser()).getJSONObjectFromUrl(url);
-            //Log.e("h", jsonObject.toString());
+
             if(jsonObject == null)
                 return null;
 
@@ -105,7 +115,6 @@ public class ProfileController extends Activity {
                     jsonObject.getString("HP"), jsonObject.getString("Email"), jsonObject.getString("Foto"), jsonObject.getInt("Status"));
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.e("m", "masuk ex");
             return null;
         }
     }

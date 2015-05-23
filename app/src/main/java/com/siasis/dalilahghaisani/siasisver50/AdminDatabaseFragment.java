@@ -26,9 +26,8 @@ import org.json.JSONObject;
  */
 public class AdminDatabaseFragment extends Fragment{
 
-    final Context context = this.context;
+    final Context context = this.getActivity();
     TextView result;
-
     private View rootView;
 
     @Override
@@ -48,11 +47,11 @@ public class AdminDatabaseFragment extends Fragment{
             public void onClick(View arg0) {
 
                 // get prompts.xml view
-                LayoutInflater li = LayoutInflater.from(context);
+                LayoutInflater li = LayoutInflater.from(getActivity());
                 View promptsView = li.inflate(R.layout.dialog_semester, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
+                        getActivity());
 
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
@@ -127,7 +126,8 @@ public class AdminDatabaseFragment extends Fragment{
             }
             try {
                 result.setTextColor(Color.parseColor("#000000"));
-                result.setText(jsonArray.getString("status"));
+                if(jsonArray != null)
+                    result.setText(jsonArray.getString("status"));
                 //Toast.makeText(getApplicationContext(), jsonArray.toString(), Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -17,6 +17,7 @@ import com.siasis.dalilahghaisani.siasisver50.Controller.EnrollController;
 import com.siasis.dalilahghaisani.siasisver50.Controller.ExpandableEnrollAdapter;
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
 import com.siasis.dalilahghaisani.siasisver50.Controller.MenjabatController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,7 @@ public class KelasFragment extends Fragment {
 
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
+    SessionManager session;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,13 +48,17 @@ public class KelasFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        session = new SessionManager(getActivity());
+        HashMap<String, String> detailMahasiswa = session.getUserDetails();
+        this.username = detailMahasiswa.get("username");
+
         View view = inflater.inflate(R.layout.list_enroll, container, false);
 
         //GetAllEnrollListView = (ListView) view.findViewById(R.id.GetAllJadwalListView);
         ImageView enroll = (ImageView) view.findViewById(R.id.button);
         expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
 
-        this.username="rian.fitriansyah";
+        //this.username="rian.fitriansyah";
 
         new GetAllEnrollTask(KelasFragment.this).execute(username);
 
@@ -100,7 +106,7 @@ public class KelasFragment extends Fragment {
 
         public GetAllEnrollTask(KelasFragment activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(activity.getActivity());
+            dialog = new ProgressDialog(activity.getActivity(), R.style.MyTheme);
         }
 
         @Override
@@ -121,27 +127,27 @@ public class KelasFragment extends Fragment {
 
         @Override
         protected void onPostExecute(JSONArray jsonArray) {
-            listDataHeader = new ArrayList<String>();
-            listDataChild = new HashMap<String, List<String>>();
-            //String k = "";
+            if (jsonArray != null) {
+                listDataHeader = new ArrayList<String>();
+                listDataChild = new HashMap<String, List<String>>();
+                //String k = "";
 
-            if(jsonArray != null) {
                 try {
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject ob = jsonArray.getJSONObject(i);
-                            String kelas = ob.getString("Nama");
-                            listDataHeader.add(kelas);
-                            List<String> listChild = (new EnrollController()).getAllAsdosKelas(ob.getInt("Id"));
-                            listDataChild.put(kelas, listChild);
-                        }
-                } catch(JSONException e){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject ob = jsonArray.getJSONObject(i);
+                        String kelas = ob.getString("Nama");
+                        listDataHeader.add(kelas);
+                        List<String> listChild = (new EnrollController()).getAllAsdosKelas(ob.getInt("Id"));
+                        listDataChild.put(kelas, listChild);
+                    }
+                } catch (JSONException e) {
                     e.printStackTrace();
+                    //Toast.makeText(getApplicationContext(), k, Toast.LENGTH_LONG).show();
                 }
 
                 ExpandableListAdapter listAdapter = new ExpandableEnrollAdapter(KelasFragment.this.getActivity(), listDataHeader, listDataChild, username);
                 expListView.setAdapter(listAdapter);
-            }
-            if (dialog.isShowing()) {
+            } if (dialog.isShowing()) {
                 dialog.dismiss();
             }
         }

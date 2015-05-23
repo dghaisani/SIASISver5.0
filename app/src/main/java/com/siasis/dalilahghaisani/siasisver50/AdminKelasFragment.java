@@ -17,7 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +54,7 @@ public class AdminKelasFragment extends Fragment {
 
     private String username;
     private String op;
-    private LinearLayout linearMain;
+    private RelativeLayout linearMain;
     SessionManager session;
 
     private View rootView;
@@ -85,7 +87,7 @@ public class AdminKelasFragment extends Fragment {
 
             rootView = inflater.inflate(R.layout.list_kelas, container, false);
 
-            linearMain = (LinearLayout) rootView.findViewById(R.id.container);
+            linearMain = (RelativeLayout) rootView.findViewById(R.id.container);
             ImageView create = (ImageView) rootView.findViewById(R.id.button11);
 
             new GetAllKelasTask(AdminKelasFragment.this).execute(linearMain);
@@ -218,7 +220,7 @@ public class AdminKelasFragment extends Fragment {
         }
     }
 
-    private class GetAllKelasTask extends AsyncTask<LinearLayout,Long,LinearLayout>
+    private class GetAllKelasTask extends AsyncTask<RelativeLayout,Long,RelativeLayout>
     {
         private ProgressDialog dialog;
         private AdminKelasFragment activity;
@@ -229,7 +231,7 @@ public class AdminKelasFragment extends Fragment {
         }
 
         @Override
-        protected LinearLayout doInBackground(LinearLayout... params) {
+        protected RelativeLayout doInBackground(RelativeLayout... params) {
             return params[0];
         }
 
@@ -240,7 +242,7 @@ public class AdminKelasFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(LinearLayout a) {
+        protected void onPostExecute(RelativeLayout a) {
             ScrollView scrollView = new ScrollView(getActivity().getApplicationContext());
             scrollView.setLayoutParams(new ScrollView.LayoutParams(ScrollView.LayoutParams.MATCH_PARENT, ScrollView.LayoutParams.MATCH_PARENT));
 
@@ -248,31 +250,42 @@ public class AdminKelasFragment extends Fragment {
             linearLayout3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             linearLayout3.setOrientation(LinearLayout.VERTICAL);
 
+
             pilihan = (new KelasController()).getAll();
             if (!pilihan.isEmpty()){
                 for (int i = 0; i < pilihan.size(); i++) {
                     LinearLayout linearLayout = new LinearLayout(getActivity().getApplicationContext());
-                    linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT));
                     linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
                     TextView textView = new TextView(getActivity().getApplicationContext());
                     textView.setId(i);
+                    textView.setPadding(20, 20, 20, 20);
                     //Toast.makeText(getApplicationContext(), jsonArray.getJSONObject(i).getString("Nama"), Toast.LENGTH_LONG).show();
                     final String namaKelas = pilihan.get(i).getNama();
                     textView.setText(namaKelas);
                     textView.setTextColor(getResources().getColor(R.color.black));
+                    textView.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+
                     linearLayout.addView(textView);
 
-                    final Button button = new Button(getActivity().getApplicationContext());
+//                    LinearLayout linearLayout2 = new LinearLayout(getActivity().getApplicationContext());
+//                    linearLayout2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+//                    linearLayout2.setOrientation(LinearLayout.HORIZONTAL);
+//                    linearLayout2.setMinimumWidth(TypedValue.COMPLEX_UNIT_DIP, 30));
+
+                    final ImageView button = new ImageView(getActivity().getApplicationContext());
+                    button.setImageResource(R.drawable.ic_deny);
                     button.setId(i);
-                    button.setText("Delete");
+                    //button.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1));
+                    //button.setText("Delete");
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AdminKelasFragment.this.getActivity());
-                            alertDialogBuilder.setTitle("Delete Class");
-                            alertDialogBuilder.setMessage("Are you sure you want to delete " + namaKelas + " ?").setCancelable(false)
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            alertDialogBuilder.setTitle("Hapus Kelas");
+                            alertDialogBuilder.setMessage("Apakah Anda yakin untuk menghapus " + namaKelas + " ?").setCancelable(false)
+                                    .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -290,7 +303,7 @@ public class AdminKelasFragment extends Fragment {
                                             getActivity().finish();
                                         }
                                     })
-                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.cancel();

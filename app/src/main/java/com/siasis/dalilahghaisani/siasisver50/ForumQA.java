@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.siasis.dalilahghaisani.siasisver50.Controller.DetailQAController;
@@ -41,14 +42,21 @@ public class ForumQA extends Activity {
     // Email address (make variable public to access from outside)
     public static final String KEY_ROLE = "role";
     private ExpandableListView GetAllQuestionView;
-
+    ImageView back = (ImageView) findViewById(R.id.back_createqa);
     SessionManager session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_thread_question);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         session = new SessionManager(getApplicationContext());
         this.detailMahasiswa = session.getUserDetails();
         this.username = this.detailMahasiswa.get(KEY_NAME);
@@ -83,7 +91,6 @@ public class ForumQA extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }

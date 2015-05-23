@@ -109,7 +109,7 @@ public class RoleController extends Activity {
         }
     }
 
-    public void deny(String username, int idKelas){
+    public void denny (String username, int idKelas){
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
         nameValuePairs.add(new BasicNameValuePair("Username", username));
         nameValuePairs.add(new BasicNameValuePair("Id_Kelas", Integer.toString(idKelas)));
@@ -152,7 +152,7 @@ public class RoleController extends Activity {
 
         public GetAllRequestRoleTask(RoleController activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity, R.style.MyTheme);
         }
 
         @Override
@@ -161,7 +161,7 @@ public class RoleController extends Activity {
         }
 
         protected void onPreExecute() {
-            this.dialog.setMessage("Sedang mengambil data...");
+            this.dialog.setMessage("Please wait...");
             this.dialog.show();
             this.dialog.setCancelable(false);
         }
@@ -218,24 +218,23 @@ public class RoleController extends Activity {
                         linearLayout.addView(approve);
                     }
 
-                    final Button deny = new Button(getApplicationContext());
-                    deny.setId(i);
-                    deny.setText("Deny");
-                    deny.setOnClickListener(new View.OnClickListener() {
+                    final Button denny = new Button(getApplicationContext());
+                    denny.setId(i);
+                    denny.setText("Deny");
+                    denny.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            int pos = deny.getId();
+                            int pos = denny.getId();
                             String username = pilihan.get(pos).getUsername();
                             int idKelas = pilihan.get(pos).getIdKelas();
-                            deny(username, idKelas);
+                            denny(username, idKelas);
                             Intent showDetails = new Intent(getApplicationContext(), RoleController.class);
                             //asumsi username gak null
                             showDetails.putExtra("Username", username);
                             startActivity(showDetails);
-                            finish();
                         }
                     });
-                    linearLayout.addView(deny);
+                    linearLayout.addView(denny);
                     linearLayout3.addView(linearLayout);
                 }
                 scrollView.addView(linearLayout3);

@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,12 +48,12 @@ public class MenjabatController extends Activity{
 
         this.username = getIntent().getStringExtra("Username");
 
-        setContentView(R.layout.view_profile_personal);
-        //this.username_asdos = (TextView) this.findViewById(R.id.username_mahasiswa);
-        this.nama = (TextView) this.findViewById(R.id.nama_mahasiswaText);
-        this.npm = (TextView) this.findViewById(R.id.npm_mahasiswaText);
-        this.hp = (TextView) this.findViewById(R.id.nohp_mahasiswaText);
-        this.email = (TextView) this.findViewById(R.id.email_mahasiswaText);
+        setContentView(R.layout.view_profile_other);
+        this.username_asdos = (TextView) this.findViewById(R.id.username_mahasiswa);
+        this.nama = (TextView) this.findViewById(R.id.nama_mahasiswa);
+        this.npm = (TextView) this.findViewById(R.id.npm_mahasiswa);
+        this.hp = (TextView) this.findViewById(R.id.nohp_mahasiswa);
+        this.email = (TextView) this.findViewById(R.id.email_mahasiswa);
         this.linearMain = (LinearLayout) findViewById(R.id.role);
 
         new GetProfile(MenjabatController.this).execute(this.username);
@@ -86,7 +85,7 @@ public class MenjabatController extends Activity{
 
         public GetProfile(MenjabatController activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity, R.style.MyTheme);
         }
         @Override
         protected String doInBackground(String... params) {
@@ -101,11 +100,9 @@ public class MenjabatController extends Activity{
 
         @Override
         protected void onPostExecute(String mahasiswa) {
-            //Log.e("k", mahasiswa);
             Mahasiswa asdos = (new ProfileController()).getMahasiswa(mahasiswa);
-            Log.e("k", (asdos == null) + "");
-            ArrayList<Kelas> arrayKelas = (new MenjabatController(mahasiswa)).getMenjabatKelas();
-            //username_asdos.setText(asdos.getUsername());
+            ArrayList<Kelas> arrayKelas = (new MenjabatController(username)).getMenjabatKelas();
+            username_asdos.setText(asdos.getUsername());
             nama.setText(asdos.getName());
             npm.setText(asdos.getNpm());
             hp.setText(asdos.getHp());
@@ -158,7 +155,6 @@ public class MenjabatController extends Activity{
 
         if(role != null) {
             int length = role.length();
-
             for (int i = 0; i < length; i++) {
                 try {
                     JSONObject jsonObject = role.getJSONObject(i);
@@ -182,16 +178,16 @@ public class MenjabatController extends Activity{
         String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=getKelas&Id_Kelas=" + listIdKelas;
 
         JSONArray jsonkelas = (new JSONParser()).getJSONArrayFromUrl(url);
+
+        int length = jsonkelas.length();
         ArrayList<Kelas> kelas = new ArrayList<Kelas>();
-        if(jsonkelas != null){
-            int length = jsonkelas.length();
-            for(int i=0; i<length; i++) {
-                try {
-                    JSONObject jsonObject = jsonkelas.getJSONObject(i);
-                    kelas.add((new KelasController()).createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
+        for(int i=0; i<length; i++){
+            try {
+                JSONObject jsonObject = jsonkelas.getJSONObject(i);
+                kelas.add((new KelasController()).createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         } return kelas;
     }

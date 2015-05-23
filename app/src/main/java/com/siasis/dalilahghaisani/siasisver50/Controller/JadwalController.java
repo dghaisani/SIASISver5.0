@@ -10,8 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -65,7 +63,6 @@ public class JadwalController extends Activity {
     private JSONArray mahasiswa;
     private LinearLayout kehadiran;
 
-
     SessionManager session;
 
     @Override
@@ -110,17 +107,19 @@ public class JadwalController extends Activity {
             ImageView picture = (ImageView) this.findViewById(R.id.pic);
 
             final int jadwalID = getIntent().getIntExtra("JadwalID", -1);
-            final int kelasID = getIntent().getIntExtra("KelasID", -1);
+            //final int kelasID = getIntent().getIntExtra("KelasID", -1);
 
-            JadwalDetail jadwalDetail = new JadwalDetail(judul, asisten, hp, tanggal, waktu, ruangan, deskripsi, jadwalID, kelasID, picture, edit);
+            JadwalDetail jadwalDetail = new JadwalDetail(judul, asisten, hp, tanggal, waktu, ruangan, deskripsi, jadwalID, picture, edit);
 
+            //this.username = getIntent().getStringExtra("Username");
             try {
-                jumlah.setText(Integer.toString(getJumlahMenghadiri(jadwalID, kelasID)));
+                jumlah.setText(Integer.toString(getJumlahMenghadiri(jadwalID)));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            if (jadwalID > 0 && kelasID > 0) {
+            if (jadwalID > 0)
+            {
                 // we have customer ID passed correctly.
                 getDetailJadwal(jadwalDetail);
             }
@@ -130,14 +129,17 @@ public class JadwalController extends Activity {
                 @Override
                 public void onClick(View v) {
                     //bernilai true jika ia blm menghadiri
-                    if (cekMenghadiri(jadwalID, kelasID)) {
+                    if(cekMenghadiri(jadwalID)) {
                         addMenghadiri(jadwalID);
                         try {
-                            jumlah.setText(Integer.toString(getJumlahMenghadiri(jadwalID, kelasID)));
+                            jumlah.setText(Integer.toString(getJumlahMenghadiri(jadwalID)));
+                            Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    } //belum menghadiri
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Sudah menyatakan hadir", Toast.LENGTH_LONG).show();//belum menghadiri
+                    }
                 }
             });
             partisipan.setOnClickListener(new View.OnClickListener() {
@@ -479,40 +481,45 @@ public class JadwalController extends Activity {
         }
     }
 
-    public int getJumlahMenghadiri(int id_jadwal, int id_kelas) throws JSONException {
-        String url = "http://ppl-a08.cs.ui.ac.id/hadir.php?fun=jadwalJumlah&Id="+id_jadwal+"&Id_Kelas="+id_kelas;
-        //new GetHadir(JadwalController.this).execute(getIntent().getIntExtra("JadwalID", -1));
-
+    public int getJumlahMenghadiri(int id_jadwal) throws JSONException {
+        String url = "http://ppl-a08.cs.ui.ac.id/hadir.php?fun=jadwalJumlah&Id="+id_jadwal;
         return (new JSONParser()).getJSONObjectFromUrl(url).getInt("Count");
     }
 
-
-    /*public void addMenghadiri(int id_jadwal, int id_kelas){
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-            GetAllHadirListView = (ListView) findViewById(R.id.GetAllHadirListView);
-            nameValuePairs.add(new BasicNameValuePair("Id_Kelas", Integer.toString(id_kelas)));
-            nameValuePairs.add(new BasicNameValuePair("Username", username));
-            nameValuePairs.add(new BasicNameValuePair("Id_Jadwal", Integer.toString(id_jadwal)));
-            *//*GetAllHadirListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    try {
-                        //Toast.makeText(getApplicationContext(), "masuk ke klik",Toast.LENGTH_LONG).show();
-                        JSONObject mahasiswaClicked = mahasiswa.getJSONObject(position);
-                        String userMahasiswa = mahasiswaClicked.getString("Username");
-                        Intent showDetails = new Intent(getApplicationContext(), MenjabatController.class);
-                        showDetails.putExtra("Username", userMahasiswa);
-                        startActivity(showDetails);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });*//*
-        }*/
-
-    public boolean cekMenghadiri(int id_jadwal, int id_kelas) {
-        String url = "http://ppl-a08.cs.ui.ac.id/jadwal.php?fun=cekHadir&Id=" + id_jadwal + "&Id_Kelas=" + id_kelas + "&Username=" + username;
+    public boolean cekMenghadiri(int id_jadwal){
+        String url = "http://ppl-a08.cs.ui.ac.id/hadir.php?fun=cekHadir&Id="+id_jadwal+"&Username="+username;
         return (new JSONParser()).getJSONObjectFromUrl(url) == null;
+    }
+
+    public ArrayList<Jadwal> getJadwalToday (String username){
+        String url = "http://ppl-a08.cs.ui.ac.id/jadwal.php?fun=jadwalToday&username="+username;
+        return getJadwal(url);
+    }
+
+    public ArrayList<Jadwal> getJadwalUpdate (String username){
+        String url = "http://ppl-a08.cs.ui.ac.id/jadwal.php?fun=jadwalUpdate&username="+username;
+        return getJadwal(url);
+    }
+
+    public ArrayList<Jadwal> getJadwal (String url){
+        try {
+            JSONArray jsonArray = (new JSONParser()).getJSONArrayFromUrl(url);
+            if(jsonArray != null) {
+                ArrayList<Jadwal> allJadwal = new ArrayList<Jadwal>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jadwal = jsonArray.getJSONObject(i);
+                    Jadwal oneJadwal = new Jadwal(jadwal.getInt("Id"), jadwal.getString("Judul") + " " +  jadwal.getString("Nama"),
+                            jadwal.getString("Tanggal"), jadwal.getString("W_Mulai"), jadwal.getString("W_Akhir"),
+                            jadwal.getString("Ruangan"), jadwal.getString("Deskripsi"),
+                            jadwal.getInt("Id_kelas"), jadwal.getString("Username"));
+                    allJadwal.add(oneJadwal);
+                }
+                return allJadwal;
+            } return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void addMenghadiri(int id_jadwal){
@@ -520,25 +527,7 @@ public class JadwalController extends Activity {
         nameValuePairs.add(new BasicNameValuePair("Username", username));
         nameValuePairs.add(new BasicNameValuePair("Id_Jadwal", Integer.toString(id_jadwal)));
 
-        InputStream is = null;
-        try {
-            HttpClient httpClient = new DefaultHttpClient();
-
-            HttpPost httpPost = new HttpPost("http://ppl-a08.cs.ui.ac.id/createMenghadiri.php");
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            HttpResponse response = httpClient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-
-            is = entity.getContent();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            Log.e("Client Protocol", "Log_Tag");
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.e("Log_Tag", "IOException");
-            e.printStackTrace();
-        }
+        toDatabase(nameValuePairs, "http://ppl-a08.cs.ui.ac.id/createMenghadiri.php");
     }
 
     public void getDetailJadwal(JadwalDetail jadwalDetail){
@@ -583,18 +572,18 @@ public class JadwalController extends Activity {
 
         public GetJadwalDetails(JadwalController activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity, R.style.MyTheme);
         }
 
         @Override
         protected JSONObject doInBackground(JadwalDetail... params) {
             this.jadwalDetail = params[0];
-            String url = "http://ppl-a08.cs.ui.ac.id/jadwal.php?fun=jadwalDetail&Id=" + jadwalDetail.getJadwalID() + "&Id_Kelas=" + jadwalDetail.getKelasID();
+            String url = "http://ppl-a08.cs.ui.ac.id/jadwal.php?fun=jadwalDetail&Id=" + jadwalDetail.getJadwalID();
             return (new JSONParser()).getJSONObjectFromUrl(url);
         }
 
         protected void onPreExecute() {
-            this.dialog.setMessage("Sedang mengambil data...");
+            this.dialog.setMessage("Please wait...");
             this.dialog.show();
             this.dialog.setCancelable(false);
         }
@@ -602,59 +591,66 @@ public class JadwalController extends Activity {
         @Override
         protected void onPostExecute(final JSONObject jadwal) {
             try {
-                final Jadwal kJadwal = new Jadwal(jadwal.getInt("Id"), jadwal.getString("Judul"), jadwal.getString("Tanggal"), jadwal.getString("W_Mulai"),
-                        jadwal.getString("W_Akhir"), jadwal.getString("Ruangan"), jadwal.getString("Deskripsi"), jadwal.getInt("Id_kelas"),
-                        jadwal.getString("Username"));
-                String asdos = kJadwal.getUsername();
-                final String judul = kJadwal.getJudul();
-                String[] atgl = kJadwal.getTanggal().split("-");
-                final String tanggal = atgl[2] + "-" + atgl[1] + "-" + atgl[0];
-                final String w_mulai = kJadwal.getWaktuMulai().substring(0, kJadwal.getWaktuMulai().length() - 3);
-                final String w_akhir = kJadwal.getWaktuAkhir().substring(0, kJadwal.getWaktuAkhir().length() - 3);
-                final String ruangan = kJadwal.getRuangan();
-                final String deskripsi = kJadwal.getDeskripsi();
+                if(jadwal != null) {
+                    final Jadwal kJadwal = new Jadwal(jadwal.getInt("Id"), jadwal.getString("Judul"), jadwal.getString("Tanggal"), jadwal.getString("W_Mulai"),
+                            jadwal.getString("W_Akhir"), jadwal.getString("Ruangan"), jadwal.getString("Deskripsi"), jadwal.getInt("Id_kelas"),
+                            jadwal.getString("Username"));
+                    String asdos = kJadwal.getUsername();
+                    final String judul = kJadwal.getJudul();
+                    String[] atgl = kJadwal.getTanggal().split("-");
+                    final String tanggal = atgl[2] + "-" + atgl[1] + "-" + atgl[0];
+                    final String w_mulai = kJadwal.getWaktuMulai().substring(0, kJadwal.getWaktuMulai().length() - 3);
+                    final String w_akhir = kJadwal.getWaktuAkhir().substring(0, kJadwal.getWaktuAkhir().length() - 3);
+                    final String ruangan = kJadwal.getRuangan();
+                    final String deskripsi = kJadwal.getDeskripsi();
 
-                jadwalDetail.getJudul().setText(judul);
-                jadwalDetail.getAsisten().setText(asdos);
+                    jadwalDetail.getJudul().setText(judul + " " + jadwal.getString("Nama"));
+                    jadwalDetail.getAsisten().setText(asdos);
 
-                if (!username.equals(asdos))
-                    jadwalDetail.getEdit().setVisibility(View.GONE);
-                else
-                    jadwalDetail.getEdit().setVisibility(View.VISIBLE);
+                    if (!username.equals(asdos))
+                        jadwalDetail.getEdit().setVisibility(View.GONE);
+                    else
+                        jadwalDetail.getEdit().setVisibility(View.VISIBLE);
 
-                if (dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-
-                jadwalDetail.getEdit().setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        Intent showDetails = new Intent(getApplicationContext(), JadwalController.class);
-                        showDetails.putExtra("JadwalID", kJadwal.getId());
-                        showDetails.putExtra("KelasID", kJadwal.getIdKelas());
-                        showDetails.putExtra("Username", username);
-                        showDetails.putExtra("View", "createJadwal");
-                        showDetails.putExtra("Update", 1);
-                        showDetails.putExtra("judul", judul);
-                        showDetails.putExtra("tanggal", tanggal);
-                        showDetails.putExtra("mulai", w_mulai);
-                        showDetails.putExtra("selesai", w_akhir);
-                        showDetails.putExtra("ruangan", ruangan);
-                        showDetails.putExtra("deskripsi", deskripsi);
-                        startActivity(showDetails);
+                    if (dialog.isShowing()) {
+                        dialog.dismiss();
                     }
-                });
-                Mahasiswa m = (new ProfileController()).getMahasiswa(asdos);
-                jadwalDetail.getHp().setText(m.getHp());
 
-                jadwalDetail.getTanggal().setText(tanggal);
-                jadwalDetail.getWaktu().setText(w_mulai + " - " + w_akhir);
-                jadwalDetail.getRuangan().setText(ruangan);
-                jadwalDetail.getDeskripsi().setText(deskripsi);
+                    jadwalDetail.getEdit().setOnClickListener(new View.OnClickListener() {
 
+                        @Override
+                        public void onClick(View v) {
+                            Intent showDetails = new Intent(getApplicationContext(), JadwalController.class);
+                            showDetails.putExtra("JadwalID", kJadwal.getId());
+                            showDetails.putExtra("KelasID", kJadwal.getIdKelas());
+                            showDetails.putExtra("Username", username);
+                            showDetails.putExtra("View", "createJadwal");
+                            showDetails.putExtra("Update", 1);
+                            showDetails.putExtra("judul", judul);
+                            showDetails.putExtra("tanggal", tanggal);
+                            showDetails.putExtra("mulai", w_mulai);
+                            showDetails.putExtra("selesai", w_akhir);
+                            showDetails.putExtra("ruangan", ruangan);
+                            showDetails.putExtra("deskripsi", deskripsi);
+                            startActivity(showDetails);
+                            finish();
+                        }
+                    });
+                    Mahasiswa m = (new ProfileController()).getMahasiswa(asdos);
+                    jadwalDetail.getHp().setText(m.getHp());
+
+                    jadwalDetail.getTanggal().setText(tanggal);
+                    jadwalDetail.getWaktu().setText(w_mulai + " - " + w_akhir);
+                    jadwalDetail.getRuangan().setText(ruangan);
+                    jadwalDetail.getDeskripsi().setText(deskripsi);
+                } else {
+                    if (dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
+                //Log.e("kena",kJadwal == null +"");
             }
 
         }
@@ -666,7 +662,7 @@ public class JadwalController extends Activity {
 
         public GetHadir(JadwalController activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity, R.style.MyTheme);
         }
 
         @Override
@@ -676,7 +672,7 @@ public class JadwalController extends Activity {
         }
 
         protected void onPreExecute() {
-            this.dialog.setMessage("Sedang mengambil data...");
+            this.dialog.setMessage("Please wait...");
             this.dialog.show();
             this.dialog.setCancelable(false);
         }
@@ -686,21 +682,15 @@ public class JadwalController extends Activity {
             if (dialog.isShowing()) {
                 dialog.dismiss();
             }
-
             if(mahasiswa != null) {
                 setListAdapterHadir(mahasiswa);
             } else {
                 TextView none = new TextView(getApplicationContext());
                 none.setText("Tidak ada yang menyatakan hadir");
-                none.setPadding(10, 10, 10, 10);
-                none.setGravity(Gravity.CENTER);
-                none.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
                 none.setTextColor(getResources().getColor(R.color.black));
                 kehadiran.addView(none);
             }
         }
-
-
     }
 
     public  void setListAdapterHadir(JSONArray mahasiswa) {
@@ -710,6 +700,7 @@ public class JadwalController extends Activity {
 
     class JadwalDetail{
         private TextView judul;
+        //private TextView kelas;
         private TextView asisten;
         private TextView hp;
         private TextView tanggal;
@@ -718,14 +709,14 @@ public class JadwalController extends Activity {
         private TextView deskripsi;
 
         private int jadwalID;
-        private int kelasID;
 
         private ImageView picture;
         private ImageView edit;
 
         JadwalDetail(TextView judul, TextView asisten, TextView hp, TextView tanggal, TextView waktu, TextView ruangan, TextView deskripsi,
-                     int jadwalID, int kelasID, ImageView picture, ImageView edit) {
+                     int jadwalID, ImageView picture, ImageView edit) {
             this.judul = judul;
+            //this.kelas = kelas;
             this.asisten = asisten;
             this.hp = hp;
             this.tanggal = tanggal;
@@ -733,7 +724,6 @@ public class JadwalController extends Activity {
             this.ruangan = ruangan;
             this.deskripsi = deskripsi;
             this.jadwalID = jadwalID;
-            this.kelasID = kelasID;
             this.picture = picture;
             this.edit = edit;
         }
@@ -741,6 +731,10 @@ public class JadwalController extends Activity {
         public TextView getJudul() {
             return judul;
         }
+
+//        public TextView getKelas() {
+//            return kelas;
+//        }
 
         public TextView getAsisten() {
             return asisten;
@@ -768,10 +762,6 @@ public class JadwalController extends Activity {
 
         public int getJadwalID() {
             return jadwalID;
-        }
-
-        public int getKelasID() {
-            return kelasID;
         }
 
         public ImageView getEdit() {

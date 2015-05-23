@@ -22,10 +22,11 @@
             android:id="@+id/back_partisipan"/>
 
         <TextView
-            android:layout_centerHorizontal="true"
+            android:layout_centerHorizontal="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Partisipan Asistensi"
+            android:layout_marginLeft="40dp"
             android:textSize="22sp"
             android:textColor="@color/black"/>
 

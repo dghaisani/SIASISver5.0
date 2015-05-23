@@ -60,6 +60,7 @@ public class QAController extends Activity {
         usernameQuestion.setText(username);
         final EditText judulQuestion = (EditText) findViewById(R.id.pertanyaan_judul_question);
         final EditText deskripsiQuestion = (EditText) findViewById(R.id.req_jadwal_question_deskripsi);
+        ImageView back = (ImageView) findViewById(R.id.back_createqa);
 
         final ArrayList<Kelas> arrayKelas = getKelas();
         final ArrayList<Integer> temp_id = new ArrayList<Integer>();
@@ -83,12 +84,20 @@ public class QAController extends Activity {
                         //Toast.makeText(getApplicationContext(), "You have selected " + daftarKelas[position], Toast.LENGTH_LONG).show();
                         // TODO Auto-generated method stub
                     }
+
                     @Override
                     public void onNothingSelected(AdapterView<?> arg0) {
                         // TODO Auto-generated method stub
                     }
                 }
         );
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         sendQuestion.setOnClickListener(new View.OnClickListener() {
             @Override

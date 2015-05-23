@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -188,11 +188,11 @@ public class AdminRoleFragment extends Fragment{
             if (!pilihan.isEmpty() && !kelas.isEmpty()){
                 for (int i = 0; i < pilihan.size(); i++) {
                     LinearLayout linearLayout = new LinearLayout(getActivity().getApplicationContext());
-                    linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    linearLayout.setOrientation(LinearLayout.VERTICAL);
+                    linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
                     LinearLayout linearLayout2 = new LinearLayout(getActivity().getApplicationContext());
-                    linearLayout2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    linearLayout2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f));
                     linearLayout2.setOrientation(LinearLayout.VERTICAL);
 
                     TextView textView = new TextView(getActivity().getApplicationContext());
@@ -210,9 +210,9 @@ public class AdminRoleFragment extends Fragment{
                     linearLayout.addView(linearLayout2);
 
                     if (pilihan.get(i).getStatus() == 0){
-                        final Button approve = new Button(getActivity().getApplicationContext());
+                        final ImageView approve = new ImageView(getActivity().getApplicationContext());
                         approve.setId(i);
-                        approve.setText("Approve");
+                        approve.setImageResource(R.drawable.ic_accept);
                         approve.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -226,24 +226,20 @@ public class AdminRoleFragment extends Fragment{
                         linearLayout.addView(approve);
                     }
 
-                    final Button denny = new Button(getActivity().getApplicationContext());
-                    denny.setId(i);
-                    denny.setText("Deny");
-                    denny.setOnClickListener(new View.OnClickListener() {
+                    final ImageView deny = new ImageView(getActivity().getApplicationContext());
+                    deny.setImageResource(R.drawable.ic_deny);
+                    deny.setId(i);
+                    deny.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            int pos = denny.getId();
+                            int pos = deny.getId();
                             String username = pilihan.get(pos).getUsername();
                             int idKelas = pilihan.get(pos).getIdKelas();
                             denny(username, idKelas);
-                            /*Intent showDetails = new Intent(getActivity().getApplicationContext(), RoleController.class);
-                            //asumsi username gak null
-                            showDetails.putExtra("Username", username);
-                            startActivity(showDetails);
-                            finish();*/
+
                         }
                     });
-                    linearLayout.addView(denny);
+                    linearLayout.addView(deny);
                     linearLayout3.addView(linearLayout);
                 }
                 scrollView.addView(linearLayout3);

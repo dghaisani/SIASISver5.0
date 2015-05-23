@@ -17,25 +17,38 @@
 package com.siasis.dalilahghaisani.siasisver50;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
+import com.siasis.dalilahghaisani.siasisver50.Controller.JadwalController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.NotifReceiver;
 import com.siasis.dalilahghaisani.siasisver50.Controller.ProfileController;
 import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
+import com.siasis.dalilahghaisani.siasisver50.Model.Jadwal;
 import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     EditText username, password;
@@ -86,6 +99,51 @@ public class MainActivity extends Activity implements View.OnClickListener {
         new LoginTask(MainActivity.this).execute(in);
     }
 
+    public void  startNotif (String username){
+        ArrayList<Jadwal> jadwals = (new JadwalController()).getJadwalToday(username);
+        if(jadwals != null) {
+            Log.e("masuk notif", "enggak null");
+            for (int i = 0; i < jadwals.size(); i++) {
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+
+                Intent notif = new Intent(this, JadwalController.class);
+                notif.putExtra("JadwalID", jadwals.get(i).getId());
+                notif.putExtra("KelasID", jadwals.get(i).getIdKelas());
+                notif.putExtra("Username", username);
+                notif.putExtra("View", "detailJadwal");
+
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+                stackBuilder.addParentStack(JadwalController.class);
+                stackBuilder.addNextIntent(notif);
+
+                PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                builder.setContentTitle(jadwals.get(i).getJudul());
+                builder.setContentText(jadwals.get(i).getWaktuMulai().substring(0, jadwals.get(i).getWaktuMulai().length() - 3)
+                        + " - " + jadwals.get(i).getWaktuAkhir().substring(0, jadwals.get(i).getWaktuAkhir().length() - 3));
+                builder.setContentIntent(pendingIntent);
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(i, builder.build());
+                Log.e("masuk notif", i+"");
+            }
+        }
+    }
+    public void deleteAlarm(){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(MainActivity.this, NotifReceiver.class);
+        intent.putExtra("jenis", "harian");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+
+        alarmManager.cancel(pendingIntent);
+
+        AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Intent intent2 = new Intent(MainActivity.this, NotifReceiver.class);
+        intent2.putExtra("jenis", "menitan");
+        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(MainActivity.this, 0, intent2, 0);
+
+        alarmManager2.cancel(pendingIntent2);
+    }
+
     private class LoginTask extends AsyncTask<String[],Long,JSONObject>
     {
         private ProgressDialog dialog;
@@ -94,7 +152,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         public LoginTask(MainActivity activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(activity);
+            dialog = new ProgressDialog(this.activity, R.style.MyTheme);
         }
 
         @Override
@@ -129,6 +187,35 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         dialog.dismiss();
                     }
 
+                    startNotif(username);
+//
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    Intent intent = new Intent(MainActivity.this, NotifReceiver.class);
+                    intent.putExtra("jenis", "harian");
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(System.currentTimeMillis());
+                    calendar.set(Calendar.HOUR_OF_DAY, 6);
+                    calendar.set(Calendar.MINUTE, 0);
+
+                    alarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+                            AlarmManager.INTERVAL_DAY, pendingIntent);
+
+                    AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    Intent intent2 = new Intent(MainActivity.this, NotifReceiver.class);
+                    intent2.putExtra("jenis", "menitan");
+                    //intent2.putExtra("username", username);
+                    PendingIntent pendingIntent2 = PendingIntent.getBroadcast(MainActivity.this, 0, intent2, 0);
+
+                    Calendar calendar2 = Calendar.getInstance();
+                    calendar2.setTimeInMillis(System.currentTimeMillis());
+                    calendar2.set(Calendar.HOUR_OF_DAY, 0);
+                    calendar2.set(Calendar.MINUTE, 30);
+
+                    alarmManager2.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+                            AlarmManager.INTERVAL_HALF_HOUR, pendingIntent2);
+
                     Intent showDetails = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
                     startActivity(showDetails);
                     finish();
@@ -148,6 +235,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Log.e("kena ex", "di main");
             }
         }
     }

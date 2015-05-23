@@ -22,11 +22,12 @@
             android:id="@+id/back_jadwalbaru"/>
 
         <TextView
-            android:layout_centerHorizontal="true"
+            android:layout_centerHorizontal="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Membuat Request Jadwal Asistensi"
             android:textSize="22sp"
+            android:layout_marginLeft="40dp"
             android:textColor="@color/black"/>
 
         <ImageView

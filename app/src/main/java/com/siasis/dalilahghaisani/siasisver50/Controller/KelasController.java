@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -154,7 +153,7 @@ public class KelasController extends Activity {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     kelas.add(createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
                 } catch (JSONException e) {
-                    e.printStackTrace();return kelas;
+                    e.printStackTrace();
                 }
             }
         }return kelas;
@@ -172,7 +171,6 @@ public class KelasController extends Activity {
                     kelas.add(createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    return kelas;
                 }
             }
         }return kelas;
@@ -210,7 +208,7 @@ public class KelasController extends Activity {
 
         public GetAllKelasTask(KelasController activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity, R.style.MyTheme);
         }
 
         @Override
@@ -219,7 +217,7 @@ public class KelasController extends Activity {
         }
 
         protected void onPreExecute() {
-            this.dialog.setMessage("Sedang mengambil data...");
+            this.dialog.setMessage("Please wait...");
             this.dialog.show();
             this.dialog.setCancelable(false);
         }
@@ -248,9 +246,9 @@ public class KelasController extends Activity {
                     textView.setTextColor(getResources().getColor(R.color.black));
                     linearLayout.addView(textView);
 
-                    final ImageView button = new ImageView(getApplicationContext());
+                    final Button button = new Button(getApplicationContext());
                     button.setId(i);
-                    button.setImageResource(R.drawable.ic_deny);
+                    button.setText("Delete");
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

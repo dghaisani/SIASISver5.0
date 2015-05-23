@@ -6,11 +6,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
@@ -59,9 +62,15 @@ public class EnrollController extends Activity{
         setContentView(R.layout.add_enroll);
         linearMain = (LinearLayout) findViewById(R.id.container);
         ImageView enroll = (ImageView) findViewById(R.id.button);
-
+        ImageView back = (ImageView) findViewById(R.id.back_enroll);
         new GetAllKelasTask(EnrollController.this).execute(linearMain);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         enroll.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -78,7 +87,6 @@ public class EnrollController extends Activity{
                     kelas = kelas.substring(0, kelas.length() - 1);
                     addEnroll(username, kelas);
                 }
-
                 finish();
             }
         });
@@ -108,7 +116,7 @@ public class EnrollController extends Activity{
 
         public GetAllKelasTask(EnrollController activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity, R.style.MyTheme);
         }
 
         @Override
@@ -140,11 +148,20 @@ public class EnrollController extends Activity{
                     checkBox.setText(pilihan.get(i).getNama());
                     checkBox.setTextColor(getResources().getColor(R.color.black));
                     checkBox.setTextSize(22);
-
+                    checkBox.setPadding(20,0,20,20);
                     linearLayout3.addView(checkBox);
                     addKelas.add(checkBox);
                 } scrollView.addView(linearLayout3);
                 a.addView(scrollView);
+            }
+            if(pilihan.isEmpty()){
+                TextView none = new TextView(getApplicationContext());
+                none.setText("Seluruh kelas telah di enroll");
+                none.setPadding(10, 30, 10, 10);
+                none.setGravity(Gravity.CENTER);
+                none.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                none.setTextColor(getResources().getColor(R.color.black));
+                a.addView(none);
             }
             if (dialog.isShowing()) {
                 dialog.dismiss();
