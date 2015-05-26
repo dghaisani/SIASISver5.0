@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -13,17 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
 import com.siasis.dalilahghaisani.siasisver50.Controller.KelasController;
 import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
 import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
@@ -37,14 +31,12 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -54,7 +46,7 @@ public class AdminKelasFragment extends Fragment {
 
     private String username;
     private String op;
-    private RelativeLayout linearMain;
+    private LinearLayout linearMain;
     SessionManager session;
 
     private View rootView;
@@ -72,10 +64,10 @@ public class AdminKelasFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //session = new SessionManager(getActivity().getApplicationContext());
-        //HashMap<String, String> detailMahasiswa = session.getUserDetails();
-        //this.username = detailMahasiswa.get("username");
-        this.username = "rian.fitriansyah";
+        session = new SessionManager(getActivity());
+        HashMap<String, String> detailMahasiswa = session.getUserDetails();
+        this.username = detailMahasiswa.get("username");
+        //this.username = "rian.fitriansyah";
 
         op = getActivity().getIntent().getStringExtra("View");
 
@@ -85,115 +77,141 @@ public class AdminKelasFragment extends Fragment {
 
         if (op.equals("listKelas")) {
 
-            rootView = inflater.inflate(R.layout.list_kelas, container, false);
+            this.rootView = inflater.inflate(R.layout.list_kelas, container, false);
 
-            linearMain = (RelativeLayout) rootView.findViewById(R.id.container);
-            ImageView create = (ImageView) rootView.findViewById(R.id.button11);
+            this.linearMain = (LinearLayout) rootView.findViewById(R.id.container);
+            ImageView buttonKelas = (ImageView) rootView.findViewById(R.id.buttonAddKelas);
 
             new GetAllKelasTask(AdminKelasFragment.this).execute(linearMain);
 
-            create.setOnClickListener(new View.OnClickListener() {
-
+            buttonKelas.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Intent showDetails = new Intent(getActivity().getApplicationContext(), KelasController.class);
-                    //asumsi username gak null
-                    showDetails.putExtra("Username", username);
-                    showDetails.putExtra("View", "createKelas");
-                    startActivity(showDetails);
-                }
-            });
-        } else if (op.equals("createKelas")){
-            rootView = inflater.inflate(R.layout.form_kelas, container, false);
-
-            Button ok = (Button) rootView.findViewById(R.id.button2);
-            final EditText nama = (EditText) rootView.findViewById(R.id.editText);
-
-            ok.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    if(nama.getText().toString().equals("")){
-                        Toast.makeText(getActivity().getApplicationContext(), "Hei Isi Namanya", Toast.LENGTH_LONG).show();
-                        nama.setHintTextColor(Color.parseColor("#FF0000"));
-                    } else if(nama.getText().toString().length() > 25) {
-                        nama.setText(null);
-                        nama.setHintTextColor(Color.parseColor("#FF0000"));
-                        nama.setHint("max 15 karakter");
-
-                    } else {
-                        addKelas(nama.getText().toString());
-                        Intent showDetails = new Intent(getActivity().getApplicationContext(), AdminKelasFragment.class);
+                    try{
+                        Intent showDetails = new Intent(getActivity(), KelasController.class);
+                        //asumsi username gak null
                         showDetails.putExtra("Username", username);
-                        showDetails.putExtra("View", "listKelas");
+                        showDetails.putExtra("View", "createKelas");
                         startActivity(showDetails);
-                        getActivity().finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             });
         }
+//        else if (op.equals("createKelas")){
+//            rootView = inflater.inflate(R.layout.form_kelas, container, false);
+//
+//            Button ok = (Button) rootView.findViewById(R.id.button2);
+//            final EditText nama = (EditText) rootView.findViewById(R.id.editText);
+//
+//            ok.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//                    if(nama.getText().toString().equals("")){
+//                        Toast.makeText(getActivity().getApplicationContext(), "Hei Isi Namanya", Toast.LENGTH_LONG).show();
+//                        nama.setHintTextColor(Color.parseColor("#FF0000"));
+//                    } else if(nama.getText().toString().length() > 25) {
+//                        nama.setText(null);
+//                        nama.setHintTextColor(Color.parseColor("#FF0000"));
+//                        nama.setHint("max 15 karakter");
+//
+//                    } else {
+//                        addKelas(nama.getText().toString());
+//                        Intent showDetails = new Intent(getActivity().getApplicationContext(), AdminKelasFragment.class);
+//                        showDetails.putExtra("Username", username);
+//                        showDetails.putExtra("View", "listKelas");
+//                        startActivity(showDetails);
+//                        getActivity().finish();
+//                    }
+//                }
+//            });
+//        }
         return rootView;
     }
 
-    public void addKelas(String nama){
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("Nama", nama));
-        InputStream is = null;
-
-        try {
-            HttpClient httpClient = new DefaultHttpClient();
-
-            HttpPost httpPost = new HttpPost("http://ppl-a08.cs.ui.ac.id/createKelas.php");
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            HttpResponse response = httpClient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-
-            is = entity.getContent();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            Log.e("Client Protocol", "Log_Tag");
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.e("Log_Tag", "IOException");
-            e.printStackTrace();
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("jjj","kkk");
+        new GetAllKelasTask(AdminKelasFragment.this).execute(linearMain);
     }
 
-    public ArrayList<Kelas> getAllClass(String username){
-        ArrayList<Kelas> kelas = new ArrayList<Kelas>();
-        String url = "http://ppl-a08.cs.ui.ac.id/kelas.php?fun=notEnroll&Username=" + username;
-        JSONArray jsonArray = (new JSONParser()).getJSONArrayFromUrl(url);
-
-        if(jsonArray != null){
-            for (int i = 0; i < jsonArray.length(); i++) {
-                try {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    kelas.add(createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }return kelas;
+    @Override
+    public void onPause() {
+        super.onPause();
+        new GetAllKelasTask(AdminKelasFragment.this).execute(linearMain);
     }
 
-    public ArrayList<Kelas> getAll(){
-        ArrayList<Kelas> kelas = new ArrayList<Kelas>();
-        String url = "http://ppl-a08.cs.ui.ac.id/kelas.php?fun=all";
-        JSONArray jsonArray = (new JSONParser()).getJSONArrayFromUrl(url);
-
-        if(jsonArray != null){
-            for (int i = 0; i < jsonArray.length(); i++) {
-                try {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    kelas.add(createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }return kelas;
+    @Override
+    public void onStop() {
+        super.onStop();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+//    public void addKelas(String nama){
+//        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+//        nameValuePairs.add(new BasicNameValuePair("Nama", nama));
+//        InputStream is = null;
+//
+//        try {
+//            HttpClient httpClient = new DefaultHttpClient();
+//
+//            HttpPost httpPost = new HttpPost("http://ppl-a08.cs.ui.ac.id/createKelas.php");
+//            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//            HttpResponse response = httpClient.execute(httpPost);
+//            HttpEntity entity = response.getEntity();
+//
+//            is = entity.getContent();
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        } catch (ClientProtocolException e) {
+//            Log.e("Client Protocol", "Log_Tag");
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            Log.e("Log_Tag", "IOException");
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public ArrayList<Kelas> getAllClass(String username){
+//        ArrayList<Kelas> kelas = new ArrayList<Kelas>();
+//        String url = "http://ppl-a08.cs.ui.ac.id/kelas.php?fun=notEnroll&Username=" + username;
+//        JSONArray jsonArray = (new JSONParser()).getJSONArrayFromUrl(url);
+//
+//        if(jsonArray != null){
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                try {
+//                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                    kelas.add(createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }return kelas;
+//    }
+//
+//    public ArrayList<Kelas> getAll(){
+//        ArrayList<Kelas> kelas = new ArrayList<Kelas>();
+//        String url = "http://ppl-a08.cs.ui.ac.id/kelas.php?fun=all";
+//        JSONArray jsonArray = (new JSONParser()).getJSONArrayFromUrl(url);
+//
+//        if(jsonArray != null){
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                try {
+//                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                    kelas.add(createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }return kelas;
+//    }
 
     public void deleteKelas (int id){
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
@@ -220,7 +238,7 @@ public class AdminKelasFragment extends Fragment {
         }
     }
 
-    private class GetAllKelasTask extends AsyncTask<RelativeLayout,Long,RelativeLayout>
+    private class GetAllKelasTask extends AsyncTask<LinearLayout,Long,LinearLayout>
     {
         private ProgressDialog dialog;
         private AdminKelasFragment activity;
@@ -231,7 +249,7 @@ public class AdminKelasFragment extends Fragment {
         }
 
         @Override
-        protected RelativeLayout doInBackground(RelativeLayout... params) {
+        protected LinearLayout doInBackground(LinearLayout... params) {
             return params[0];
         }
 
@@ -242,7 +260,7 @@ public class AdminKelasFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(RelativeLayout a) {
+        protected void onPostExecute(LinearLayout a) {
             ScrollView scrollView = new ScrollView(getActivity().getApplicationContext());
             scrollView.setLayoutParams(new ScrollView.LayoutParams(ScrollView.LayoutParams.MATCH_PARENT, ScrollView.LayoutParams.MATCH_PARENT));
 
@@ -254,9 +272,10 @@ public class AdminKelasFragment extends Fragment {
             pilihan = (new KelasController()).getAll();
             if (!pilihan.isEmpty()){
                 for (int i = 0; i < pilihan.size(); i++) {
-                    LinearLayout linearLayout = new LinearLayout(getActivity().getApplicationContext());
+                    final LinearLayout linearLayout = new LinearLayout(getActivity().getApplicationContext());
                     linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT));
                     linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                    linearLayout.setId(i);
 
                     TextView textView = new TextView(getActivity().getApplicationContext());
                     textView.setId(i);
@@ -293,14 +312,19 @@ public class AdminKelasFragment extends Fragment {
 
                                             int pos = button.getId();
                                             int idKelas = pilihan.get(pos).getId();
-                                            Toast.makeText(getActivity().getApplicationContext(), idKelas + "", Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(getActivity().getApplicationContext(), idKelas + "", Toast.LENGTH_LONG).show();
                                             deleteKelas(idKelas);
-                                            Intent showDetails = new Intent(getActivity().getApplicationContext(), AdminKelasFragment.class);
-                                            //asumsi username gak null
-                                            showDetails.putExtra("Username", username);
-                                            showDetails.putExtra("View", "listKelas");
-                                            startActivity(showDetails);
-                                            getActivity().finish();
+                                            linearLayout.setVisibility(View.GONE);
+                                            dialog.dismiss();
+                                            //(new M1aterialNavigationDrawer<Fragment, TextView>()).setA
+                                            //(new NavigationDrawerActivity()).setKelas();
+                                            //dialog.dismiss();
+//                                            Intent showDetails = new Intent(getActivity().getApplicationContext(), AdminKelasFragment.class);
+//                                            //asumsi username gak null
+//                                            showDetails.putExtra("Username", username);
+//                                            showDetails.putExtra("View", "listKelas");
+//                                            startActivity(showDetails);
+//                                            getActivity().finish();
                                         }
                                     })
                                     .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {

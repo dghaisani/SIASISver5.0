@@ -228,6 +228,7 @@ public class DetailReqController extends Activity {
         nameValuePairs.add(new BasicNameValuePair("Id_Kelas", idKelas));
 
         addReplyReq(nameValuePairs);
+        new GetAllReplyReq().execute(username);
     }
 
     public void addReplyReq (List<NameValuePair> nameValuePairs){

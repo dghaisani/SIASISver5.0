@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:paddingTop="20dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/whitedrawer"
@@ -20,15 +20,26 @@
         >
 
         <TextView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:textStyle="bold"
+
             android:gravity="center_horizontal"
             android:id="@+id/judul"
             android:layout_column="1"
             android:layout_weight="1"
             android:textColor="@color/black"/>
+        <!--
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:id="@+id/judulkelas"
+            android:layout_column="1"
+            android:layout_weight="1"
+            />-->
     </LinearLayout>
 
     <LinearLayout
@@ -64,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textSize="23sp"
-                    android:textColor="@color/black"
+
                     android:gravity="center"
                     android:text="Asdos:"
                     />
@@ -72,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:paddingLeft="52dp"
+                    android:paddingLeft="57dp"
                     android:textSize="23sp"
                     android:textColor="@color/black"
                     android:gravity="center"
@@ -81,7 +92,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="27dp"
+                android:layout_marginTop="28dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -93,7 +104,8 @@
                     android:textSize="20sp"
                     />
                 <TextView
-                    android:paddingLeft="83dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="98dp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/hp"
@@ -102,7 +114,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="46dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -114,9 +126,10 @@
                     android:textSize="20sp"
                     android:gravity="center"/>
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="120dp"
+                    android:layout_marginLeft="130dp"
                     android:id="@+id/tanggal"
                     android:textSize="20sp"
                     android:gravity="center"/>
@@ -124,7 +137,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="62dp"
+                android:layout_marginTop="65dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -135,7 +148,8 @@
                     android:gravity="center"
                     />
                 <TextView
-                    android:paddingLeft="44dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="45dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/waktu"
@@ -146,7 +160,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="78dp"
+                android:layout_marginTop="80dp"
                 android:orientation="horizontal"
                 >
                 <TextView
@@ -157,7 +171,8 @@
                     android:gravity="center"
                     />
                 <TextView
-                    android:paddingLeft="60dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="62dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/ruangan"
@@ -193,7 +208,7 @@
                 android:layout_height="30dp"
                 android:text="Deskripsi"
                 android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/twitter_blue"
                 ></TextView>
             <ScrollView
                 android:layout_width="fill_parent"
@@ -239,8 +254,9 @@
             android:layout_height="48dp"
             android:orientation="horizontal">
             <TextView
+                android:paddingLeft="5dp"
                 android:layout_marginLeft="3dp"
-                android:paddingTop="6dp"
+                android:paddingTop="11dp"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:textSize="22sp"
@@ -251,7 +267,7 @@
             </TextView>
 
             <Button
-                android:layout_marginRight="165dp"
+                android:layout_marginRight="190dp"
                 android:layout_marginLeft="30dp"
                 android:background="@color/white"
                 android:layout_width="wrap_content"

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -41,6 +42,8 @@ public class DetailPolController extends Activity {
     private ListView listReplyPol;
     JSONArray jsonArray;
 
+    ImageView send, repeat;
+
     ListReplyReqAdapter adapt;
     RadioGroup groupPilihan;
     EditText textReply;
@@ -56,12 +59,37 @@ public class DetailPolController extends Activity {
         groupPilihan = (RadioGroup) this.findViewById(R.id.pilihanGroup);
 
         listReplyPol= (ListView) this.findViewById(R.id.reply_pol);
+
         this.username = getIntent().getStringExtra("Username");
+        threadID = getIntent().getIntExtra("RequestID", -1);
+        kelasID = getIntent().getIntExtra("KelasID", -1);
+
         new GetAllReplyReq().execute(username);
         new GetAllPilihan().execute(username);
 
-        threadID = getIntent().getIntExtra("RequestID", -1);
-        kelasID = getIntent().getIntExtra("KelasID", -1);
+        send = (ImageView) findViewById(R.id.buttonSave);
+        repeat = (ImageView) findViewById(R.id.buttonPilihUlang);
+
+        repeat.setVisibility(View.INVISIBLE);
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                groupPilihan.getCheckedRadioButtonId();
+                View pilihan = groupPilihan.getChildAt(groupPilihan.getCheckedRadioButtonId());
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                nameValuePairs.add(new BasicNameValuePair("Id_Kelas", Integer.toString(kelasID)));
+                nameValuePairs.add(new BasicNameValuePair("Username", username));
+                nameValuePairs.add(new BasicNameValuePair("Id_Polling", Integer.toString(threadID)));
+                //nameValuePairs.add(new BasicNameValuePair("Waktu", waktuPilihan));
+
+                addPilihan(nameValuePairs);
+                Toast.makeText(getApplicationContext(),"Pilihan sudah terpilih", Toast.LENGTH_LONG).show();
+                send.setVisibility(View.INVISIBLE);
+                repeat.setVisibility(View.VISIBLE);
+            }
+        });
 
         PollingDetail pollingDetail= new PollingDetail(judul, threadID, kelasID);
 
@@ -72,6 +100,40 @@ public class DetailPolController extends Activity {
             // we have customer ID passed correctly.
             getDetailRequest(pollingDetail);
         }
+
+       /*send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://ppl-a08.cs.ui.ac.id/polling.php?fun=pilihPolling&Id="+pollingDetail.getthreadID()+"&Id_Kelas="+pollingDetail.getKelasID();
+            }
+        });*/
+    }
+
+    public void addPilihan (List<NameValuePair> nameValuePairs){
+        InputStream is = null;
+
+        try {
+            HttpClient httpClient = new DefaultHttpClient();
+
+            HttpPost httpPost = new HttpPost("http://ppl-a08.cs.ui.ac.id/polling.php?fun=addpoll");
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpClient.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+
+            is = entity.getContent();
+
+            String msg = "Berhasil";
+            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            Log.e("Client Protocol", "Log_Tag");
+            e.printStackTrace();
+        } catch (IOException e) {
+            Log.e("Log_Tag", "IOException");
+            e.printStackTrace();
+        }
+        finish();
     }
 
     public void getDetailRequest(PollingDetail pollingDetail){
@@ -132,7 +194,8 @@ public class DetailPolController extends Activity {
         for (int i=0;i<jsonArray.length();i++){
             jsonObject = this.jsonArray.getJSONObject(i);
             button = new RadioButton(this);
-            button.setText(jsonObject.getString("Judul")+", "+ jsonObject.getString("Waktu"));
+            button.setText(jsonObject.getString("Judul") + ", " + jsonObject.getString("Waktu") + ": " + " XX partisipan");
+            //button.setTransitionName(jsonObject.getString("Waktu"));
             groupPilihan.addView(button);
         }
     }

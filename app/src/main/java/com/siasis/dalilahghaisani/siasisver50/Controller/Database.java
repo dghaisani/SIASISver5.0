@@ -11,9 +11,9 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.siasis.dalilahghaisani.siasisver50.R;
 
@@ -25,7 +25,7 @@ import org.json.JSONObject;
  */
 public class Database extends Activity {
     final Context context = this;
-    TextView result;
+    //TextView result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +34,19 @@ public class Database extends Activity {
         StrictMode.setThreadPolicy(policy);
 
         setContentView(R.layout.new_semester);
-        result = (TextView) this.findViewById(R.id.textView12);
-        Button semester = (Button) this.findViewById(R.id.button13);
+        //result = (TextView) this.findViewById(R.id.textView12);
+        ImageView semester = (ImageView) this.findViewById(R.id.button13);
         semester.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 // get prompts.xml view
-                LayoutInflater li = LayoutInflater.from(context);
+                LayoutInflater li = LayoutInflater.from(getApplicationContext());
                 View promptsView = li.inflate(R.layout.dialog_semester, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
+                        getApplicationContext());
 
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
@@ -60,12 +60,14 @@ public class Database extends Activity {
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        String nama = userInput.getText().toString();
+                                        String nama = userInput.getText().toString().trim();
                                         if (nama.equals("") || nama.contains("/") || nama.length() > 20) {
                                             //Toast.makeText(getApplicationContext(), nama.contains("/") + "", Toast.LENGTH_LONG).show();
-                                            result.setText("Nama tidak mengandung /, max: 20");
-                                            result.setTextColor(Color.parseColor("#FF0000"));
-                                            dialog.cancel();
+//                                            result.setText("Nama tidak mengandung /, max: 20");
+//                                            result.setTextColor(Color.parseColor("#FF0000"));
+                                            //dialog.cancel();
+                                            userInput.setHint("Nama tidak mengandung /, max: 20");
+                                            userInput.setHintTextColor(Color.parseColor("#FF0000"));
                                         } else {
                                             new Newdatabase(Database.this).execute(nama);
                                         }
@@ -94,7 +96,7 @@ public class Database extends Activity {
 
         public Newdatabase(Database activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity);
+            dialog = new ProgressDialog(this.activity, R.style.CustomAlertDialogStyle);
         }
 
         @Override
@@ -118,9 +120,9 @@ public class Database extends Activity {
                 dialog.dismiss();
             }
             try {
-                result.setTextColor(Color.parseColor("#000000"));
-                result.setText(jsonArray.getString("status"));
-                //Toast.makeText(getApplicationContext(), jsonArray.toString(), Toast.LENGTH_LONG).show();
+                //result.setTextColor(Color.parseColor("#000000"));
+                //result.setText(jsonArray.getString("status"));
+                Toast.makeText(getApplicationContext(), jsonArray.getString("status"), Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

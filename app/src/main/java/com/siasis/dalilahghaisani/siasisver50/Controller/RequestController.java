@@ -51,6 +51,13 @@ public class RequestController extends Activity {
 
     String username;
 
+    TextView textViewTanggalReq;
+    TextView textViewWaktuReq;
+
+    TextView usernameReq;
+    EditText judulReq;
+    EditText deskripsiReq;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +74,13 @@ public class RequestController extends Activity {
         final Calendar calendar = Calendar.getInstance();
         final Calendar calendarWaktu = Calendar.getInstance();
 
-        final TextView textViewTanggalReq = (TextView) findViewById(R.id.textViewTanggalReq);
-        final TextView textViewWaktuReq = (TextView) findViewById(R.id.textViewWaktuReq);
+        textViewTanggalReq = (TextView) findViewById(R.id.textViewTanggalReq);
+        textViewWaktuReq = (TextView) findViewById(R.id.textViewWaktuReq);
         final Spinner idkelas = (Spinner)findViewById(R.id.spinnerReq);
-        final TextView usernameReq = (TextView) findViewById(R.id.req_jadwal_asis_username);
+        usernameReq = (TextView) findViewById(R.id.req_jadwal_asis_username);
         usernameReq.setText(username);
-        final EditText judulReq = (EditText) findViewById(R.id.req_jadwal_asis_judul);
-        final EditText deskripsiReq = (EditText) findViewById(R.id.req_jadwal_asis_deskripsi);
+        judulReq = (EditText) findViewById(R.id.req_jadwal_asis_judul);
+        deskripsiReq = (EditText) findViewById(R.id.req_jadwal_asis_deskripsi);
 
         bTanggalReq.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,16 +184,6 @@ public class RequestController extends Activity {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 SimpleDateFormat parserTime = new SimpleDateFormat("HH:mm:ss");
 
-                Date date1 = null;
-                Date date3 = null;
-                try {
-                    date1 = simpleDateFormat.parse(sTanggal);
-                    date3 = parserTime.parse(sMulai);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                Date date2 = new Date();
-
                 if (sJudul.isEmpty() || sTanggal.isEmpty() || sMulai.isEmpty() || sDeskripsi.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Input data tidak valid", Toast.LENGTH_LONG).show();
                     return;
@@ -195,10 +192,12 @@ public class RequestController extends Activity {
                 boolean temp = true;
                 if (sJudul.equals("") || sJudul.trim().length() <= 0) {
                     //judul.setBackgroundColor(15918822);
+                    Log.e("1", "haha");
                     judulReq.setHint("Judul tidak boleh kosong");
                     judulReq.setHintTextColor(Color.parseColor("#FF0000"));
                     temp = false;
                 } else if (sJudul.length() > 25) {
+                    Log.e("2", "haha");
                     judulReq.setText(null);
                     judulReq.setHintTextColor(Color.parseColor("#FF0000"));
                     judulReq.setHint("Judul, max 25 karakter");
@@ -206,10 +205,12 @@ public class RequestController extends Activity {
                 }
 
                 if (sDeskripsi.equals("") || sDeskripsi.trim().length() <= 0) {
+                    Log.e("3", "haha");
                     deskripsiReq.setHint("Deskripsi tidak boleh kosong");
                     deskripsiReq.setHintTextColor(Color.parseColor("#FF0000"));
                     temp = false;
                 } else if (sDeskripsi.length() > 255) {
+                    Log.e("4", "haha");
                     deskripsiReq.setText(null);
                     deskripsiReq.setHintTextColor(Color.parseColor("#FF0000"));
                     deskripsiReq.setHint("contoh: 2403, max 10 karakter");
@@ -217,22 +218,28 @@ public class RequestController extends Activity {
                 }
 
                 if (sMulai.isEmpty()){
+                    Log.e("5", "haha");
                     textViewWaktuReq.setText("Waktu tidak boleh kosong");
                     textViewWaktuReq.setHintTextColor(Color.parseColor("#FF0000"));
                     temp = false;
-                }else if(date1.compareTo(date2)>=0){
-                    if (date3.compareTo(date2)<0){
-                        textViewWaktuReq.setHint("Waktu telah berlalu");
-                        textViewWaktuReq.setHintTextColor(Color.parseColor("#FF0000"));
-                        temp = false;
-                    }
                 }
 
+                Date date1 = null;
+
+                try {
+                    date1 = simpleDateFormat.parse(sTanggal);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Date date2 = new Date();
+
                 if (sTanggal.isEmpty()){
+                    Log.e("7", "haha");
                     textViewTanggalReq.setHint("Tanggal tidak boleh kosong");
                     textViewTanggalReq.setHintTextColor(Color.parseColor("#FF0000"));
                     temp = false;
                 }else if(date1.compareTo(date2)<0){
+                    Log.e("8", "haha");
                     textViewTanggalReq.setHint("Tanggal telah berlalu");
                     textViewTanggalReq.setHintTextColor(Color.parseColor("#FF0000"));
                     temp = false;

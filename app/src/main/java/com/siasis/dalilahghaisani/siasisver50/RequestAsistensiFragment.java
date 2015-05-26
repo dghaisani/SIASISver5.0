@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -57,7 +57,7 @@ public class RequestAsistensiFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_request_asistensi, container, false);
 
 		linearMain = (LinearLayout) rootView.findViewById(R.id.containerReq);
-		Button adminReq = (Button) rootView.findViewById(R.id.buttonAdminReq);
+		ImageView adminReq = (ImageView) rootView.findViewById(R.id.buttonAdminReq);
 
 		new GetAllReq(this).execute(linearMain);
 

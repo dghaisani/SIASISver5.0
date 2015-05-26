@@ -187,7 +187,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         dialog.dismiss();
                     }
 
-                    startNotif(username);
+                    //startNotif(username);
 //
                     AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                     Intent intent = new Intent(MainActivity.this, NotifReceiver.class);
@@ -224,8 +224,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         dialog.dismiss();
                     }
                     final AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
-                    alertDialog.setTitle("Login failed..");
-                    alertDialog.setMessage("Username/Password is incorrect");
+                    alertDialog.setTitle("Login gagal..");
+                    alertDialog.setMessage("Salah memasukkan username/password");
                     alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             alertDialog.cancel();

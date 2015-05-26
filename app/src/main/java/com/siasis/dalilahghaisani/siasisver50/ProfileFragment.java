@@ -15,12 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.ApiConnector;
+import com.siasis.dalilahghaisani.siasisver50.Controller.DownloadImageTask;
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
 import com.siasis.dalilahghaisani.siasisver50.Controller.ListRoleAdapter;
 import com.siasis.dalilahghaisani.siasisver50.Controller.ProfileController;
@@ -52,6 +53,8 @@ public class ProfileFragment extends Fragment implements ConfirmProfile.ConfirmP
     private String username;
     private int role;
 
+    private ImageView foto;
+
     Mahasiswa mahasiswa;
 
     private ListView ListRole;
@@ -68,6 +71,8 @@ public class ProfileFragment extends Fragment implements ConfirmProfile.ConfirmP
 
     private HashMap<String, String> detailMahasiswa;
 
+    private static final String baseUrlForImage = "http://ppl-a08.cs.ui.ac.id/";
+
     SessionManager session;
     public ProfileFragment() {
         // Empty constructor required for fragment subclasses
@@ -79,6 +84,8 @@ public class ProfileFragment extends Fragment implements ConfirmProfile.ConfirmP
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.view_profile_personal, container, false);
+
+        Log.e("error", "eradwa");
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.profile_pref),
                 MODE_PRIVATE);
@@ -92,6 +99,8 @@ public class ProfileFragment extends Fragment implements ConfirmProfile.ConfirmP
         ProfileController profileController= new ProfileController(username);
         mahasiswa = profileController.getMahasiswa(username);
 
+        foto = (ImageView) rootView.findViewById(R.id.foto_profil);
+
             /*String defaultS = "";
             int defaultI = 0;
             String name = sharedPreferences.getString(getString(R.string.nama_pref), defaultS);
@@ -102,18 +111,15 @@ public class ProfileFragment extends Fragment implements ConfirmProfile.ConfirmP
             int stats = sharedPreferences.getInt(getString(R.string.status_pref), defaultI);*/
 
         if (mahasiswa.getUsername() != null){
-            ((TextView) rootView.findViewById(R.id.nama_mahasiswaText)).setText(mahasiswa.getName());
-            ((TextView) rootView.findViewById(R.id.npm_mahasiswaText)).setText(mahasiswa.getNpm());
-            ((TextView) rootView.findViewById(R.id.email_mahasiswaText)).setText(mahasiswa.getEmail());
-            ((TextView) rootView.findViewById(R.id.nohp_mahasiswaText)).setText(mahasiswa.getHp());
+            validasi();
 
-            ((EditText) rootView.findViewById(R.id.nama_mahasiswa)).setText(mahasiswa.getName());
-            ((EditText) rootView.findViewById(R.id.npm_mahasiswa)).setText(mahasiswa.getNpm());
-            ((EditText) rootView.findViewById(R.id.email_mahasiswa)).setText(mahasiswa.getEmail());
-            ((EditText) rootView.findViewById(R.id.nohp_mahasiswa)).setText(mahasiswa.getHp());
+            rootView.findViewById(R.id.buttonDone).setVisibility(View.INVISIBLE);
 
-            if (mahasiswa.getPath() != null)
-                ((ImageButton) rootView.findViewById(R.id.foto_profil)).setBackgroundDrawable(new BitmapDrawable(BitmapFactory.decodeFile(mahasiswa.getPath())));
+            if (!mahasiswa.getPath().equals("a")){
+                new GetCustomerDetails().execute(new ApiConnector());
+            }else{
+                ((ImageView) rootView.findViewById(R.id.foto_profil)).setImageDrawable(getResources().getDrawable(R.drawable.ava120));
+            }
             ListRole = (ListView) rootView.findViewById(R.id.list_role);
 
             new GetAllRole().execute(username);
@@ -313,6 +319,26 @@ public class ProfileFragment extends Fragment implements ConfirmProfile.ConfirmP
 
     }
 
+    public void validasi (){
+
+        if (!mahasiswa.getEmail().isEmpty()){
+            ((TextView) rootView.findViewById(R.id.email_mahasiswaText)).setText(mahasiswa.getEmail());
+            ((EditText) rootView.findViewById(R.id.email_mahasiswa)).setText(mahasiswa.getEmail());
+        }
+        if (!mahasiswa.getName().isEmpty()){
+            ((TextView) rootView.findViewById(R.id.nama_mahasiswaText)).setText(mahasiswa.getName());
+            ((EditText) rootView.findViewById(R.id.nama_mahasiswa)).setText(mahasiswa.getName());
+        }
+        if (!mahasiswa.getHp().isEmpty()){
+            ((TextView) rootView.findViewById(R.id.nohp_mahasiswaText)).setText(mahasiswa.getHp());
+            ((EditText) rootView.findViewById(R.id.nohp_mahasiswa)).setText(mahasiswa.getHp());
+        }
+        if (!mahasiswa.getNpm().isEmpty()){
+            ((TextView) rootView.findViewById(R.id.npm_mahasiswaText)).setText(mahasiswa.getNpm());
+            ((EditText) rootView.findViewById(R.id.npm_mahasiswa)).setText(mahasiswa.getNpm());
+        }
+    }
+
     private class GetAllRole extends AsyncTask<String,Long,JSONArray>
     {
         @Override
@@ -347,6 +373,34 @@ public class ProfileFragment extends Fragment implements ConfirmProfile.ConfirmP
 
             mahasiswa = profileController.getMahasiswa(username);
             if (mahasiswa.getPath() != null)
-                ((ImageButton) rootView.findViewById(R.id.foto_profil)).setBackgroundDrawable(new BitmapDrawable(BitmapFactory.decodeFile(mahasiswa.getPath())));
+                ((ImageView) rootView.findViewById(R.id.foto_profil)).setBackgroundDrawable(new BitmapDrawable(BitmapFactory.decodeFile(mahasiswa.getPath())));
+    }
+
+    private class GetCustomerDetails extends AsyncTask<ApiConnector,Long,JSONArray>
+    {
+        @Override
+        protected JSONArray doInBackground(ApiConnector... params) {
+
+            // it is executed on Background thread
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(JSONArray jsonArray) {
+
+            try
+            {
+                String photo = mahasiswa.getPath();
+
+                String urlForImage = baseUrlForImage + photo;
+                new DownloadImageTask(foto).execute(urlForImage);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+        }
     }
 }

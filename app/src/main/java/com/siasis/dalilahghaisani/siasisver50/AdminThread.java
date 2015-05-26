@@ -33,6 +33,13 @@ public class AdminThread extends Fragment {
 		Button forumReq = (Button) rootView.findViewById(R.id.buttonAdminReq);
 		Button forumPol = (Button) rootView.findViewById(R.id.buttonAdminPolling);
 
+
+		Fragment fragment2 = new TanyaJawabFragment();
+		FragmentManager fragmentManager = getFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.fragment, fragment2);
+		fragmentTransaction.commit();
+
 		forumQA.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

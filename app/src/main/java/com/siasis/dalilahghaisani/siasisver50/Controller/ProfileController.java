@@ -110,7 +110,7 @@ public class ProfileController extends Activity {
 
             if(jsonObject == null)
                 return null;
-
+            Log.e("isi pro", jsonObject.toString());
             return new Mahasiswa(jsonObject.getString("Username"), jsonObject.getString("Nama"), jsonObject.getString("NPM"),
                     jsonObject.getString("HP"), jsonObject.getString("Email"), jsonObject.getString("Foto"), jsonObject.getInt("Status"));
         } catch (JSONException e) {

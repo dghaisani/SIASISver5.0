@@ -1,38 +1,65 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pager"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Request"
-        android:id="@+id/buttonAdminReq"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp" />
+        android:orientation="horizontal"
+        android:id="@+id/tooladmin">
+        <Button
+            android:textStyle="bold"
+            android:paddingTop="17dp"
+            android:paddingRight="17dp"
+            android:paddingLeft="17dp"
+            android:textColor="@color/black"
+            android:background="@color/whitedrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanya Jawab"
+            android:id="@+id/buttonAdminQA"
+            />
+        <LinearLayout
+            android:background="@color/ColorPrimary"
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"></LinearLayout>
+        <Button
+            android:textStyle="bold"
+            android:paddingTop="17dp"
+            android:paddingRight="17dp"
+            android:paddingLeft="17dp"
+            android:textColor="@color/black"
+            android:background="@color/whitedrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Request Jadwal"
+            android:id="@+id/buttonAdminReq"
+            />
+        <LinearLayout
+            android:background="@color/ColorPrimary"
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"></LinearLayout>
+        <Button
+            android:textStyle="bold"
+            android:paddingTop="17dp"
+            android:paddingRight="17dp"
+            android:paddingLeft="17dp"
+            android:textColor="@color/black"
+            android:background="@color/whitedrawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Polling Jadwal"
+            android:id="@+id/buttonAdminPolling"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Polling"
-        android:id="@+id/buttonAdminPolling"
-        android:layout_alignTop="@+id/buttonAdminReq"
-        android:layout_toRightOf="@+id/buttonAdminReq"
-        android:layout_toEndOf="@+id/buttonAdminReq" />
+        </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="QA"
-        android:id="@+id/buttonAdminQA"
-        android:layout_alignTop="@+id/buttonAdminReq"
-        android:layout_toLeftOf="@+id/buttonAdminReq"
-        android:layout_toStartOf="@+id/buttonAdminReq" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/buttonAdminReq"
+        android:layout_below="@+id/tooladmin"
         android:id="@+id/fragment"/>
 </RelativeLayout>

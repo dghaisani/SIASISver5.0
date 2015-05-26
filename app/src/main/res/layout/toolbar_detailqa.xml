@@ -19,23 +19,16 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:src="@drawable/back"
-            android:id="@+id/back_jadwalbaru"/>
+            android:id="@+id/back_partisipan"/>
 
         <TextView
             android:layout_centerHorizontal="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Membuat Request Jadwal Asistensi"
-            android:textSize="21sp"
-            android:layout_marginLeft="30dp"
+            android:text="Tanya Jawab"
+            android:layout_marginLeft="40dp"
+            android:textSize="22sp"
             android:textColor="@color/black"/>
 
-        <ImageView
-            android:layout_marginRight="5dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:id="@+id/buttonSendReq"
-            android:src="@drawable/sent"/>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

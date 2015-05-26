@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.PilihanController;
 import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
 
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class LogoutFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_logout, container, false);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setTitle("Logout");
-        alertDialogBuilder.setMessage("Apakah kamu yakin ingin keluar dari SIASIS ?").setCancelable(false)
+        alertDialogBuilder.setMessage("Apakah Anda yakin keluar dari SIASIS ?").setCancelable(false)
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -48,17 +49,22 @@ public class LogoutFragment extends Fragment {
                         //role = Intdeger.parseInt(detailMahasiswa.get(KEY_ROLE));
 
                         session.logoutUser();
-                        (new MainActivity()).deleteAlarm();
+                        //(new MainActivity()).deleteAlarm();
                         Intent showDetails = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                        dialog.dismiss();
                         startActivity(showDetails);
+                        dialog.dismiss();
                         getActivity().finish();
                     }
                 })
                 .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                        Fragment fragment = new PilihanController();
+                        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.remove((android.support.v4.app.Fragment) LogoutFragment.this);
+                        ft.replace(R.id.frame_container, (android.support.v4.app.Fragment) fragment).commit();
+
+                        dialog.dismiss();
                     }
                 });
 

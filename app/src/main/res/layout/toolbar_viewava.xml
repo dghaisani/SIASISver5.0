@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#57c6ef"
+    android:background="#000"
     android:elevation="4dp"
     android:theme="@style/AppTheme"
     >
@@ -19,23 +19,24 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:src="@drawable/back"
-            android:id="@+id/back_jadwalbaru"/>
+            android:id="@+id/back_detail"/>
 
         <TextView
             android:layout_centerHorizontal="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Membuat Request Jadwal Asistensi"
-            android:textSize="21sp"
-            android:layout_marginLeft="30dp"
-            android:textColor="@color/black"/>
+            android:text="Foto Profil"
+            android:layout_marginLeft="40dp"
+            android:textSize="22sp"
+            android:textColor="@color/white"/>
 
         <ImageView
+            android:onClick="toEditPicture"
             android:layout_marginRight="5dp"
             android:layout_alignParentRight="true"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:id="@+id/buttonSendReq"
-            android:src="@drawable/sent"/>
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:id="@+id/buttonEdit"
+            android:src="@drawable/ditb"/>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

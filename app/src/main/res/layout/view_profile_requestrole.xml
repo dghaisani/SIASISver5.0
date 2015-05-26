@@ -1,34 +1,32 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    tools:context="com.example.android.navigationdrawerexample.RequestRole">
+    <include
+        android:id="@+id/toolbar_addrole"
+        layout="@layout/toolbar_addrole"
+        ></include>
 
-    <Button
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
         android:id="@+id/buttonAddRole"
-        android:background="@color/ColorPrimary"
-        android:backgroundTint="@color/ColorPrimary"
-        android:drawableStart="@drawable/ic_add_white"
-        android:paddingRight="3dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="3dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentStart="false"
-        android:text="Tambah Role"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/submit"
         android:onClick="onClickAddRole"
-        android:textColor="@color/white"
-        android:gravity="center_horizontal|top"
-        android:minWidth="40dp"
-        android:minHeight="35dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        />
+
     <ListView
-        android:layout_marginTop="30dp"
+
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="70dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listViewReq"

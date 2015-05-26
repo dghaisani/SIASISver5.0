@@ -10,14 +10,14 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter new semester name: "
+        android:text="Masukkan nama semester baru: "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/editTextDialogUserInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="tidak mengandung /, max: 20">
+        android:hint="tidak mengandung /, [spasi], max: 20">
 
         <requestFocus />
 

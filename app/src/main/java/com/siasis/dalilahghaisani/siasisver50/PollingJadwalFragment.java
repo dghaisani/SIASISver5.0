@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -57,7 +57,7 @@ public class PollingJadwalFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_polling_jadwal, container, false);
 
 		linearMain = (LinearLayout) rootView.findViewById(R.id.containerPolling);
-		Button adminPolling = (Button) rootView.findViewById(R.id.buttonAdminPolling);
+		ImageView adminPolling = (ImageView) rootView.findViewById(R.id.buttonAdminPolling);
 
 		new GetAllPolling(this).execute(linearMain);
 

@@ -88,8 +88,8 @@ public class QAFragment extends Fragment {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 try {
                     // GEt the customer which was clicked
-                    int reqp = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getInt("Id");
-                    int kelasp = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getInt("Id_kelas");
+                    int qap = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getInt("Id");
+                    int kelasp = listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getInt("Id_Kelas");
 
 //                        Toast.makeText(getApplicationContext(), "-j=" + jadwalp + "-k=" + kelasp
 //                                , Toast.LENGTH_LONG).show();
@@ -97,7 +97,7 @@ public class QAFragment extends Fragment {
                     // Send Customer ID
                     Intent showDetails = new Intent(getActivity().getBaseContext(), DetailQAController.class);
                     showDetails.putExtra("Username", username);
-                    showDetails.putExtra("RequestID", reqp);
+                    showDetails.putExtra("RequestID", qap);
                     showDetails.putExtra("KelasID", kelasp);
 
                     //Toast.makeText(getApplicationContext(), "seharusnya abis ini ke detail", Toast.LENGTH_LONG).show();
@@ -121,7 +121,6 @@ public class QAFragment extends Fragment {
 
         new GetAllForumQuestion(QAFragment.this).execute(username);
     }
-
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {

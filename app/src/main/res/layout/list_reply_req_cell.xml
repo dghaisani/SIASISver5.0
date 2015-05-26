@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text=""
+        android:paddingLeft="10dp"
         android:id="@+id/isiReplyReq"
         android:layout_below="@+id/user_rep_req"
         android:layout_alignLeft="@+id/user_rep_req"
@@ -22,6 +23,7 @@
         android:src="@drawable/ava" />
 
     <TextView
+        android:paddingLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"

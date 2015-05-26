@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
 
@@ -27,7 +26,7 @@ import org.json.JSONObject;
 public class AdminDatabaseFragment extends Fragment{
 
     final Context context = this.getActivity();
-    TextView result;
+    //TextView result;
     private View rootView;
 
     @Override
@@ -39,7 +38,7 @@ public class AdminDatabaseFragment extends Fragment{
 
         rootView = inflater.inflate(R.layout.new_semester, container, false);
 
-        result = (TextView) rootView.findViewById(R.id.textView12);
+        //result = (TextView) rootView.findViewById(R.id.textView12);
         ImageView semester = (ImageView) rootView.findViewById(R.id.button13);
         semester.setOnClickListener(new View.OnClickListener() {
 
@@ -50,7 +49,7 @@ public class AdminDatabaseFragment extends Fragment{
                 LayoutInflater li = LayoutInflater.from(getActivity());
                 View promptsView = li.inflate(R.layout.dialog_semester, null);
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         getActivity());
 
                 // set prompts.xml to alertdialog builder
@@ -66,11 +65,11 @@ public class AdminDatabaseFragment extends Fragment{
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         String nama = userInput.getText().toString();
-                                        if (nama.equals("") || nama.contains("/") || nama.length() > 20) {
-                                            //Toast.makeText(getApplicationContext(), nama.contains("/") + "", Toast.LENGTH_LONG).show();
-                                            result.setText("Nama tidak mengandung /, max: 20");
-                                            result.setTextColor(Color.parseColor("#FF0000"));
-                                            dialog.cancel();
+                                        if (nama.equals("") || nama.contains("/") || nama.contains(" ") || nama.contains("\"") ||nama.length() > 20) {
+                                            Toast.makeText(getActivity().getApplicationContext(), "Input nama semester tidak valid", Toast.LENGTH_LONG).show();
+//                                            userInput.setHint("Nama tidak mengandung /, max: 20");
+//                                            userInput.setHintTextColor(Color.parseColor("#FF0000"));
+//                                            Log.e("masuk", "if laaaaa");
                                         } else {
                                             new Newdatabase(AdminDatabaseFragment.this).execute(nama);
                                         }
@@ -101,7 +100,7 @@ public class AdminDatabaseFragment extends Fragment{
 
         public Newdatabase(AdminDatabaseFragment activity) {
             this.activity = activity;
-            dialog = new ProgressDialog(this.activity.getActivity());
+            dialog = new ProgressDialog(this.activity.getActivity(), R.style.CustomAlertDialogStyle);
         }
 
         @Override
@@ -125,9 +124,9 @@ public class AdminDatabaseFragment extends Fragment{
                 dialog.dismiss();
             }
             try {
-                result.setTextColor(Color.parseColor("#000000"));
+                //result.setTextColor(Color.parseColor("#000000"));
                 if(jsonArray != null)
-                    result.setText(jsonArray.getString("status"));
+                    Toast.makeText(getActivity().getApplicationContext(), jsonArray.getString("status"), Toast.LENGTH_LONG).show();
                 //Toast.makeText(getApplicationContext(), jsonArray.toString(), Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 e.printStackTrace();

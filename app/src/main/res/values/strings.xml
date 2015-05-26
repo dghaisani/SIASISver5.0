@@ -2,7 +2,7 @@
 <resources>
 
     <string name="nothing"/>
-    <string name="app_name">SIASISnav</string>
+    <string name="app_name">SIASIS</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -47,5 +47,12 @@
     <string name="title_activity_detail_req_controller">DetailReqController</string>
     <string name="title_activity_forum_polling">ForumPolling</string>
     <string name="title_activity_polling_controller">PollingController</string>
+
+    <string-array
+        name="edit_picture">
+        <item>Ubah Foto</item>
+        <item>Hapus Foto</item>
+    </string-array>
+
 
 </resources>

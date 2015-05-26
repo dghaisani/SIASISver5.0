@@ -3,12 +3,20 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container">
+    android:id="@+id/containerAja">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        android:orientation="vertical">
+
+    </LinearLayout>
 
     <ImageView
 
-        android:id="@+id/button11"
+        android:contentDescription="@string/abc_action_bar_home_description"
+        android:id="@+id/buttonAddKelas"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:src="@drawable/add"

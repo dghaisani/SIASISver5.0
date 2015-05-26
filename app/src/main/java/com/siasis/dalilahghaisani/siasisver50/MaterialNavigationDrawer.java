@@ -42,19 +42,19 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import com.siasis.dalilahghaisani.siasisver50.listener.MaterialHeadItemChangeListener;
 import com.siasis.dalilahghaisani.siasisver50.head.MaterialHeadItem;
+import com.siasis.dalilahghaisani.siasisver50.listener.MaterialHeadItemChangeListener;
 import com.siasis.dalilahghaisani.siasisver50.listener.MaterialSectionChangeListener;
+import com.siasis.dalilahghaisani.siasisver50.listener.MaterialSectionOnClickListener;
 import com.siasis.dalilahghaisani.siasisver50.menu.MaterialMenu;
 import com.siasis.dalilahghaisani.siasisver50.menu.item.MaterialDevisor;
 import com.siasis.dalilahghaisani.siasisver50.menu.item.MaterialLabel;
 import com.siasis.dalilahghaisani.siasisver50.menu.item.MaterialSection;
-import com.siasis.dalilahghaisani.siasisver50.listener.MaterialSectionOnClickListener;
 import com.siasis.dalilahghaisani.siasisver50.tools.Utils;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 
@@ -2146,5 +2146,11 @@ public abstract class MaterialNavigationDrawer<Fragment, customTextView extends 
 
     public List<MaterialSection> getSectionLastBackPatternList() {
         return sectionLastBackPatternList;
+    }
+
+    public void setAKelas (){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_container, new AdminKelasFragment())
+                .commit();
     }
 }

@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -57,7 +57,7 @@ public class TanyaJawabFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_tanya_jawab, container, false);
 
 		linearMain = (LinearLayout) rootView.findViewById(R.id.containerQA);
-		Button adminQA = (Button) rootView.findViewById(R.id.buttonAdminQA);
+		ImageView adminQA = (ImageView) rootView.findViewById(R.id.buttonAdminQA);
 
 		new GetAllQA(this).execute(linearMain);
 

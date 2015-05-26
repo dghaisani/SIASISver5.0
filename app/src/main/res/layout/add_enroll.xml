@@ -9,6 +9,9 @@
         android:id="@+id/toolbar_enroll"
         layout="@layout/toolbar_enroll"
         ></include>
-
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/classroom"/>
 
 </LinearLayout>

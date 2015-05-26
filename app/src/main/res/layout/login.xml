@@ -74,14 +74,14 @@
                     <ImageView
                         android:paddingLeft="2dp"
                         android:paddingRight="2dp"
-                        android:layout_height="30dp"
-                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_width="40dp"
                         android:background="@color/twitter_blue"
                         android:src="@drawable/ic_person"/>
 
                     <EditText
                         android:layout_width="fill_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="40dp"
                         android:background="@color/white"
                         android:hint="username"
                         android:id="@+id/editText8"
@@ -101,14 +101,14 @@
                     <ImageView
                         android:paddingLeft="2dp"
                         android:paddingRight="2dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/ic_login"
                         android:layout_marginTop="10dip"
                         android:background="@color/twitter_blue"/>
 
                     <EditText android:layout_width="fill_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="40dp"
                         android:layout_marginTop="10dip"
                         android:singleLine="true"
                         android:password="true"

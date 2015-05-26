@@ -25,17 +25,26 @@
             android:layout_centerHorizontal="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jadwal Asistensi Baru"
-            android:layout_marginLeft="40dp"
-            android:textSize="22sp"
+            android:text="Membuat Polling Jadwal Asistensi"
+            android:layout_marginLeft="30dp"
+            android:textSize="21sp"
             android:textColor="@color/black"/>
 
         <ImageView
             android:layout_marginRight="5dp"
             android:layout_alignParentRight="true"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:id="@+id/buttonSendPolling"
             android:src="@drawable/sent"/>
+<!--
+        <ImageView
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/buttonPilihUlang"
+            android:src="@drawable/dita"/>-->
+
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

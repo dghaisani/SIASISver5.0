@@ -3,10 +3,18 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_marginTop="5dp"
+
     android:background="#DADADC"
     android:id="@+id/container">
+
+    <include
+        android:id="@+id/toolbar_detailrequest"
+        layout="@layout/toolbar_detailrequest"
+        ></include>
+
     <LinearLayout
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/toolbar_detailrequest"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -19,6 +27,16 @@
 
             <TextView
 
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:text="Kelas :"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:textColor="@color/black"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:layout_width="wrap_content"
@@ -38,6 +56,7 @@
             android:paddingRight="10dp">
 
             <TextView
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
@@ -56,20 +75,17 @@
             android:background="@color/white"
             android:paddingRight="10dp">
             <TextView
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="7dp"
                 android:layout_width="0sp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 android:layout_marginLeft="12dp"
                 android:id="@+id/req_jadwal_asis_2_desc" />
 
-            <ImageView
 
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:id="@+id/customer_mobile"
-                android:src="@drawable/ava" />
         </LinearLayout>
 
         <LinearLayout
@@ -122,6 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <EditText
+            android:paddingLeft="15dp"
             android:layout_marginRight="50dp"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"

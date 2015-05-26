@@ -1,11 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".MainActivity"
-    >
-
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/data_mahasiswa"
@@ -15,25 +14,24 @@
         android:weightSum="1"
         android:background="@color/whitedrawer">
 
-
-
         <LinearLayout
             android:id="@+id/frame_foto"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:orientation="vertical"
             android:weightSum="1"
-            android:background="@color/white">
+            android:background="@drawable/a">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/foto_profil"
-                android:layout_width="190dp"
+                android:layout_width="120dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:layout_height="fill_parent"
+                android:layout_height="120dp"
                 android:layout_marginBottom="15dp"
                 />
         </LinearLayout>
+
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
@@ -43,13 +41,12 @@
                 android:orientation="vertical">
 
                 <EditText
-
                     android:id="@+id/nama_mahasiswa"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+
                     android:gravity="center"
-                    android:textSize="32sp"
+                    android:hint="Nama"
                     android:singleLine="true"
                     android:visibility="invisible"
                     android:textColor="@color/black"
@@ -60,20 +57,22 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="25sp"
+                    android:textSize="22sp"
+                    android:hint="NPM"
                     android:visibility="invisible"
                     android:layout_below="@+id/nama_mahasiswa"
-                    android:textColor="@color/list_divider"
+                    android:textColor="@color/black"
                     />
                 <EditText
                     android:id="@+id/nohp_mahasiswa"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="25sp"
+                    android:textSize="22sp"
+                    android:hint="No.HP"
                     android:visibility="invisible"
                     android:layout_below="@+id/npm_mahasiswa"
-                    android:textColor="@color/list_divider"
+                    android:textColor="@color/black"
                     />
                 <EditText
                     android:id="@+id/email_mahasiswa"
@@ -81,9 +80,10 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="20sp"
+                    android:hint="Email"
                     android:visibility="invisible"
                     android:layout_below="@+id/nohp_mahasiswa"
-                    android:textColor="@color/list_divider"
+                    android:textColor="@color/black"
                     />
 
                 <TextView
@@ -91,6 +91,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:hint="Nama Mahasiswa"
                     android:gravity="center"
                     android:textSize="32sp"
                     android:textColor="@color/black"
@@ -100,6 +101,7 @@
                     android:id="@+id/npm_mahasiswaText"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:hint="NPM Mahasiswa"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:layout_below="@+id/nama_mahasiswa"
@@ -109,6 +111,7 @@
                     android:id="@+id/nohp_mahasiswaText"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Nomer HP Mahasiswa"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:layout_below="@+id/npm_mahasiswa"
@@ -118,6 +121,7 @@
                     android:id="@+id/email_mahasiswaText"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Email Mahasiswa"
                     android:gravity="center"
                     android:textSize="20sp"
                     android:layout_below="@+id/nohp_mahasiswa"
@@ -171,29 +175,28 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/buttonProfile"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/editround"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"/>
+    <ImageView
+        android:id="@+id/buttonDone"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/submit"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:src="@drawable/dit"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_gravity="end"
-            android:id="@+id/buttonProfile"
-            android:layout_alignBottom="@+id/buttonDone"
-            android:layout_alignLeft="@+id/buttonDone"
-            android:layout_alignStart="@+id/buttonDone" />
-        <ImageView
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:src="@drawable/sent"
-            android:id="@+id/buttonDone"
-            android:visibility="invisible"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true" />
-
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>
 

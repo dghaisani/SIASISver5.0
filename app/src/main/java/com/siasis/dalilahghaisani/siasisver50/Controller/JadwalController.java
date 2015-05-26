@@ -62,6 +62,7 @@ public class JadwalController extends Activity {
     private String op;
     private JSONArray mahasiswa;
     private LinearLayout kehadiran;
+    ImageView foto;
 
     SessionManager session;
 
@@ -82,6 +83,7 @@ public class JadwalController extends Activity {
             setContentView(R.layout.detail_jadwal);
 
             TextView judul = (TextView) this.findViewById(R.id.judul);
+            //TextView judulkelas = (TextView) this.findViewById(R.id.judulkelas);
             TextView asisten = (TextView) this.findViewById(R.id.asisten);
             TextView hp = (TextView) this.findViewById(R.id.hp);
             TextView tanggal = (TextView) this.findViewById(R.id.tanggal);
@@ -93,6 +95,7 @@ public class JadwalController extends Activity {
             ImageView hadir = (ImageView) this.findViewById(R.id.button5);
             ImageView edit = (ImageView) this.findViewById(R.id.button12);
             ImageView back = (ImageView) this.findViewById(R.id.back_detail);
+            this.foto = (ImageView) this.findViewById(R.id.pic);
             Button partisipan = (Button) this.findViewById(R.id.button6);
 
             back.setOnClickListener(new View.OnClickListener() {
@@ -441,7 +444,7 @@ public class JadwalController extends Activity {
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "Pastikan isian valid", Toast.LENGTH_LONG).show();
-                        Toast.makeText(getApplicationContext(),"Pastikan isian valid",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(),"Pastikan isian valid",Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -604,13 +607,22 @@ public class JadwalController extends Activity {
                     final String ruangan = kJadwal.getRuangan();
                     final String deskripsi = kJadwal.getDeskripsi();
 
-                    jadwalDetail.getJudul().setText(judul + " " + jadwal.getString("Nama"));
+                    jadwalDetail.getJudul().setText(judul + " - " + jadwal.getString("Nama"));
                     jadwalDetail.getAsisten().setText(asdos);
 
                     if (!username.equals(asdos))
                         jadwalDetail.getEdit().setVisibility(View.GONE);
                     else
                         jadwalDetail.getEdit().setVisibility(View.VISIBLE);
+
+                    Mahasiswa m = (new ProfileController()).getMahasiswa(asdos);
+
+                    if (!m.getPath().equals("a")){
+                        String urlForImage = "http://ppl-a08.cs.ui.ac.id/" + m.getPath();
+                        new DownloadImageTask(foto).execute(urlForImage);
+                    }else{
+                        foto.setImageDrawable(getResources().getDrawable(R.drawable.ava120));
+                    }
 
                     if (dialog.isShowing()) {
                         dialog.dismiss();
@@ -636,7 +648,6 @@ public class JadwalController extends Activity {
                             finish();
                         }
                     });
-                    Mahasiswa m = (new ProfileController()).getMahasiswa(asdos);
                     jadwalDetail.getHp().setText(m.getHp());
 
                     jadwalDetail.getTanggal().setText(tanggal);

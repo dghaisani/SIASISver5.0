@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class MenjabatController extends Activity{
     private TextView npm;
     private TextView hp;
     private TextView email;
+    ImageView foto;
     private LinearLayout linearMain;
 
     public MenjabatController(String username){
@@ -49,15 +51,14 @@ public class MenjabatController extends Activity{
         this.username = getIntent().getStringExtra("Username");
 
         setContentView(R.layout.view_profile_other);
-        this.username_asdos = (TextView) this.findViewById(R.id.username_mahasiswa);
+        //this.username_asdos = (TextView) this.findViewById(R.id.username_mahasiswa);
         this.nama = (TextView) this.findViewById(R.id.nama_mahasiswa);
         this.npm = (TextView) this.findViewById(R.id.npm_mahasiswa);
         this.hp = (TextView) this.findViewById(R.id.nohp_mahasiswa);
         this.email = (TextView) this.findViewById(R.id.email_mahasiswa);
         this.linearMain = (LinearLayout) findViewById(R.id.role);
-
+        this.foto = (ImageView) this.findViewById(R.id.foto_profil);
         new GetProfile(MenjabatController.this).execute(this.username);
-
     }
 
     @Override
@@ -102,11 +103,21 @@ public class MenjabatController extends Activity{
         protected void onPostExecute(String mahasiswa) {
             Mahasiswa asdos = (new ProfileController()).getMahasiswa(mahasiswa);
             ArrayList<Kelas> arrayKelas = (new MenjabatController(username)).getMenjabatKelas();
-            username_asdos.setText(asdos.getUsername());
+            //username_asdos.setText(asdos.getUsername());
             nama.setText(asdos.getName());
             npm.setText(asdos.getNpm());
             hp.setText(asdos.getHp());
             email.setText(asdos.getEmail());
+            if (!asdos.getPath().equals("a")){
+                String urlForImage = "http://ppl-a08.cs.ui.ac.id/" + asdos.getPath();
+                new DownloadImageTask(foto).execute(urlForImage);
+            }else{
+                foto.setImageDrawable(getResources().getDrawable(R.drawable.ava120));
+            }
+            //String photo = asdos.getPath();
+
+//            String urlForImage = "http://ppl-a08.cs.ui.ac.id/" + photo;
+//            new DownloadImageTask(foto).execute(urlForImage);
 
             TextView role1 = new TextView(getApplicationContext());
             role1.setText("Mahasiswa");
@@ -168,27 +179,30 @@ public class MenjabatController extends Activity{
 
     public ArrayList<Kelas> getMenjabatKelas(){
         ArrayList<Menjabat> listMenjabat = getListMenjabat();
-
-        String listIdKelas = "(";
-
-        for (int i=0; i<listMenjabat.size()-1; i++){
-            listIdKelas += listMenjabat.get(i).getIdKelas() + ",";
-        } listIdKelas += listMenjabat.get(listMenjabat.size()-1).getIdKelas() + ")";
-
-        String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=getKelas&Id_Kelas=" + listIdKelas;
-
-        JSONArray jsonkelas = (new JSONParser()).getJSONArrayFromUrl(url);
-
-        int length = jsonkelas.length();
         ArrayList<Kelas> kelas = new ArrayList<Kelas>();
 
-        for(int i=0; i<length; i++){
-            try {
-                JSONObject jsonObject = jsonkelas.getJSONObject(i);
-                kelas.add((new KelasController()).createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if(listMenjabat != null && !listMenjabat.isEmpty()) {
+            String listIdKelas = "(";
+
+            for (int i = 0; i < listMenjabat.size() - 1; i++) {
+                listIdKelas += listMenjabat.get(i).getIdKelas() + ",";
             }
-        } return kelas;
+            listIdKelas += listMenjabat.get(listMenjabat.size() - 1).getIdKelas() + ")";
+
+            String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=getKelas&Id_Kelas=" + listIdKelas;
+
+            JSONArray jsonkelas = (new JSONParser()).getJSONArrayFromUrl(url);
+
+            int length = jsonkelas.length();
+
+            for (int i = 0; i < length; i++) {
+                try {
+                    JSONObject jsonObject = jsonkelas.getJSONObject(i);
+                    kelas.add((new KelasController()).createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }  return kelas;
     }
 }
