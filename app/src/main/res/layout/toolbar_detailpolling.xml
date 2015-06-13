@@ -19,7 +19,7 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:src="@drawable/back"
-            android:id="@+id/back_detail"/>
+            android:id="@+id/back_detailpol"/>
 
         <TextView
             android:layout_centerHorizontal="false"
@@ -30,21 +30,6 @@
             android:textSize="22sp"
             android:textColor="@color/black"/>
 
-        <ImageView
-
-            android:layout_marginRight="5dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:id="@+id/buttonEdit"></ImageView>
-        <ImageView
-
-            android:layout_marginRight="5dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:id="@+id/buttonSave"
-            android:src="@drawable/sent"/>
         <ImageView
             android:layout_marginRight="5dp"
             android:layout_alignParentRight="true"

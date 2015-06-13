@@ -5,10 +5,13 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.Kelas.KelasController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.Profile.ProfileController;
 import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
 import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
 import com.siasis.dalilahghaisani.siasisver50.Model.Menjabat;
@@ -20,13 +23,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by lenovo on 4/5/2015.
- */
 public class MenjabatController extends Activity{
     private String username;
-    private ArrayList<Menjabat> allMenjabat;
-    private TextView username_asdos;
     private TextView nama;
     private TextView npm;
     private TextView hp;
@@ -40,7 +38,8 @@ public class MenjabatController extends Activity{
         StrictMode.setThreadPolicy(policy);
     }
 
-    public MenjabatController(){}
+    public MenjabatController(){
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +50,6 @@ public class MenjabatController extends Activity{
         this.username = getIntent().getStringExtra("Username");
 
         setContentView(R.layout.view_profile_other);
-        //this.username_asdos = (TextView) this.findViewById(R.id.username_mahasiswa);
         this.nama = (TextView) this.findViewById(R.id.nama_mahasiswa);
         this.npm = (TextView) this.findViewById(R.id.npm_mahasiswa);
         this.hp = (TextView) this.findViewById(R.id.nohp_mahasiswa);
@@ -102,8 +100,7 @@ public class MenjabatController extends Activity{
         @Override
         protected void onPostExecute(String mahasiswa) {
             Mahasiswa asdos = (new ProfileController()).getMahasiswa(mahasiswa);
-            ArrayList<Kelas> arrayKelas = (new MenjabatController(username)).getMenjabatKelas();
-            //username_asdos.setText(asdos.getUsername());
+            ArrayList<Kelas> arrayKelas = (new MenjabatController(username)).getMenjabatKelas(asdos.getStatus());
             nama.setText(asdos.getName());
             npm.setText(asdos.getNpm());
             hp.setText(asdos.getHp());
@@ -114,17 +111,17 @@ public class MenjabatController extends Activity{
             }else{
                 foto.setImageDrawable(getResources().getDrawable(R.drawable.ava120));
             }
-            //String photo = asdos.getPath();
-
-//            String urlForImage = "http://ppl-a08.cs.ui.ac.id/" + photo;
-//            new DownloadImageTask(foto).execute(urlForImage);
 
             TextView role1 = new TextView(getApplicationContext());
             role1.setText("Mahasiswa");
+            role1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            role1.setPadding(20,20,20,20);
             role1.setTextColor(getResources().getColor(R.color.black));
             linearMain.addView(role1);
             for(int i=0; i<arrayKelas.size(); i++){
                 TextView role = new TextView(getApplicationContext());
+                role.setPadding(20,20,20,20);
+                role.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 role.setText("Asisten Dosen: " + arrayKelas.get(i).getNama());
                 role.setTextColor(getResources().getColor(R.color.black));
                 linearMain.addView(role);
@@ -134,7 +131,7 @@ public class MenjabatController extends Activity{
             }
         }
     }
-
+/*
     public void setMenjabat(){
         String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=all";
         ArrayList<Menjabat> temp = new ArrayList<Menjabat>();
@@ -153,11 +150,7 @@ public class MenjabatController extends Activity{
             }
             this.allMenjabat = temp;
         }
-    }
-
-    public ArrayList<Menjabat> getAllMenjabat(){
-        return this.allMenjabat;
-    }
+    }*/
 
     public ArrayList<Menjabat> getListMenjabat(){
         String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=getMenjabat&username=" + this.username;
@@ -177,32 +170,37 @@ public class MenjabatController extends Activity{
         } return menjabat;
     }
 
-    public ArrayList<Kelas> getMenjabatKelas(){
-        ArrayList<Menjabat> listMenjabat = getListMenjabat();
-        ArrayList<Kelas> kelas = new ArrayList<Kelas>();
+    public ArrayList<Kelas> getMenjabatKelas(int role){
+        if(role == 2)
+            return (new KelasController()).getAll();
+        else {
+            ArrayList<Menjabat> listMenjabat = getListMenjabat();
+            ArrayList<Kelas> kelas = new ArrayList<Kelas>();
 
-        if(listMenjabat != null && !listMenjabat.isEmpty()) {
-            String listIdKelas = "(";
+            if (listMenjabat != null && !listMenjabat.isEmpty()) {
+                String listIdKelas = "(";
 
-            for (int i = 0; i < listMenjabat.size() - 1; i++) {
-                listIdKelas += listMenjabat.get(i).getIdKelas() + ",";
-            }
-            listIdKelas += listMenjabat.get(listMenjabat.size() - 1).getIdKelas() + ")";
+                for (int i = 0; i < listMenjabat.size() - 1; i++) {
+                    listIdKelas += listMenjabat.get(i).getIdKelas() + ",";
+                }
+                listIdKelas += listMenjabat.get(listMenjabat.size() - 1).getIdKelas() + ")";
 
-            String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=getKelas&Id_Kelas=" + listIdKelas;
+                String url = "http://ppl-a08.cs.ui.ac.id/menjabat.php?fun=getKelas&Id_Kelas=" + listIdKelas;
 
-            JSONArray jsonkelas = (new JSONParser()).getJSONArrayFromUrl(url);
+                JSONArray jsonkelas = (new JSONParser()).getJSONArrayFromUrl(url);
 
-            int length = jsonkelas.length();
+                int length = jsonkelas.length();
 
-            for (int i = 0; i < length; i++) {
-                try {
-                    JSONObject jsonObject = jsonkelas.getJSONObject(i);
-                    kelas.add((new KelasController()).createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                for (int i = 0; i < length; i++) {
+                    try {
+                        JSONObject jsonObject = jsonkelas.getJSONObject(i);
+                        kelas.add((new KelasController()).createKelas(jsonObject.getInt("Id"), jsonObject.getInt("Id_Semester"), jsonObject.getString("Nama")));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }  return kelas;
+            return kelas;
+        }
     }
 }

@@ -22,6 +22,7 @@
     <string name="hp_pref">HP_Pref</string>
     <string name="status_pref">Status_Pref</string>
     <string name="cek_pref">Count</string>
+    <string name="waktu_pref">Waktu_pref</string>
 
     <string name="dialog_confirm_profile">Apakah kamu ingin merubah profil?</string>
     <string name="agree">Ya</string>

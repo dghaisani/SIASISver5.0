@@ -17,9 +17,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by lenovo on 5/2/2015.
- */
 public class ExpandableForumAdapter extends BaseExpandableListAdapter {
 
     private Context _context;

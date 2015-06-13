@@ -91,6 +91,7 @@
     </RelativeLayout>
 
     <ImageView
+        android:contentDescription="@string/abc_action_bar_home_description"
         android:layout_marginRight="12dp"
         android:layout_width="85sp"
         android:layout_height="93sp"

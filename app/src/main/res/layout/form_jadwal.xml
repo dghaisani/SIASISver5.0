@@ -10,232 +10,245 @@
         layout="@layout/toolbar_jadwalbaru"
         ></include>
 
-    <LinearLayout
-        android:layout_marginTop="2dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingRight="10dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Judul:"
-            android:textColor="@color/black"
-            android:textSize="23sp"
-            android:id="@+id/textView" />
-
-        <EditText
-            android:textSize="18dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_gravity="right"
-            android:hint="Judul asistensi"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:text="Kelas :"
-            android:id="@+id/textView7" />
-        <RadioGroup
-            android:id="@+id/kelas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></RadioGroup>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="12dp"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tanggal :"
-            android:textColor="@color/black"
-            android:id="@+id/textView2"
-            android:textSize="19sp"
-            />
-        <TextView
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="5dp"
-            android:layout_width="0sp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="19sp"
-            android:id="@+id/textView8"
-            android:hint="tanggal asistensi"
-            />
-        <ImageView
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:src="@drawable/ic_add_drakblue"
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:id="@+id/button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Waktu Mulai :"
-            android:id="@+id/textView3"
-            android:textSize="19sp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="5dp"
-            android:layout_width="0sp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="19sp"
-            android:id="@+id/textView9"
-            android:hint="waktu mulai asistensi"/>
-        <ImageView
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:src="@drawable/ic_add_drakblue"
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:id="@+id/button3"/>
-    </LinearLayout>
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Waktu Selesai :"
-            android:textColor="@color/black"
-            android:id="@+id/textView4"
-            android:textSize="19sp"
-            android:gravity="center"
-            />
-        <TextView
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="5dp"
-            android:layout_width="0sp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="19sp"
-            android:id="@+id/textView10"
-            android:hint="waktu selesai asistensi"
-            />
-        <ImageView
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:src="@drawable/ic_add_drakblue"
-            android:textSize="14sp"
-            android:id="@+id/button4"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingRight="10dp">
-
-        <TextView
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ruangan :"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:id="@+id/textView5" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText5"
-            android:layout_gravity="right"
-            android:textSize="18sp"
-            android:hint="nama ruangan di Fasilkom"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white"
-        android:paddingRight="10dp">
-        <TextView
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Deskripsi"
-            android:textSize="19sp"
-            android:textColor="@color/twitter_blue"
-            android:textAlignment="center"
-            android:layout_marginLeft="12dp"
-            android:id="@+id/textView6" />
-
-        <EditText
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="8dp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/editText6"
-            android:textSize="19sp"
-            android:layout_gravity="center_horizontal"
-            android:hint="Deskripsi dari asistensi yang akan dilaksanakan"/>
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Judul:"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    android:id="@+id/textView" />
+
+                <EditText
+                    android:textSize="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText"
+                    android:layout_gravity="right"
+                    android:hint="Judul asistensi"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:text="Kelas :"
+                    android:id="@+id/textView7" />
+
+                    <RadioGroup
+                    android:id="@+id/kelas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></RadioGroup>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal :"
+                    android:textColor="@color/black"
+                    android:id="@+id/textView2"
+                    android:textSize="19sp"
+                    />
+                <TextView
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0sp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="19sp"
+                    android:id="@+id/textView8"
+                    android:hint="tanggal asistensi"
+                    />
+                <ImageView
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:src="@drawable/ic_add_drakblue"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:id="@+id/button" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Waktu Mulai :"
+                    android:id="@+id/textView3"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0sp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="19sp"
+                    android:id="@+id/textView9"
+                    android:hint="waktu mulai asistensi"/>
+                <ImageView
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:src="@drawable/ic_add_drakblue"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:id="@+id/button3"/>
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Waktu Selesai :"
+                    android:textColor="@color/black"
+                    android:id="@+id/textView4"
+                    android:textSize="19sp"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="0sp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="19sp"
+                    android:id="@+id/textView10"
+                    android:hint="waktu selesai asistensi"
+                    />
+                <ImageView
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:src="@drawable/ic_add_drakblue"
+                    android:textSize="14sp"
+                    android:id="@+id/button4"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ruangan :"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:id="@+id/textView5" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText5"
+                    android:layout_gravity="right"
+                    android:textSize="18sp"
+                    android:hint="nama ruangan di Fasilkom"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:paddingRight="10dp">
+                <TextView
+                    android:layout_marginTop="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi"
+                    android:textSize="19sp"
+                    android:textColor="@color/twitter_blue"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="12dp"
+                    android:id="@+id/textView6" />
+
+                <EditText
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/editText6"
+                    android:textSize="19sp"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="Deskripsi dari asistensi yang akan dilaksanakan"/>
+
+            </LinearLayout>
     </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>

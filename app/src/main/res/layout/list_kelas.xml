@@ -5,13 +5,27 @@
     android:layout_height="match_parent"
     android:id="@+id/containerAja">
 
+    <TextView
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/jdlkelas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List Kelas Semester Ini"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/list_divider"
+        android:textSize="28sp"/>
+
     <LinearLayout
+        android:layout_below="@+id/jdlkelas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/container"
         android:orientation="vertical">
 
+
     </LinearLayout>
+
 
     <ImageView
 

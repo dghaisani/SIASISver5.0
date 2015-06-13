@@ -23,8 +23,7 @@ import java.util.List;
 public class ExpandableJadwalAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<String> _listDataHeader; // header titles
-    // child data in format of header title, child title
+    private List<String> _listDataHeader;
     private HashMap<String, List<JSONObject>> _listDataChild;
 
     public ExpandableJadwalAdapter (Context context, List<String> listDataHeader,
@@ -64,7 +63,7 @@ public class ExpandableJadwalAdapter extends BaseExpandableListAdapter {
         ImageView mobile = (ImageView) convertView.findViewById(R.id.customer_mobile);
 
         try {
-            judul.setText(jsonObject.getString("Judul"));
+            judul.setText(jsonObject.getString("Judul") + " - " + jsonObject.getString("Nama"));
             asisten.setText(jsonObject.getString("Username"));
             waktu.setText(jsonObject.getString("W_Mulai").substring(0, jsonObject.getString("W_Mulai").length() - 3) +
                     " - " + jsonObject.getString("W_Akhir").substring(0, jsonObject.getString("W_Akhir").length() - 3));

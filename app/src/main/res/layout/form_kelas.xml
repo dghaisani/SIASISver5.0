@@ -10,6 +10,7 @@
         layout="@layout/toolbar_addkelas"
         ></include>
     <ImageView
+        android:contentDescription="@string/abc_action_bar_home_description"
         android:layout_width="fill_parent"
         android:layout_height="150dp"
         android:src="@drawable/classroom"/>
@@ -42,6 +43,7 @@
             android:layout_weight="1"/>
 
         <ImageView
+            android:contentDescription="@string/abc_action_bar_home_description"
             android:layout_marginRight="20dp"
             android:layout_width="40dp"
             android:layout_height="40dp"

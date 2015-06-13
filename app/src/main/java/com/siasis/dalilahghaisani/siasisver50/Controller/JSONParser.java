@@ -13,9 +13,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-/**
- * Created by lenovo on 3/31/2015.
- */
 public class JSONParser {
 
     public JSONArray getJSONArrayFromUrl(String url){

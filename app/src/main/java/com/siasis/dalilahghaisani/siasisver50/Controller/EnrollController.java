@@ -16,6 +16,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.Kelas.KelasController;
 import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
 import com.siasis.dalilahghaisani.siasisver50.R;
 
@@ -39,9 +40,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by lenovo on 4/11/2015.
- */
 public class EnrollController extends Activity{
     private LinearLayout linearMain;
     private String username;
@@ -79,8 +77,8 @@ public class EnrollController extends Activity{
                 for (int i = 0; i < addKelas.size(); i++) {
                     if (addKelas.get(i).isChecked()) {
                         kelas += pilihan.get(addKelas.get(i).getId()).getId() + " ";
-                        Toast.makeText(getApplicationContext(),
-                                "Kamu meng-enroll Kelas "+ pilihan.get(addKelas.get(i).getId()).getNama(), Toast.LENGTH_LONG).show();
+                        /*Toast.makeText(getApplicationContext(),
+                                "Kamu meng-enroll Kelas "+ pilihan.get(addKelas.get(i).getId()).getNama(), Toast.LENGTH_LONG).show();*/
                     }
                 }
                 if (!kelas.equals("")){
@@ -138,7 +136,7 @@ public class EnrollController extends Activity{
             LinearLayout linearLayout3 = new LinearLayout(getApplicationContext());
             linearLayout3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             linearLayout3.setOrientation(LinearLayout.VERTICAL);
-            linearLayout3.setPadding(30,30,30,30);
+            //linearLayout3.setPadding(30,30,30,30);
 
             pilihan = (new KelasController()).getAllClass(username);
             if (!pilihan.isEmpty()){
@@ -148,7 +146,6 @@ public class EnrollController extends Activity{
                     checkBox.setText(pilihan.get(i).getNama());
                     checkBox.setTextColor(getResources().getColor(R.color.black));
                     checkBox.setTextSize(22);
-
                     checkBox.setPadding(20,0,20,20);
                     linearLayout3.addView(checkBox);
                     addKelas.add(checkBox);

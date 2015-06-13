@@ -25,6 +25,7 @@
                 android:layout_weight="1"/>
 
             <ImageView
+                android:contentDescription="@string/abc_action_bar_home_description"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:src="@drawable/logo"

@@ -4,9 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-/**
- * Created by lenovo on 5/15/2015.
- */
 public class NotifReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

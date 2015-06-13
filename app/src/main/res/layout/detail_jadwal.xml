@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,197 +11,149 @@
         ></include>
 
     <LinearLayout
-        android:paddingTop="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/toolbar_detail"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/whitedrawer"
-        android:backgroundTint="@color/whitedrawer"
+        android:id="@+id/dul"
         >
-
         <TextView
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-
+            android:textSize="28sp"
             android:gravity="center_horizontal"
             android:id="@+id/judul"
             android:layout_column="1"
             android:layout_weight="1"
             android:textColor="@color/black"/>
-        <!--
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:gravity="center_horizontal"
-            android:id="@+id/judulkelas"
-            android:layout_column="1"
-            android:layout_weight="1"
-            />-->
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="140dp"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"></LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_marginTop="142dp"
+        >
 
         <ImageView
-            android:layout_width="130dp"
-            android:layout_height="120dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:padding="20dp"
+            android:layout_gravity="center_horizontal"
             android:id="@+id/pic"
             android:src="@drawable/ic_book"
             android:layout_column="5" />
 
-        <RelativeLayout
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
             >
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textSize="23sp"
-
-                    android:gravity="center"
-                    android:text="Asdos:"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:paddingLeft="57dp"
-                    android:textSize="23sp"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:id="@+id/asisten"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_marginTop="28dp"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="No.Hp Asdos:"
-                    android:textSize="20sp"
-                    />
-                <TextView
-                    android:textColor="@color/black"
-                    android:paddingLeft="98dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/hp"
-                    android:textSize="20sp"
-                    />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_marginTop="46dp"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:text="Asdos:"
+                />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tanggal Asistensi:"
-                    android:textSize="20sp"
-                    android:gravity="center"/>
-                <TextView
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="130dp"
-                    android:id="@+id/tanggal"
-                    android:textSize="20sp"
-                    android:gravity="center"/>
-            </RelativeLayout>
-            <RelativeLayout
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:id="@+id/asisten"
+                />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="No.Hp Asdos:"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hp"
+                android:textSize="19sp"
+                />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="65dp"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Waktu:"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    />
-                <TextView
-                    android:textColor="@color/black"
-                    android:paddingLeft="45dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/waktu"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    />
-            </RelativeLayout>
-            <RelativeLayout
+                android:text="Tanggal Asistensi:"
+                android:textSize="15sp"
+                android:gravity="center"/>
+            <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ruangan:"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    />
-                <TextView
-                    android:textColor="@color/black"
-                    android:paddingLeft="62dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ruangan"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    />
-            </RelativeLayout>
-        </RelativeLayout>
-
+                android:id="@+id/tanggal"
+                android:textSize="19sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waktu:"
+                android:textSize="15sp"
+                android:gravity="center"
+                />
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/waktu"
+                android:textSize="18sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ruangan:"
+                android:textSize="15sp"
+                android:gravity="center"
+                />
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ruangan"
+                android:textSize="18sp"
+                android:gravity="center"
+                />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="319dp"
         android:layout_width="fill_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="@color/list_divider">
     </LinearLayout>
 
     <LinearLayout
-
+        android:layout_marginTop="320dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="270dp">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:background="@color/whitedrawer"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:orientation="vertical">
             <TextView
+                android:paddingRight="10dp"
                 android:paddingTop="10dp"
                 android:paddingLeft="10dp"
                 android:layout_width="fill_parent"
@@ -209,75 +161,72 @@
                 android:text="Deskripsi"
                 android:textSize="18sp"
                 android:textColor="@color/twitter_blue"
-                ></TextView>
+                >
+            </TextView>
             <ScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="270dp">
+                android:layout_height="wrap_content">
                 <TextView
                     android:paddingLeft="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_width="fill_parent"
-                    android:layout_height="320dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/deskripsi"
-                    android:textSize="18sp"></TextView>
+                    android:textSize="18sp">
+                 </TextView>
             </ScrollView>
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:background="@color/list_divider"
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"></LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:weightSum="1">
-        <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:background="@color/twitter_blue">
-            <ImageView
-                android:layout_centerHorizontal="true"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/new2"
-                android:id="@+id/button5" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <LinearLayout
+            android:background="@color/list_divider"
             android:layout_width="fill_parent"
+            android:layout_height="1dp"></LinearLayout>
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:paddingRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/add"
+            android:id="@+id/button5"
+            />
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="5dp"
+            android:layout_marginLeft="25dp"
+            android:paddingTop="11dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:orientation="horizontal">
-            <TextView
-                android:paddingLeft="5dp"
-                android:layout_marginLeft="3dp"
-                android:paddingTop="11dp"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:textSize="22sp"
-                android:textColor="@color/black"
-                android:id="@+id/textView11"
-                android:layout_toLeftOf="@+id/button6"
-                android:layout_marginRight="5dp">
-            </TextView>
-
-            <Button
-                android:layout_marginRight="190dp"
-                android:layout_marginLeft="30dp"
-                android:background="@color/white"
-                android:layout_width="wrap_content"
-                android:text="Partisipan"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:layout_height="match_parent"
-                android:id="@+id/button6"
-                />
-        </RelativeLayout>
-
-    </LinearLayout>
-</LinearLayout>
+            android:textSize="22sp"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:id="@+id/textView11"
+            android:layout_toLeftOf="@+id/button6"
+            android:layout_marginRight="5dp"
+            >
+        </TextView>
+        <Button
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="170dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:text="Partisipan"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:id="@+id/button6"
+            />
+    </RelativeLayout>
+</RelativeLayout>

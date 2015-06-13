@@ -37,9 +37,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.siasis.dalilahghaisani.siasisver50.Controller.JSONParser;
-import com.siasis.dalilahghaisani.siasisver50.Controller.JadwalController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.Jadwal.JadwalController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.NavigationDrawerActivity;
 import com.siasis.dalilahghaisani.siasisver50.Controller.NotifReceiver;
-import com.siasis.dalilahghaisani.siasisver50.Controller.ProfileController;
+import com.siasis.dalilahghaisani.siasisver50.Controller.Profile.ProfileController;
 import com.siasis.dalilahghaisani.siasisver50.Controller.SessionManager;
 import com.siasis.dalilahghaisani.siasisver50.Model.Jadwal;
 import com.siasis.dalilahghaisani.siasisver50.Model.Mahasiswa;
@@ -87,12 +88,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //cek dah nih valid apa enggak
-//        Intent showDetails = new Intent(this, PilihanController.class);
-//        String usernameMahasiswa = username.getText().toString();
-//        showDetails.putExtra("Username", usernameMahasiswa);
-//        startActivity(showDetails);
-//        finish();
         String[] in = new String[2];
         in[0] = username.getText().toString().toLowerCase();
         in[1] = password.getText().toString();

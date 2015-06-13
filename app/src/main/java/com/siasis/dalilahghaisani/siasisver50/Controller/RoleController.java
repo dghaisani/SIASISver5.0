@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.Kelas.KelasController;
 import com.siasis.dalilahghaisani.siasisver50.Model.Kelas;
 import com.siasis.dalilahghaisani.siasisver50.Model.RequestRole;
 import com.siasis.dalilahghaisani.siasisver50.R;
@@ -37,9 +38,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lenovo on 4/13/2015.
- */
 public class RoleController extends Activity {
     private LinearLayout linearMain;
 

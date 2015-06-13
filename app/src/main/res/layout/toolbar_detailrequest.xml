@@ -19,7 +19,7 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:src="@drawable/back"
-            android:id="@+id/back_partisipan"/>
+            android:id="@+id/back_detailreq"/>
 
         <TextView
             android:layout_centerHorizontal="false"

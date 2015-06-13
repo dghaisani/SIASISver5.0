@@ -8,12 +8,6 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
-/**
- * Created by tahseen0amin on 26/03/2014.
- *
- * Download image from server and set it to Imageview
- */
-
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap>
 {
     private ImageView imgView;

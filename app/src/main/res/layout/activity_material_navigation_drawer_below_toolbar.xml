@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/statusBar" />
 
-    <com.siasis.dalilahghaisani.siasisver50.MaterialDrawerLayout
+    <com.siasis.dalilahghaisani.siasisver50.Controller.MaterialDrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +31,7 @@
 
         <include layout="@layout/layout_drawer" />
 
-    </com.siasis.dalilahghaisani.siasisver50.MaterialDrawerLayout>
+    </com.siasis.dalilahghaisani.siasisver50.Controller.MaterialDrawerLayout>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

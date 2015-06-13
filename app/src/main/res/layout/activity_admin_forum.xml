@@ -2,6 +2,7 @@
     android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/whitedrawer"
     >
 
     <LinearLayout
@@ -9,48 +10,42 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/tooladmin">
-        <Button
+        <ImageView
             android:textStyle="bold"
-            android:paddingTop="17dp"
-            android:paddingRight="17dp"
-            android:paddingLeft="17dp"
-            android:textColor="@color/black"
-            android:background="@color/whitedrawer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tanya Jawab"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/tanyajawab2"
             android:id="@+id/buttonAdminQA"
             />
-        <LinearLayout
+        <!--<LinearLayout
             android:background="@color/ColorPrimary"
             android:layout_width="2dp"
-            android:layout_height="fill_parent"></LinearLayout>
-        <Button
+            android:layout_height="fill_parent"></LinearLayout>-->
+        <ImageView
             android:textStyle="bold"
-            android:paddingTop="17dp"
-            android:paddingRight="17dp"
-            android:paddingLeft="17dp"
-            android:textColor="@color/black"
-            android:background="@color/whitedrawer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Request Jadwal"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/req"
             android:id="@+id/buttonAdminReq"
             />
-        <LinearLayout
+        <!--<LinearLayout
             android:background="@color/ColorPrimary"
             android:layout_width="2dp"
-            android:layout_height="fill_parent"></LinearLayout>
-        <Button
+            android:layout_height="fill_parent"></LinearLayout>-->
+        <ImageView
             android:textStyle="bold"
-            android:paddingTop="17dp"
-            android:paddingRight="17dp"
-            android:paddingLeft="17dp"
-            android:textColor="@color/black"
-            android:background="@color/whitedrawer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Polling Jadwal"
+            android:src="@drawable/pol"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:id="@+id/buttonAdminPolling"
             />
 

@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.Jadwal.JadwalController;
 import com.siasis.dalilahghaisani.siasisver50.Model.Jadwal;
 
 import java.text.SimpleDateFormat;
@@ -18,9 +19,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-/**
- * Created by lenovo on 5/15/2015.
- */
 public class NotifService extends Service{
     private NotificationManager nManager;
     SessionManager session;

@@ -1,9 +1,5 @@
 package com.siasis.dalilahghaisani.siasisver50.Controller;
 
-/**
- * Created by lenovo on 5/20/2015.
- */
-
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -14,14 +10,12 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.siasis.dalilahghaisani.siasisver50.Controller.Jadwal.JadwalController;
 import com.siasis.dalilahghaisani.siasisver50.Model.Jadwal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by lenovo on 5/15/2015.
- */
 public class NotifRHarian extends Service {
     private NotificationManager nManager;
     SessionManager session;
